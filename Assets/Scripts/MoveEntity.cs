@@ -6,7 +6,7 @@ public class MoveEntity : MonoBehaviour {
     
     private MapCheckpoints targets;
     private bool returnToInitialStartPosition;
-    private bool initialized = false;
+    private bool initialized;
     
     public float movementSpeed;
     public Vector3 initialPosition;
@@ -26,7 +26,7 @@ public class MoveEntity : MonoBehaviour {
         initialPosition = transform.position;
         
         returnToInitialStartPosition = false;
-        initialized = true;
+        //initialized = true;
         
         go();
     }
