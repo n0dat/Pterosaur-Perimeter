@@ -22,15 +22,12 @@ public class Toggle : MonoBehaviour {
             Debug.Log("Unable to find SettingsManager in current Scene");
     }
 
-
     public void Toggled(bool toggled) {
         if (settingsManager != null) {
-            if (gameObject.name == "ShowFpsToggle") {
+            if (gameObject.name == "ShowFpsToggle")
                 settingsManager.setShowFps(baseToggle.isOn);
-            }
-            else if (gameObject.name == "PlayAudioToggle") {
+            else if (gameObject.name == "PlayAudioToggle")
                 settingsManager.setPlayAudio(baseToggle.isOn);
-            }
         }
     }
 }
