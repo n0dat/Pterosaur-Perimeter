@@ -7,6 +7,9 @@ public class TowerDropper : MonoBehaviour {
     // globals
     
     [SerializeField]
+    private Camera camera;
+    
+    [SerializeField]
     private GameObject tower;
     
     [SerializeField]
@@ -21,9 +24,13 @@ public class TowerDropper : MonoBehaviour {
     [SerializeField]
     private string towerName;
 
+    void Start() {
+        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+    }
+
     void Update() {
         if (towerHeld) {
-            var loc = Input.mousePosition;
+            var loc = camera.ScreenToWorldPoint(Input.mousePosition);
             loc.z = 0;
             heldTower.transform.position = loc;
             Debug.Log("Tower Position = x: " + heldTower.transform.position.x + " y: " + heldTower.transform.position.y + " z: " + heldTower.transform.position.z);
@@ -43,7 +50,7 @@ public class TowerDropper : MonoBehaviour {
     public void dropTower() {   
         // instantiate tower at mouse coordinates if it can be placed
         if (canBePlaced && towerHeld) {
-            instantiateTower(Input.mousePosition);
+            instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
             Destroy(heldTower);
             towerHeld = false;
         }
@@ -51,7 +58,7 @@ public class TowerDropper : MonoBehaviour {
 
     public void createTower() {
         towerHeld = true;
-        heldTower = instantiateTower(Input.mousePosition);
+        heldTower = instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
     }
 
 

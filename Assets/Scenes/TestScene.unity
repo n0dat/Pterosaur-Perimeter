@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 271691445}
   - component: {fileID: 271691444}
   - component: {fileID: 271691447}
+  - component: {fileID: 271691448}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -319,7 +320,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 291.5
+  orthographic size: 150
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -344,11 +345,10 @@ Transform:
   m_GameObject: {fileID: 271691443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 518, y: 291.5, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1729051733}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &271691447
@@ -395,6 +395,18 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &271691448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271691443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc74749a1f72748dcb7204be4369913e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &704901709
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bcdde2b1dd945e4ad8359cb3e07e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
   tower: {fileID: 0}
   heldTower: {fileID: 0}
   towerHeld: 0
@@ -894,6 +907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bcdde2b1dd945e4ad8359cb3e07e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
   tower: {fileID: 0}
   heldTower: {fileID: 0}
   towerHeld: 0
@@ -967,8 +981,8 @@ Canvas:
   m_GameObject: {fileID: 1729051729}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 271691445}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -995,7 +1009,7 @@ RectTransform:
   m_Children:
   - {fileID: 1149065065}
   - {fileID: 704901710}
-  m_Father: {fileID: 271691446}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1007,4 +1021,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 271691446}
+  - {fileID: 1729051733}
   - {fileID: 1094358105}
