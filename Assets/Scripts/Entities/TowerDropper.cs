@@ -7,7 +7,7 @@ public class TowerDropper : MonoBehaviour {
     // globals
     
     [SerializeField]
-    private Camera camera;
+    private new Camera camera;
     
     [SerializeField]
     private GameObject tower;
