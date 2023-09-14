@@ -7,17 +7,16 @@ public class Tower : MonoBehaviour {
     // globals
     
     [SerializeField]
-    private int towerCost, repairCost;
+    private int towerCost, repairCost, radiusLineSegments;
     
     [SerializeField]
     private float durability, attackSpeed, attackDamage, attackRange;
     
     [SerializeField]
-    private bool hasRangeUpgrade, hasAttackSpeedUpgrade, hasDamageUpgrade, showRadiusCircle;
+    private bool hasRangeUpgrade, hasAttackSpeedUpgrade, hasDamageUpgrade, showRadius, isHeld, selected;
     
     [SerializeField]
     private LineRenderer radiusLine;
-    private int radiusLineSegments;
 
     // some basics
     
@@ -34,15 +33,49 @@ public class Tower : MonoBehaviour {
         hasRangeUpgrade = false;
         hasAttackSpeedUpgrade = false;
         hasDamageUpgrade = false;
-        showRadiusCircle = false;
+        isHeld = false;
+        selected = false;
         
-        radiusLine.startColor = new Color(49, 49, 49);;
+        radiusLine.startColor = new Color(49, 49, 49);
         radiusLine.endColor = new Color(49, 49, 49);
+        radiusLine.enabled = true;
+        
+        drawRadiusCircle();
+        deselect();
+    }
+
+    public bool beingHeld() {
+        return isHeld;
+    }
+
+    public bool isSelected() {
+        return selected;
+    }
+
+    public void deselect() {
+        selected = false;
+        hideRadiusCircle();
+    }
+
+    public void select() {
+        selected = true;
+        showRadiusCircle();
+    }
+
+    public void holdTower() {
+        isHeld = true;
+        showRadiusCircle();
+    }
+
+    public void dropTower() {
+        isHeld = false;
+        hideRadiusCircle();
+        
     }
 
     void Update() {
-        radiusLine.enabled = showRadiusCircle;
-        drawRadiusCircle();
+        if (isHeld)
+            drawRadiusCircle();
     }
 
     // main functionality
@@ -54,13 +87,25 @@ public class Tower : MonoBehaviour {
             float angle = 0f;
             float angleIncrement = 2 * Mathf.PI / radiusLineSegments;
 
-            for (int i = 0; i < radiusLineSegments + 1; i++, angle += angleIncrement) {
+            for (int i = 0; i < radiusLineSegments + 1; i++, angle += angleIncrement)
                 points[i] = new Vector3(Mathf.Cos(angle) * attackRange, Mathf.Sin(angle) * attackRange, 0f) + transform.position;
-            }
 
             radiusLine.positionCount = points.Length;
             radiusLine.SetPositions(points);
         }
+    }
+
+    public void updateRadiusCircle() {
+        //
+        drawRadiusCircle();
+    }
+
+    public void showRadiusCircle() {
+        radiusLine.enabled = true;
+    }
+
+    public void hideRadiusCircle() {
+        radiusLine.enabled = false;
     }
 
     // getters and setters
@@ -135,13 +180,5 @@ public class Tower : MonoBehaviour {
 
     public void setHasDamageUpgrade(bool val) {
         hasDamageUpgrade = val;
-    }
-
-    public bool getShowRadiusCircle() {
-        return showRadiusCircle;
-    }
-
-    public void setShowRadiusCircle(bool val) {
-        showRadiusCircle = val;
     }
 }

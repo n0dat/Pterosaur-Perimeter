@@ -33,7 +33,8 @@ public class TowerDropper : MonoBehaviour {
             var loc = camera.ScreenToWorldPoint(Input.mousePosition);
             loc.z = 0;
             heldTower.transform.position = loc;
-            Debug.Log("Tower Position = x: " + heldTower.transform.position.x + " y: " + heldTower.transform.position.y + " z: " + heldTower.transform.position.z);
+            heldTower.GetComponent<Tower>().holdTower();
+            //Debug.Log("Tower Position = x: " + heldTower.transform.position.x + " y: " + heldTower.transform.position.y + " z: " + heldTower.transform.position.z);
 
             if (Input.GetMouseButtonDown(0))
                 dropTower();
