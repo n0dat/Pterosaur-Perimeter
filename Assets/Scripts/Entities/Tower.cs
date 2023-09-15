@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Tower : MonoBehaviour {
     
@@ -13,14 +14,17 @@ public class Tower : MonoBehaviour {
     private float durability, attackSpeed, attackDamage, attackRange;
     
     [SerializeField]
-    private bool hasRangeUpgrade, hasAttackSpeedUpgrade, hasDamageUpgrade, showRadius, isHeld, selected;
+    private bool hasRangeUpgrade, hasAttackSpeedUpgrade, hasDamageUpgrade, showRadius, isHeld, selected, validPosition;
     
     [SerializeField]
     private LineRenderer radiusLine;
+    
+    [SerializeField]
+    private Material lineMaterial;
 
     // some basics
     
-    void Start() {
+    void Awake() {
         towerCost = 0;
         repairCost = 0;
         radiusLineSegments = 50;
@@ -35,13 +39,48 @@ public class Tower : MonoBehaviour {
         hasDamageUpgrade = false;
         isHeld = false;
         selected = false;
+        validPosition = true;
         
-        radiusLine.startColor = new Color(49, 49, 49);
-        radiusLine.endColor = new Color(49, 49, 49);
+        radiusLine.startColor = new Color(224f, 67f, 85f, 0.85f);
+        radiusLine.endColor = new Color(224f, 67f, 85f, 0.85f);
         radiusLine.enabled = true;
+        
+        lineMaterial = radiusLine.material;
+        
+        setLineColorGrey();
         
         drawRadiusCircle();
         deselect();
+    }
+
+    public void setLineColorGrey() {
+        //radiusLine.material.SetColor("_Color",  new Color(49, 49, 49));
+        // set the color to the material on the radius line instead
+        //radiusLine.startColor = new Color(49, 49, 49);
+        //radiusLine.endColor = new Color(49, 49, 49);
+        var gradient = new Gradient();
+        var tempColorKeys = radiusLine.colorGradient.colorKeys;
+        for (int i = 0; i < tempColorKeys.Length; i++)
+            tempColorKeys[i].color = Color.grey;
+            
+        gradient.colorKeys = tempColorKeys;
+            
+        radiusLine.colorGradient = gradient;
+    }
+
+    public void setLineColorRed() {
+        //radiusLine.material.SetColor("_Color", new Color(224f, 67f, 85f, 0.85f));
+        //radiusLine.startColor = new Color(224f, 67f, 85f, 0.85f);
+        //radiusLine.endColor = new Color(224f, 67f, 85f, 0.85f);
+        
+        var gradient = new Gradient();
+        var tempColorKeys = radiusLine.colorGradient.colorKeys;
+        for (int i = 0; i < tempColorKeys.Length; i++)
+            tempColorKeys[i].color = Color.red;
+            
+        gradient.colorKeys = tempColorKeys;
+            
+        radiusLine.colorGradient = gradient;
     }
 
     public bool beingHeld() {
@@ -70,16 +109,32 @@ public class Tower : MonoBehaviour {
     public void dropTower() {
         isHeld = false;
         hideRadiusCircle();
-        
     }
 
     void Update() {
-        if (isHeld)
+        if (isHeld) {
+            setRadiusColor();
             drawRadiusCircle();
+        }
+    }
+
+    private void setRadiusColor() {
+        if (validPosition)
+            setLineColorGrey();
+        else
+            setLineColorRed();
     }
 
     // main functionality
-    
+
+    public bool isValidPosition() {
+        return validPosition;
+    }
+
+    public void setValidPosition(bool val) {
+        validPosition = val;
+    }
+
     private void drawRadiusCircle() {
         if (radiusLine.enabled) {
             Vector3[] points = new Vector3[radiusLineSegments + 1];

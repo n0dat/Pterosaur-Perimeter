@@ -34,9 +34,8 @@ public class TowerDropper : MonoBehaviour {
             loc.z = 0;
             heldTower.transform.position = loc;
             heldTower.GetComponent<Tower>().holdTower();
-            //Debug.Log("Tower Position = x: " + heldTower.transform.position.x + " y: " + heldTower.transform.position.y + " z: " + heldTower.transform.position.z);
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && heldTower.GetComponent<Tower>().isValidPosition())
                 dropTower();
         }
     }
