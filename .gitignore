@@ -78,3 +78,7 @@ crashlytics-build.properties
 *.DS_Store
 .idea/
 ._*.cs
+Assets/._*.cs
+Assets/*/._*.cs
+Assets/*/*/._*.cs
+Assets/*/*/*/._*.cs
