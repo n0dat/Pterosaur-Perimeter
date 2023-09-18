@@ -15,9 +15,9 @@ public class MainMenuButton : MonoBehaviour {
     public void ButtonPressed() {
         var sceneManager = GameObject.Find("SceneManager");
         if (sceneManager != null) {
-            var sceneLoader = sceneManager.GetComponent<SceneLoader>();
+            var sceneLoader = sceneManager.GetComponent<SceneManager>();
             if (sceneLoader != null)
-                sceneLoader.LoadScene(sceneToLoad);
+                sceneLoader.loadScene(sceneToLoad);
             else
                 Debug.Log("Unable to get Scene Loader component of Scene Manager");
         }

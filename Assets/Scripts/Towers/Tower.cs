@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class Tower : MonoBehaviour {
@@ -14,13 +17,22 @@ public class Tower : MonoBehaviour {
     private float durability, attackSpeed, attackDamage, attackRange;
     
     [SerializeField]
-    private bool hasRangeUpgrade, hasAttackSpeedUpgrade, hasDamageUpgrade, showRadius, isHeld, selected, validPosition;
+    private bool hasRangeUpgrade, hasAttackSpeedUpgrade, hasDamageUpgrade, showRadius, isHeld, selected, validPosition, targetStrong, targetFirst;
     
     [SerializeField]
     private LineRenderer radiusLine;
     
     [SerializeField]
     private Material lineMaterial;
+    
+    [SerializeField]
+    private CircleCollider2D targetingCollider;
+    
+    [SerializeField]
+    private Collider2D[] enemiesInRange;
+    
+    [SerializeField]
+    private GameObject firstEnemy;
 
     // some basics
     
@@ -40,6 +52,8 @@ public class Tower : MonoBehaviour {
         isHeld = false;
         selected = false;
         validPosition = true;
+        targetStrong = false;
+        targetFirst = true;
         
         radiusLine.startColor = new Color(224f, 67f, 85f, 0.85f);
         radiusLine.endColor = new Color(224f, 67f, 85f, 0.85f);
@@ -47,10 +61,59 @@ public class Tower : MonoBehaviour {
         
         lineMaterial = radiusLine.material;
         
+        targetingCollider = gameObject.GetComponent<CircleCollider2D>();
+        targetingCollider.radius = attackRange / transform.localScale.x; 
+        
         setLineColorGrey();
         
         drawRadiusCircle();
         deselect();
+        
+        enemiesInRange = Array.Empty<Collider2D>();
+        
+        firstEnemy = new GameObject();
+    }
+    
+    void Update() {
+        if (isHeld) {
+            setRadiusColor();
+            drawRadiusCircle();
+        }
+        else {
+
+            // handle enemy targeting
+            getEnemiesInRadius();
+            if (enemiesInRange.Length > 0) {
+                float distance = 0f;
+                foreach (var enemy in enemiesInRange) {
+                    var tempDistance = enemy.gameObject.GetComponent<Enemy>().getTravelDistance();
+                    if (tempDistance >= distance) {
+                        distance = tempDistance;
+                        firstEnemy = enemy.gameObject;
+                    }
+                }
+
+                if (targetFirst) {
+                    var direction = firstEnemy.transform.position - transform.position;
+                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1f);
+                }
+                else if (targetStrong) {
+                    // uh oh - needs implemented
+                }
+
+            }
+        }
+    }
+
+    private void getEnemiesInRadius() {
+        var temp = new List<Collider2D>();
+        foreach (var enemy in Physics2D.OverlapCircleAll(transform.position, attackRange))
+            if (enemy.gameObject.CompareTag("Enemy"))
+                temp.Add(enemy);
+        
+        enemiesInRange = temp.ToArray();
     }
 
     public void setLineColorGrey() {
@@ -109,13 +172,6 @@ public class Tower : MonoBehaviour {
     public void dropTower() {
         isHeld = false;
         hideRadiusCircle();
-    }
-
-    void Update() {
-        if (isHeld) {
-            setRadiusColor();
-            drawRadiusCircle();
-        }
     }
 
     private void setRadiusColor() {

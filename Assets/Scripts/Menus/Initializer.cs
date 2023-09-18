@@ -5,6 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Initializer : MonoBehaviour {
     void Start() {
-        SceneManager.LoadSceneAsync("MainMenuScene");
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainMenuScene");
     }
 }
