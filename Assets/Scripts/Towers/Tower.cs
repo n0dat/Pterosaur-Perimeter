@@ -10,6 +10,8 @@ public class Tower : MonoBehaviour {
     
     // globals
     
+    public enum AttackState { ATTACKING, WAITING, INITIAL };
+
     [SerializeField]
     private int towerCost, repairCost, radiusLineSegments;
     
@@ -33,6 +35,9 @@ public class Tower : MonoBehaviour {
     
     [SerializeField]
     private GameObject firstEnemy;
+    
+    [SerializeField]
+    private AttackState attackState = AttackState.INITIAL;
 
     // some basics
     
@@ -204,6 +209,10 @@ public class Tower : MonoBehaviour {
             radiusLine.positionCount = points.Length;
             radiusLine.SetPositions(points);
         }
+    }
+
+    public void attack() {
+        
     }
 
     public void updateRadiusCircle() {
