@@ -25,20 +25,19 @@ public class Tower : MonoBehaviour {
     private LineRenderer radiusLine;
     
     [SerializeField]
-    private Material lineMaterial;
-    
-    [SerializeField]
     private CircleCollider2D targetingCollider;
     
     [SerializeField]
     private Collider2D[] enemiesInRange;
     
-    [SerializeField]
-    private GameObject firstEnemy;
+    [FormerlySerializedAs("firstEnemy")] [SerializeField]
+    private GameObject enemyToAttack;
     
     [SerializeField]
     private AttackState attackState = AttackState.INITIAL;
 
+    [SerializeField]
+    private RoundManager roundManager;
     // some basics
     
     void Awake() {
@@ -47,8 +46,8 @@ public class Tower : MonoBehaviour {
         radiusLineSegments = 50;
         
         durability = 100.0f;
-        attackSpeed = 5.0f;
-        attackDamage = 10.0f;
+        attackSpeed = 1.7f;
+        attackDamage = 25.0f;
         attackRange = 60.0f;
         
         hasRangeUpgrade = false;
@@ -64,8 +63,6 @@ public class Tower : MonoBehaviour {
         radiusLine.endColor = new Color(224f, 67f, 85f, 0.85f);
         radiusLine.enabled = true;
         
-        lineMaterial = radiusLine.material;
-        
         targetingCollider = gameObject.GetComponent<CircleCollider2D>();
         targetingCollider.radius = attackRange / transform.localScale.x; 
         
@@ -76,7 +73,9 @@ public class Tower : MonoBehaviour {
         
         enemiesInRange = Array.Empty<Collider2D>();
         
-        firstEnemy = new GameObject();
+        enemyToAttack = new GameObject();
+        
+        roundManager = GameObject.Find("RoundSpawner").GetComponent<RoundManager>();
     }
     
     void Update() {
@@ -88,28 +87,60 @@ public class Tower : MonoBehaviour {
 
             // handle enemy targeting
             getEnemiesInRadius();
-            if (enemiesInRange.Length > 0) {
-                float distance = 0f;
-                foreach (var enemy in enemiesInRange) {
-                    var tempDistance = enemy.gameObject.GetComponent<Enemy>().getTravelDistance();
-                    if (tempDistance >= distance) {
-                        distance = tempDistance;
-                        firstEnemy = enemy.gameObject;
+            if (enemiesInRange.Length > 0) { // we have come enemies in range
+                if (targetFirst) { // target the furthest along the track in our range
+                    float distance = 0f;
+                    foreach (var enemy in enemiesInRange) {
+                        var tempDistance = enemy.gameObject.GetComponent<Enemy>().getTravelDistance();
+                        if (tempDistance >= distance) {
+                            distance = tempDistance;
+                            enemyToAttack = enemy.gameObject;
+                        }
                     }
                 }
-
-                if (targetFirst) {
-                    var direction = firstEnemy.transform.position - transform.position;
-                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                    var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1f);
+                else if (targetStrong) { // target the strongest in range
+                    var strength = 0f;
+                    foreach (var enemy in enemiesInRange) {
+                        var health = enemy.gameObject.GetComponent<Enemy>().getTravelDistance();
+                        if (health >= strength) {
+                            strength = health;
+                            enemyToAttack = enemy.gameObject;
+                        }
+                    }
                 }
-                else if (targetStrong) {
-                    // uh oh - needs implemented
-                }
+                
+                var direction = enemyToAttack.transform.position - transform.position;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1f);
 
+                if (enemyToAttack != null && attackState != AttackState.ATTACKING) {
+                    attackState = AttackState.ATTACKING;
+                    StartCoroutine(attackRoutine());
+                }
+            }
+            else {
+                attackState = AttackState.WAITING;
             }
         }
+    }
+    
+    public IEnumerator attackRoutine() {
+        while (attackState == AttackState.ATTACKING) {
+            var enemy = enemyToAttack.GetComponent<Enemy>();
+            if (enemy != null) {
+                attack(enemy, gameObject.GetComponent<Tower>());
+                yield return new WaitForSeconds(attackSpeed);
+            }
+            else {
+                yield break;
+            }
+        }
+    }
+
+    public void attack(Enemy enemy, Tower tower) {
+        Debug.Log("Attacked enemy");
+        enemy.takeDamage(attackDamage, tower);
     }
 
     private void getEnemiesInRadius() {
@@ -149,6 +180,13 @@ public class Tower : MonoBehaviour {
         gradient.colorKeys = tempColorKeys;
             
         radiusLine.colorGradient = gradient;
+    }
+
+    public void enemyKilled() {
+        roundManager.removeEnemy(enemyToAttack.GetInstanceID());
+        Debug.Log("Tower: " + GetInstanceID() + " killed an enemy.");
+        StopCoroutine(attackRoutine());
+        attackState = AttackState.WAITING;
     }
 
     public bool beingHeld() {
@@ -209,10 +247,6 @@ public class Tower : MonoBehaviour {
             radiusLine.positionCount = points.Length;
             radiusLine.SetPositions(points);
         }
-    }
-
-    public void attack() {
-        
     }
 
     public void updateRadiusCircle() {

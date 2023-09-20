@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour {
 	void Start() {
 		target = checkpoints[0];
 		findTotalDistance();
+		health = 50f;
 	}
 
 	void Update() {
@@ -59,5 +60,21 @@ public class Enemy : MonoBehaviour {
 		totalDistance = 0f;
 		for (int i = 0; i < checkpoints.Count - 1; i++)
 			totalDistance += Vector3.Distance(checkpoints[i], checkpoints[i + 1]);
+	}
+
+	public void takeDamage(float damage, Tower attacker) {
+		
+		if (gameObject == null)
+			return;
+		
+		Debug.Log("Took damage for: " + damage);
+		if (health - damage <= 0) {
+			attacker.enemyKilled();
+			Destroy(gameObject);
+			return;
+		}
+		
+		health = health - damage;
+		
 	}
 }

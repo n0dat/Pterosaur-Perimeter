@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor.ShaderKeywordFilter;
-using UnityEngine.PlayerLoop;
 
 namespace Customs {
     public class CircularBuffer<T> {

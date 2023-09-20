@@ -109,8 +109,8 @@ MonoBehaviour:
   repairCost: 0
   radiusLineSegments: 0
   durability: 0
-  attackSpeed: 0
-  attackDamage: 0
+  attackSpeed: 1
+  attackDamage: 100
   attackRange: 0
   hasRangeUpgrade: 0
   hasAttackSpeedUpgrade: 0
@@ -119,10 +119,14 @@ MonoBehaviour:
   isHeld: 0
   selected: 0
   validPosition: 0
+  targetStrong: 0
+  targetFirst: 1
   radiusLine: {fileID: 5221478542891101867}
   lineMaterial: {fileID: 0}
   targetingCollider: {fileID: 0}
   enemiesInRange: []
+  firstEnemy: {fileID: 0}
+  attackState: 2
 --- !u!120 &5221478542891101867
 LineRenderer:
   serializedVersion: 2
