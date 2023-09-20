@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour {
 	void Start() {
 		target = checkpoints[0];
 		findTotalDistance();
-		health = 50f;
+		health = 100f;
 	}
 
 	void Update() {

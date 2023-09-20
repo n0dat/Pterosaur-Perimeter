@@ -13,7 +13,7 @@ public class Tower : MonoBehaviour {
     public enum AttackState { ATTACKING, WAITING, INITIAL };
 
     [SerializeField]
-    private int towerCost, repairCost, radiusLineSegments;
+    private int towerCost, repairCost, radiusLineSegments, killCount;
     
     [SerializeField]
     private float durability, attackSpeed, attackDamage, attackRange;
@@ -44,6 +44,7 @@ public class Tower : MonoBehaviour {
         towerCost = 0;
         repairCost = 0;
         radiusLineSegments = 50;
+        killCount = 0;
         
         durability = 100.0f;
         attackSpeed = 1.7f;
@@ -90,7 +91,10 @@ public class Tower : MonoBehaviour {
             if (enemiesInRange.Length > 0) { // we have come enemies in range
                 if (targetFirst) { // target the furthest along the track in our range
                     float distance = 0f;
+                    var initLength = enemiesInRange.Length;
                     foreach (var enemy in enemiesInRange) {
+                        if (enemiesInRange.Length != initLength)
+                            break;
                         var tempDistance = enemy.gameObject.GetComponent<Enemy>().getTravelDistance();
                         if (tempDistance >= distance) {
                             distance = tempDistance;
@@ -100,7 +104,10 @@ public class Tower : MonoBehaviour {
                 }
                 else if (targetStrong) { // target the strongest in range
                     var strength = 0f;
+                    var initLength = enemiesInRange.Length;
                     foreach (var enemy in enemiesInRange) {
+                        if (enemiesInRange.Length != initLength)
+                            break;
                         var health = enemy.gameObject.GetComponent<Enemy>().getTravelDistance();
                         if (health >= strength) {
                             strength = health;
@@ -183,10 +190,10 @@ public class Tower : MonoBehaviour {
     }
 
     public void enemyKilled() {
-        roundManager.removeEnemy(enemyToAttack.GetInstanceID());
         Debug.Log("Tower: " + GetInstanceID() + " killed an enemy.");
         StopCoroutine(attackRoutine());
         attackState = AttackState.WAITING;
+        killCount++;
     }
 
     public bool beingHeld() {
