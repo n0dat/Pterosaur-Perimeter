@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5221478542891101867}
   - component: {fileID: 95702880185206319}
   - component: {fileID: 1338506517265392891}
-  - component: {fileID: -8304889742755934900}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
@@ -108,6 +107,7 @@ MonoBehaviour:
   towerCost: 0
   repairCost: 0
   radiusLineSegments: 0
+  killCount: 0
   durability: 0
   attackSpeed: 1
   attackDamage: 100
@@ -122,11 +122,11 @@ MonoBehaviour:
   targetStrong: 0
   targetFirst: 1
   radiusLine: {fileID: 5221478542891101867}
-  lineMaterial: {fileID: 0}
   targetingCollider: {fileID: 0}
   enemiesInRange: []
-  firstEnemy: {fileID: 0}
+  enemyToAttack: {fileID: 0}
   attackState: 2
+  roundManager: {fileID: 0}
 --- !u!120 &5221478542891101867
 LineRenderer:
   serializedVersion: 2
@@ -303,38 +303,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
---- !u!58 &-8304889742755934900
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5078279887009515754}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.08

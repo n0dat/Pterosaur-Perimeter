@@ -23,9 +23,7 @@ public class Tower : MonoBehaviour {
     
     [SerializeField]
     private LineRenderer radiusLine;
-    
-    [SerializeField]
-    private CircleCollider2D targetingCollider;
+   
     
     [SerializeField]
     private Collider2D[] enemiesInRange;
@@ -64,9 +62,6 @@ public class Tower : MonoBehaviour {
         radiusLine.endColor = new Color(224f, 67f, 85f, 0.85f);
         radiusLine.enabled = true;
         
-        targetingCollider = gameObject.GetComponent<CircleCollider2D>();
-        targetingCollider.radius = attackRange / transform.localScale.x; 
-        
         setLineColorGrey();
         
         drawRadiusCircle();
@@ -74,7 +69,7 @@ public class Tower : MonoBehaviour {
         
         enemiesInRange = Array.Empty<Collider2D>();
         
-        enemyToAttack = new GameObject();
+        enemyToAttack = null;
         
         roundManager = GameObject.Find("RoundSpawner").GetComponent<RoundManager>();
     }
