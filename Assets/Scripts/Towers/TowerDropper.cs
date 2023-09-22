@@ -37,6 +37,9 @@ public class TowerDropper : MonoBehaviour {
 
             if (Input.GetMouseButtonDown(0) && heldTower.GetComponent<Tower>().isValidPosition())
                 dropTower();
+            
+            if (Input.GetMouseButtonDown(1))
+                killTower();
         }
     }
 
@@ -56,10 +59,13 @@ public class TowerDropper : MonoBehaviour {
         }
     }
 
+    private void killTower() {
+        Destroy(heldTower);
+        towerHeld = false;
+    }
+
     public void createTower() {
         towerHeld = true;
         heldTower = instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
     }
-
-
 }

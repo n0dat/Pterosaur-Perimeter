@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TilemapCollision : MonoBehaviour {
     
-    void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Tower")
-            collision.gameObject.GetComponent<Tower>().setValidPosition(false);
-    }
+    //void OnCollisionEnter2D(Collision2D collision) {
+    //    if (collision.gameObject.tag == "Tower")
+    //        collision.gameObject.GetComponent<Tower>().setValidPosition(false);
+    //}
 
-    void OnCollisionExit2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Tower")
-            collision.gameObject.GetComponent<Tower>().setValidPosition(true);
-    }
+    //void OnCollisionExit2D(Collision2D collision) {
+    //    if (collision.gameObject.tag == "Tower")
+    //        collision.gameObject.GetComponent<Tower>().setValidPosition(true);
+    //}
 }

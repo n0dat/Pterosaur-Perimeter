@@ -99,11 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1bcef886d9e94eb2b35c6239597b6ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
   totalDistance: 0
   distanceCovered: 0
   health: 0
-  checkpoints: []
+  movementSpeed: 50
+  isDisplayingHit: 0
+  waypoints: []
 --- !u!58 &7856822877599368202
 CircleCollider2D:
   m_ObjectHideFlags: 0
