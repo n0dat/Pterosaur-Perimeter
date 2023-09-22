@@ -25,7 +25,6 @@ public class Tower : MonoBehaviour {
     
     [SerializeField]
     private LineRenderer radiusLine;
-   
     
     [SerializeField]
     private Collider2D[] enemiesInRange;
@@ -41,6 +40,9 @@ public class Tower : MonoBehaviour {
 
     [SerializeField]
     private RoundManager roundManager;
+    
+    [SerializeField]
+    private AttackType attackType;
     
     
     // initialize most global values
@@ -162,9 +164,8 @@ public class Tower : MonoBehaviour {
 
     public IEnumerator attackRoutine() {
         while (attackState == AttackState.Attacking) {
-            var enemy = enemyToAttack.GetComponent<Enemy>();
-            if (enemy != null) {
-                attack(enemy, gameObject.GetComponent<Tower>());
+            if (enemyToAttack != null) {
+                attackType.attack(enemyToAttack, gameObject);
                 yield return new WaitForSeconds(attackSpeed);
             }
             else {
@@ -173,8 +174,8 @@ public class Tower : MonoBehaviour {
         }
     }
 
-    public void attack(Enemy enemy, Tower tower) {
-        enemy.takeDamage(attackDamage, tower);
+    public void attack(GameObject enemy, Tower tower) {
+        //enemy.takeDamage(attackDamage, tower);
     }
 
     private void getEnemiesInRadius() {

@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour {
 	[SerializeField]
 	private float totalDistance = 0f, distanceCovered = 0f;
 	public float health = 0f;
-	public float movementSpeed = 50f;
+	public float movementSpeed = 10f;
 	
 	[SerializeField] private bool isDisplayingHit = false;
 	

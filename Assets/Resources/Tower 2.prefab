@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5221478542891101867}
   - component: {fileID: 95702880185206319}
   - component: {fileID: 1338506517265392891}
-  - component: {fileID: -5455152999257521880}
+  - component: {fileID: -7766861045392304152}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: Tower 2
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 1346524441, guid: 4820d26140c52634d957a6b3553603c0, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.91027117, a: 1}
+  m_Color: {r: 1, g: 0.79452336, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   attackState: 2
   targetingMode: 0
   roundManager: {fileID: 0}
-  attackType: {fileID: -5455152999257521880}
+  attackType: {fileID: -7766861045392304152}
 --- !u!120 &5221478542891101867
 LineRenderer:
   serializedVersion: 2
@@ -303,7 +303,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
---- !u!114 &-5455152999257521880
+--- !u!114 &-7766861045392304152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,4 +315,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a187c1a94ee3ec84dbc8a54515b779dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackStyle: 0
+  attackStyle: 1

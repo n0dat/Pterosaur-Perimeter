@@ -102,7 +102,7 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	IEnumerator spawnRound(Round curRound) {
-		Debug.Log("Spawning Round: " + curRound.roundNumber);
+		//Debug.Log("Spawning Round: " + curRound.roundNumber);
 		state = RoundState.Spawning;
 
 		for (int i = 0; i < curRound.enemyCount; i++) {
@@ -114,7 +114,7 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	void spawnEnemy(Transform enemyToSpawn) {
-		Debug.Log("Spawning Enemy: " + enemyToSpawn.name);
+		//Debug.Log("Spawning Enemy: " + enemyToSpawn.name);
 		var tempEnemy = Instantiate(enemyToSpawn, checkpoints[0], Quaternion.identity);
 		rounds[currentRound].enemies.enqueue(tempEnemy.gameObject.GetInstanceID());
 		tempEnemy.gameObject.GetComponent<Enemy>().waypoints = checkpoints;
