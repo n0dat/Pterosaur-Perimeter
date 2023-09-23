@@ -21,7 +21,7 @@ public class Tower : MonoBehaviour {
     private float durability, attackSpeed, attackDamage, attackRange;
     
     [SerializeField]
-    private bool hasRangeUpgrade, hasAttackSpeedUpgrade, hasDamageUpgrade, showRadius, isHeld, selected, validPosition;
+    private bool hasRangeUpgrade, hasAttackSpeedUpgrade, hasDamageUpgrade, isHeld, selected, validPosition, attackInProgress;
     
     [SerializeField]
     private LineRenderer radiusLine;
@@ -63,6 +63,7 @@ public class Tower : MonoBehaviour {
         isHeld = false;
         selected = false;
         validPosition = true;
+        attackInProgress = false;
         
         radiusLine.startColor = new Color(224f, 67f, 85f, 0.85f);
         radiusLine.endColor = new Color(224f, 67f, 85f, 0.85f);
@@ -93,18 +94,20 @@ public class Tower : MonoBehaviour {
             
             // we got enemies in radius
             if (enemiesInRange.Length > 0) {
-                setTargetingMode(targetingMode);
+                if (!attackInProgress) {
+                    setTargetingMode(targetingMode);
                 
-                // face the enemy we are going to attack
-                var direction = enemyToAttack.transform.position - transform.position;
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1f);
+                    // face the enemy we are going to attack
+                    var direction = enemyToAttack.transform.position - transform.position;
+                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1f);
 
-                // start attacking
-                if (enemyToAttack != null && attackState != AttackState.Attacking) {
-                    attackState = AttackState.Attacking;
-                    StartCoroutine(attackRoutine());
+                    // start attacking
+                    if (enemyToAttack != null && attackState != AttackState.Attacking) {
+                        attackState = AttackState.Attacking;
+                        StartCoroutine(attackRoutine());
+                    }
                 }
             }
             // no enemies in radius, so waiting
@@ -119,7 +122,6 @@ public class Tower : MonoBehaviour {
     // ATTACK LOGIC
     //
     //
-
     private void setTargetingMode(TargetingMode targetMode) {
         if (targetMode == TargetingMode.First) { // target enemy within radius that is furthest along the track
             var distance = 0f;
@@ -163,19 +165,20 @@ public class Tower : MonoBehaviour {
     }
 
     public IEnumerator attackRoutine() {
-        while (attackState == AttackState.Attacking) {
-            if (enemyToAttack != null) {
-                attackType.attack(enemyToAttack, gameObject);
-                yield return new WaitForSeconds(attackSpeed);
-            }
-            else {
-                yield break;
-            }
+        while (attackState == AttackState.Attacking && enemyToAttack != null) {
+            WaitForAttack waitForAttack = new WaitForAttack();
+            StartCoroutine(finishAttack(waitForAttack));
+            yield return waitForAttack;
+            attackInProgress = false;
+            yield return new WaitForSeconds(attackSpeed);
         }
     }
 
-    public void attack(GameObject enemy, Tower tower) {
-        //enemy.takeDamage(attackDamage, tower);
+    private IEnumerator finishAttack(WaitForAttack waitForAttack) {
+        attackInProgress = true;
+        attackType.attack(enemyToAttack, gameObject);
+        waitForAttack.setAttackFinished();
+        yield return null;
     }
 
     private void getEnemiesInRadius() {

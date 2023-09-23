@@ -15,12 +15,18 @@ public class Enemy : MonoBehaviour {
 	
 	private Vector3 targetWaypoint;
 	private int waypointIndex = 0;
-	public List<Vector3> waypoints;
+	private List<Vector3> waypoints;
+
+	private RoundManager roundManager;
+	private SpriteRenderer spriteRenderer;
+	private static readonly int MColor = Shader.PropertyToID("m_Color");
 
 	void Start() {
 		targetWaypoint = waypoints[0];
 		findTotalDistance();
 		health = 100f;
+		roundManager = GameObject.Find("RoundSpawner")?.GetComponent<RoundManager>();
+		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 	}
 
 	void Update() {
@@ -35,6 +41,10 @@ public class Enemy : MonoBehaviour {
 			getNextCheckpoint();
 	}
 
+	public void setWaypoints(List<Vector3> points) {
+		waypoints = points;
+	}
+
 	void getNextCheckpoint() {
 		if (waypointIndex >= waypoints.Count - 1) {
 			Destroy(gameObject);
@@ -46,12 +56,13 @@ public class Enemy : MonoBehaviour {
 	private void OnDestroy() {
 		
 		// cancel hit indication
-		StopCoroutine(indicateHit());
-		isDisplayingHit = false;
+		if (isDisplayingHit) {
+			StopCoroutine(indicateHit());
+			isDisplayingHit = false;
+		}
 		
-		var roundManager = GameObject.Find("RoundSpawner");
 		if (roundManager != null)
-			roundManager.GetComponent<RoundManager>().removeEnemy(this.gameObject.GetInstanceID());
+			roundManager.removeEnemy(this.gameObject.GetInstanceID());
 	}
 
 	public float getTotalDistance() {
@@ -64,38 +75,38 @@ public class Enemy : MonoBehaviour {
 
 	private void findTotalDistance() {
 		totalDistance = 0f;
-		for (int i = 0; i < waypoints.Count - 1; i++)
+		int count = waypoints.Count - 1;
+		for (int i = 0; i < count; i++)
 			totalDistance += Vector3.Distance(waypoints[i], waypoints[i + 1]);
 	}
 
 	public void takeDamage(float damage, Tower attacker) {
 		
-		if (gameObject == null)
+		if (gameObject == null || health <= 0f)
 			return;
 		
-		Debug.Log("Took damage for: " + damage);
-		if (!isDisplayingHit) StartCoroutine(indicateHit());
+		if (!isDisplayingHit)
+			StartCoroutine(indicateHit());
 		else {
 			StopCoroutine(indicateHit());
 			StartCoroutine(indicateHit());
 		}
 		
-		if (health - damage <= 0) {
+		health -= damage;
+		
+		if (health <= 0) {
 			attacker.enemyKilled();
 			Destroy(gameObject);
-			return;
 		}
-		
-		health = health - damage;
 	}
 
 	private IEnumerator indicateHit() {
-		gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+		spriteRenderer.color = Color.red;
 		isDisplayingHit = true;
 		
-		yield return new WaitForSeconds(0.08f);
+		yield return new WaitForSeconds(0.1f);
 		
-		gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+		spriteRenderer.color = Color.white;
 		isDisplayingHit = false;
 	}
 }

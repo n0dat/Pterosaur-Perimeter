@@ -24,20 +24,14 @@ public class AttackType : MonoBehaviour {
             foreach (Collider2D collider in colliders) {
                 Debug.Log("Collider");
                 Vector2 directionToCollider = collider.transform.position - transform.position;
-                directionToCollider = Quaternion.Inverse(transform.rotation) * directionToCollider;
-
-                // time for some math
-                var rotationAngle = transform.position.z;
-                if (rotationAngle < 0)
-                    rotationAngle += 360;
                 
-                Vector2 target = new Vector2(coneDistance * Mathf.Sin(rotationAngle), coneDistance * Mathf.Cos(rotationAngle));
-                Vector2 tempVec = transform.position.normalized * coneDistance;
-                var distance = Vector2.Distance(transform.position, collider.transform.position);
-                Vector2 tempVecCol = collider.transform.position.normalized * distance;
-                float angleToCollider = Vector2.Angle(collider.transform.position.normalized, transform.position.normalized);
+                //float angleToCollider = Vector2.Angle(collider.transform.position.normalized, transform.position.normalized);
+                float angleToCollider = Mathf.Atan2(directionToCollider.y, directionToCollider.x) * Mathf.Rad2Deg;
                 
-                if (angleToCollider <= coneAngle * 0.5f && directionToCollider.magnitude <= coneDistance) {
+                if (angleToCollider < 0)
+                    angleToCollider += 360;
+                
+                if (angleToCollider <= coneAngle * 0.5f) {
                     Debug.Log("Angle to collider: " + angleToCollider);
                     Debug.Log("Attacking");
                     enemy.takeDamage(tower.getAttackDamage(), tower);

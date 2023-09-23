@@ -117,6 +117,6 @@ public class RoundManager : MonoBehaviour {
 		//Debug.Log("Spawning Enemy: " + enemyToSpawn.name);
 		var tempEnemy = Instantiate(enemyToSpawn, checkpoints[0], Quaternion.identity);
 		rounds[currentRound].enemies.enqueue(tempEnemy.gameObject.GetInstanceID());
-		tempEnemy.gameObject.GetComponent<Enemy>().waypoints = checkpoints;
+		tempEnemy.gameObject.GetComponent<Enemy>().setWaypoints(checkpoints);
 	}
 }
