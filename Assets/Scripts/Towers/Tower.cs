@@ -9,7 +9,7 @@ using UnityEngine.Tilemaps;
 public class Tower : MonoBehaviour {
     
     // globals
-
+    public enum TowerType { Water, Land };
     private enum AttackState { Attacking, Waiting, Initial };
 
     private enum TargetingMode { First, Last, Strong };
@@ -29,7 +29,7 @@ public class Tower : MonoBehaviour {
     [SerializeField]
     private Collider2D[] enemiesInRange;
     
-    [FormerlySerializedAs("firstEnemy")] [SerializeField]
+    [SerializeField]
     private GameObject enemyToAttack;
     
     [SerializeField]
@@ -43,6 +43,9 @@ public class Tower : MonoBehaviour {
     
     [SerializeField]
     private AttackType attackType;
+
+    [SerializeField]
+    private TowerType towerType;
     
     
     // initialize most global values

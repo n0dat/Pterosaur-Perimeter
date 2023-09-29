@@ -116,10 +116,10 @@ MonoBehaviour:
   hasRangeUpgrade: 0
   hasAttackSpeedUpgrade: 0
   hasDamageUpgrade: 0
-  showRadius: 0
   isHeld: 0
   selected: 0
   validPosition: 0
+  attackInProgress: 0
   radiusLine: {fileID: 5221478542891101867}
   enemiesInRange: []
   enemyToAttack: {fileID: 0}
@@ -127,6 +127,7 @@ MonoBehaviour:
   targetingMode: 0
   roundManager: {fileID: 0}
   attackType: {fileID: -7766861045392304152}
+  towerType: 1
 --- !u!120 &5221478542891101867
 LineRenderer:
   serializedVersion: 2
