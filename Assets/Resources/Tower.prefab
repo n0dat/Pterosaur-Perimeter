@@ -31,7 +31,7 @@ RectTransform:
   m_GameObject: {fileID: 5078279887009515754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 64, y: 64, z: 64}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -116,10 +116,10 @@ MonoBehaviour:
   hasRangeUpgrade: 0
   hasAttackSpeedUpgrade: 0
   hasDamageUpgrade: 0
-  showRadius: 0
   isHeld: 0
   selected: 0
   validPosition: 0
+  attackInProgress: 0
   radiusLine: {fileID: 5221478542891101867}
   enemiesInRange: []
   enemyToAttack: {fileID: 0}
@@ -127,6 +127,7 @@ MonoBehaviour:
   targetingMode: 0
   roundManager: {fileID: 0}
   attackType: {fileID: -5455152999257521880}
+  towerType: 0
 --- !u!120 &5221478542891101867
 LineRenderer:
   serializedVersion: 2
@@ -300,7 +301,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 2
   m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!114 &-5455152999257521880

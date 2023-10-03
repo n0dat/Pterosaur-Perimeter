@@ -7,6 +7,9 @@ TagManager:
   - Path
   - Tower
   - Enemy
+  - GroundCollider
+  - WaterCollider
+  - PathCollider
   layers:
   - Default
   - TransparentFX
