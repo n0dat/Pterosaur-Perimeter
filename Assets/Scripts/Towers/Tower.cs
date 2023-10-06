@@ -227,7 +227,8 @@ public class Tower : MonoBehaviour {
                     setValidPosition(true);
             }
             */
-
+            
+            /*
             if (towerType == TowerType.Water) {
                 if (col.CompareTag("WaterCollider"))
                     setValidPosition(true);
@@ -240,6 +241,11 @@ public class Tower : MonoBehaviour {
                     setValidPosition(true);
                 else
                     setValidPosition(false);
+            }
+            */
+            if (col.CompareTag("PathCollider"))
+            {
+                setValidPosition(false);
             }
         }
     }
@@ -265,6 +271,7 @@ public class Tower : MonoBehaviour {
             }
             */
             
+            /*
             if (towerType == TowerType.Water)
                 if (col.CompareTag("WaterCollider"))
                     setValidPosition(false);
@@ -272,6 +279,13 @@ public class Tower : MonoBehaviour {
             if (towerType == TowerType.Land)
                 if (col.CompareTag("GroundCollider"))
                     setValidPosition(false);
+            */
+
+            if (col.CompareTag("PathCollider"))
+            {
+                setValidPosition(true);
+            }
+                
         }
     }
 
