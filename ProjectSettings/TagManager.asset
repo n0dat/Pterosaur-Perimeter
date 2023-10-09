@@ -7,6 +7,8 @@ TagManager:
   - Path
   - Tower
   - Enemy
+  - GroundPath
+  - Water
   layers:
   - Default
   - TransparentFX

@@ -58,7 +58,7 @@ public class Tower : MonoBehaviour {
         durability = 100.0f;
         attackSpeed = 1.7f;
         attackDamage = 25.0f;
-        attackRange = 60.0f;
+        attackRange = 5.0f;
         
         hasRangeUpgrade = false;
         hasAttackSpeedUpgrade = false;
@@ -207,8 +207,17 @@ public class Tower : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (isHeld) {
-            if (collision.gameObject.CompareTag("Tower") || collision.gameObject.CompareTag("Path")) {
+            if (collision.gameObject.CompareTag("Tower"))
                 setValidPosition(false);
+                
+            if (towerType == TowerType.Land) {
+                if (collision.gameObject.CompareTag("Water")) {
+                    setValidPosition(false);
+                }
+            }
+            else if (towerType == TowerType.Water) {
+                if (collision.gameObject.CompareTag("GroundPath"))
+                    setValidPosition(false);
             }
         }
     }

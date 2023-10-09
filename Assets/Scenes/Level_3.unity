@@ -247,7 +247,7 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 0
+  m_SortOrder: 2
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
@@ -727,6 +727,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &620032468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3944665473869599631, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+  m_PrefabInstance: {fileID: 1601022114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &966715654
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,10 +881,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerDragUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3465315095509100916, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465315095509100916, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465315095509100916, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 620032468}
+    - target: {fileID: 3465315095509100916, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465315095509100916, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: BroadcastMessage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465315095509100916, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465315095509100916, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: CLICKED
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465315095509100916, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3612640045119511337, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 966715656}
+    - target: {fileID: 3612640045119511337, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612640045119511337, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3883227708427087436, guid: 25823aaff1b4c8d4dbc5054dbce2f45d, type: 3}
       propertyPath: camera
       value: 
@@ -1063,7 +1108,7 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 0
+  m_SortOrder: 2
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
