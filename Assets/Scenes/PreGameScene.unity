@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f5e292ae0504fc1a2aeef03d9e417a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: TestScene
+  sceneToLoad: Level_3
   isExitButton: 0
 --- !u!1 &543007827
 GameObject:
@@ -970,7 +970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f5e292ae0504fc1a2aeef03d9e417a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: SampleScene
+  sceneToLoad: TestScene_1
   isExitButton: 0
 --- !u!1 &1094358102
 GameObject:
@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f5e292ae0504fc1a2aeef03d9e417a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Level_3
+  sceneToLoad: Level_4
   isExitButton: 0
 --- !u!1 &1704528580
 GameObject:

@@ -55,10 +55,10 @@ public class Tower : MonoBehaviour {
         radiusLineSegments = 50;
         killCount = 0;
         
-        durability = 100.0f;
+        durability = 100f;
         attackSpeed = 1.7f;
-        attackDamage = 25.0f;
-        attackRange = 5.0f;
+        attackDamage = 25f;
+        attackRange = 5f;
         
         hasRangeUpgrade = false;
         hasAttackSpeedUpgrade = false;
@@ -82,6 +82,9 @@ public class Tower : MonoBehaviour {
         enemyToAttack = null;
         
         roundManager = GameObject.Find("RoundSpawner").GetComponent<RoundManager>();
+        
+        radiusLine.startWidth = 0.125f;
+        radiusLine.endWidth = 0.125f;
     }
     
     // called every frame
@@ -207,29 +210,84 @@ public class Tower : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (isHeld) {
-            if (collision.gameObject.CompareTag("Tower"))
-                setValidPosition(false);
-                
+            Debug.Log("Colliding with: " + collision.gameObject.name);
+            var col = collision.gameObject;
+            /*
             if (towerType == TowerType.Land) {
-                if (collision.gameObject.CompareTag("Water")) {
+                if (col.CompareTag("WaterCollider") || col.CompareTag("Tower") || col.CompareTag("PathCollider"))
                     setValidPosition(false);
-                }
+                else if (col.CompareTag("GroundCollider"))
+                    setValidPosition(true);;
             }
-            else if (towerType == TowerType.Water) {
-                if (collision.gameObject.CompareTag("GroundPath"))
+
+            if (towerType == TowerType.Water) {
+                if (col.CompareTag("GroundCollider") || col.CompareTag("Tower") || col.CompareTag("PathCollider"))
                     setValidPosition(false);
+                else if (col.CompareTag("WaterCollider"))
+                    setValidPosition(true);
+            }
+            */
+            
+            /*
+            if (towerType == TowerType.Water) {
+                if (col.CompareTag("WaterCollider"))
+                    setValidPosition(true);
+                else
+                    setValidPosition(false);
+            }
+
+            if (towerType == TowerType.Land) {
+                if (col.CompareTag("GroundCollider"))
+                    setValidPosition(true);
+                else
+                    setValidPosition(false);
+            }
+            */
+            if (col.CompareTag("PathCollider"))
+            {
+                setValidPosition(false);
             }
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision) {
         if (isHeld) {
-            if (collision.gameObject.CompareTag("Tower") || collision.gameObject.CompareTag("Path")) {
+            Debug.Log("Stopped Colliding with: " + collision.gameObject.name);
+            var col = collision.gameObject;
+
+            /*
+            if (towerType == TowerType.Land) {
+                if (col.CompareTag("GroundCollider"))
+                    setValidPosition(false);
+                else if ((col.CompareTag("Tower") || col.CompareTag("WaterCollider") || col.CompareTag("PathCollider")) && !col.CompareTag("GroundCollider"))
+                    setValidPosition(true);
+            }
+
+            if (towerType == TowerType.Water) {
+                if (col.CompareTag("WaterCollider"))
+                    setValidPosition(false);
+                if (col.CompareTag("Tower") && !col.CompareTag("WaterCollider"))
+                    setValidPosition(true);
+            }
+            */
+            
+            /*
+            if (towerType == TowerType.Water)
+                if (col.CompareTag("WaterCollider"))
+                    setValidPosition(false);
+            
+            if (towerType == TowerType.Land)
+                if (col.CompareTag("GroundCollider"))
+                    setValidPosition(false);
+            */
+
+            if (col.CompareTag("PathCollider"))
+            {
                 setValidPosition(true);
             }
+                
         }
     }
-
 
     //
     //

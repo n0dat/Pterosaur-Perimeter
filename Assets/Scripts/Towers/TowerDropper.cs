@@ -64,7 +64,9 @@ public class TowerDropper : MonoBehaviour {
         towerHeld = false;
     }
 
-    public void createTower() {
+    public void createTower()
+    {
+        Debug.Log("Button Pressed for Tower.");
         towerHeld = true;
         heldTower = instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
     }

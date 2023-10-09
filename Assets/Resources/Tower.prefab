@@ -31,7 +31,7 @@ RectTransform:
   m_GameObject: {fileID: 5078279887009515754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 12, y: 12, z: 12}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   durability: 0
   attackSpeed: 1
   attackDamage: 100
-  attackRange: 5
+  attackRange: 0
   hasRangeUpgrade: 0
   hasAttackSpeedUpgrade: 0
   hasDamageUpgrade: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   targetingMode: 0
   roundManager: {fileID: 0}
   attackType: {fileID: -5455152999257521880}
-  towerType: 1
+  towerType: 0
 --- !u!120 &5221478542891101867
 LineRenderer:
   serializedVersion: 2
@@ -180,8 +180,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.36787415
-        value: 0.15789413
+        time: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -301,7 +301,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 2
   m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!114 &-5455152999257521880
