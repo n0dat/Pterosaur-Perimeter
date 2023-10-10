@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,16 +21,26 @@ public class Settings : MonoBehaviour {
     
     [SerializeField]
     private bool autoStartRounds;
+    
+    private GameObject fpsCounter;
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
         Application.targetFrameRate = 60;
         autoStartRounds = false;
+        targetFps = 60;
+        fpsCounter = gameObject.transform.GetChild(0).GetChild(0).gameObject;
+        fpsCounter.SetActive(false);
     }
 
     public void setShowFps(bool val) {
         showFps = val;
         Debug.Log("Show Fps: " + showFps);
+
+        if (showFps)
+            fpsCounter.SetActive(true);
+        else
+            fpsCounter.SetActive(false);
     }
 
     public void setTargetFps(int val) {
