@@ -25,8 +25,9 @@ public class SceneManager : MonoBehaviour {
         var asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneToLoad);
         if (asyncLoad == null)
             Debug.Log("Failed to load scene : " + sceneToLoad);
-        else
+        else {
             asyncLoad.completed += onLoadSceneComplete;
+        }
     }
 
     public void onLoadSceneComplete(AsyncOperation asyncOp) {

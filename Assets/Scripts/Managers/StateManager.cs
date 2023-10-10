@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour {
 	
-	public enum GameState { Paused, Playing, Menu };
+	public enum GameState { Paused, Playing, Menu, Settings };
 	
     [SerializeField]
     private GameState gameState;
