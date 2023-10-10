@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Settings : MonoBehaviour {
     
@@ -16,10 +17,14 @@ public class Settings : MonoBehaviour {
     
     [SerializeField]
     private float audioLevel;
+    
+    [SerializeField]
+    private bool autoStartRounds;
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
         Application.targetFrameRate = 60;
+        autoStartRounds = false;
     }
 
     public void setShowFps(bool val) {
@@ -43,6 +48,11 @@ public class Settings : MonoBehaviour {
         Debug.Log("Set Audio Level: " + audioLevel);
     }
 
+    public void setAutoStartRounds(bool val) {
+        autoStartRounds = val;
+        Debug.Log("Auto Start Rounds: " + autoStartRounds);
+    }
+
     public bool getShowFps() {
         return showFps;
     }
@@ -57,5 +67,9 @@ public class Settings : MonoBehaviour {
 
     public float getAudioLevel() {
         return audioLevel;
+    }
+    
+    public bool getAutoStartRounds() {
+        return autoStartRounds;
     }
 }
