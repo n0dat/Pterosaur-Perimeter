@@ -10,7 +10,7 @@ public class MainMenuButton : MonoBehaviour {
     private string sceneToLoad;
     
     [SerializeField]
-    private bool isExitButton, isLevelStartButton, isSettingsExitButton;
+    private bool isExitButton, isLevelStartButton, isSettingsExitButton, isSettingsEnterButton;
     
     private MainManager mainManager;
 
@@ -28,6 +28,8 @@ public class MainMenuButton : MonoBehaviour {
                 mainManager.getStateManager().setGameState(StateManager.GameState.Playing);
             if (isSettingsExitButton)
                 mainManager.getSettingsManager().saveSettings();
+            if (isSettingsEnterButton)
+                mainManager.getSettingsManager().loadSettings();
         }
         else
             Debug.Log("Unable to get Scene Manager.");

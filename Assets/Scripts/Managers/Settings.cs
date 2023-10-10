@@ -92,4 +92,12 @@ public class Settings : MonoBehaviour {
     public void saveSettings() {
         settingsHandler.writeSettings(getShowFps(), getPlayAudio(), getTargetFps(), getAudioLevel());
     }
+
+    public void loadSettings() {
+        var settings = settingsHandler.readSettings();
+        setShowFps(settings.Item1);
+        setPlayAudio(settings.Item2);
+        setTargetFps(settings.Item3);
+        setAudioLevel(settings.Item4);
+    }
 }
