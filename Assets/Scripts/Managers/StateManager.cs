@@ -7,22 +7,17 @@ public class StateManager : MonoBehaviour {
 	public enum GameState { Paused, Playing, Menu };
 	
     [SerializeField]
-    private GameState gameState = GameState.Menu;
+    private GameState gameState;
     
     [SerializeField]
     private GameObject pauseMenu;
     
-    /**
-     * Called when initialized.
-     *
-     * Set pause menu reference to child object of this game object
-     * Disable the pause menu object
-     * Add self to DontDestroyOnLoad
-     */
     void Awake() {
+	    DontDestroyOnLoad(this);
+	    
+	    gameState = GameState.Menu;
 	    pauseMenu = gameObject.transform.GetChild(0).gameObject;
 	    pauseMenu.SetActive(false);
-	    DontDestroyOnLoad(this);
     }
 
     void Update() {
@@ -35,16 +30,22 @@ public class StateManager : MonoBehaviour {
     }
 
     public void pauseGame() {
-	    Debug.Log("Game paused");
 	    gameState = GameState.Paused;
 	    pauseMenu.SetActive(true);
 	    Time.timeScale = 0f;
     }
 
     public void resumeGame() {
-	    Debug.Log("Game un-paused");
 	    gameState = GameState.Playing;
 	    pauseMenu.SetActive(false);
 	    Time.timeScale = 1f;
+    }
+
+    public void setGameState(GameState state) {
+	    gameState = state;
+    }
+
+    public GameState getGameState() {
+	    return gameState;
     }
 }

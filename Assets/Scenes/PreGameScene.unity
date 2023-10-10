@@ -676,6 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: Level_3
   isExitButton: 0
+  isLevelStartButton: 1
 --- !u!1 &543007827
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,6 +731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: MainMenuScene
   isExitButton: 0
+  isLevelStartButton: 0
 --- !u!114 &543007830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,6 +974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: TestScene_1
   isExitButton: 0
+  isLevelStartButton: 1
 --- !u!1 &1094358102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: Level_4
   isExitButton: 0
+  isLevelStartButton: 1
 --- !u!1 &1704528580
 GameObject:
   m_ObjectHideFlags: 0

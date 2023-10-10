@@ -6,10 +6,14 @@ public class SceneManager : MonoBehaviour {
     // globals
     [SerializeField]
     private Scene currentScene;
+    
+    private StateManager stateManager;
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
+        
         currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
     }
 
     public Scene getCurrentScene() {
@@ -20,13 +24,9 @@ public class SceneManager : MonoBehaviour {
         currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         var asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneToLoad);
         if (asyncLoad == null)
-        {
             Debug.Log("Failed to load scene : " + sceneToLoad);
-        }
         else
-        {
-            asyncLoad.completed += onLoadSceneComplete;  
-        }
+            asyncLoad.completed += onLoadSceneComplete;
     }
 
     public void onLoadSceneComplete(AsyncOperation asyncOp) {

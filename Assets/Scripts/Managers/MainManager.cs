@@ -10,6 +10,8 @@ public class MainManager : MonoBehaviour {
     public StateManager stateManager;
 
     void Awake() {
+	    DontDestroyOnLoad(this);
+	    
 	    mouseInputManager = GameObject.Find("MouseManager").GetComponent<MouseInputManager>();
 	    settingsManager = GameObject.Find("SettingsManager").GetComponent<Settings>();
 	    sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();

@@ -11,18 +11,27 @@ public class MainMenuButton : MonoBehaviour {
     
     [SerializeField]
     private bool isExitButton;
+    
+    [SerializeField]
+    private bool isLevelStartButton;
+    
+    private MainManager mainManager;
+
+    void Start() {
+        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+        if (mainManager == null)
+            Debug.Log("MainMenuButton : Unable to get MainManager component.");
+    }
 
     public void ButtonPressed() {
-        var sceneManager = GameObject.Find("SceneManager");
-        if (sceneManager != null) {
-            var sceneLoader = sceneManager.GetComponent<SceneManager>();
-            if (sceneLoader != null)
-                sceneLoader.loadScene(sceneToLoad);
-            else
-                Debug.Log("Unable to get Scene Loader component of Scene Manager");
+        var sceneLoader = mainManager.getSceneManager();
+        if (sceneLoader != null) {
+            mainManager.getSceneManager().loadScene(sceneToLoad);
+            if (isLevelStartButton)
+                mainManager.getStateManager().setGameState(StateManager.GameState.Playing);
         }
         else
-            Debug.Log("Unable to find Scene Manager in current Scene");
+            Debug.Log("Unable to get Scene Manager.");
     }
 
     public void ExitGame() {
