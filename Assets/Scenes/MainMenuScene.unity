@@ -810,6 +810,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: 
   isExitButton: 1
+  isLevelStartButton: 0
+  isSettingsExitButton: 0
+  isSettingsEnterButton: 0
 --- !u!1 &1094358102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,6 +1029,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: SettingsScene
   isExitButton: 0
+  isLevelStartButton: 0
+  isSettingsExitButton: 0
+  isSettingsEnterButton: 0
 --- !u!1 &1675352655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,8 +1417,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f5e292ae0504fc1a2aeef03d9e417a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: PreGameScene
+  sceneToLoad: LevelSelectScene
   isExitButton: 0
+  isLevelStartButton: 0
+  isSettingsExitButton: 0
+  isSettingsEnterButton: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
