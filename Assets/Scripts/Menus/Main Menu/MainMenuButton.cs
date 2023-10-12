@@ -21,6 +21,9 @@ public class MainMenuButton : MonoBehaviour {
     }
 
     public void buttonPressed() {
+        
+        mainManager.getLevelManager().displayDisasterNotification("METEOR");
+        
         var sceneLoader = mainManager.getSceneManager();
         if (sceneLoader != null) {
             mainManager.getSceneManager().loadScene(sceneToLoad);

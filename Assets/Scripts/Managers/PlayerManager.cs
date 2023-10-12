@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour {
     private int skulls;
 
     void Start() {
+        DontDestroyOnLoad(this);
         mainManager = GameObject.Find("MainManager").gameObject.GetComponent<MainManager>();
         
         skulls = 0;

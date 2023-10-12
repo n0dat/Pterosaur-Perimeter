@@ -7,6 +7,7 @@ public class Disaster : MonoBehaviour {
     
     [SerializeField] private DisasterType disasterType;
     [SerializeField] private int triggerThreshold;
+    [SerializeField] private string disasterString;
     
     private bool disasterTriggered;
 
@@ -20,13 +21,7 @@ public class Disaster : MonoBehaviour {
 
     // this is used to calculate whether or not we have a disaster this round
     public bool checkDisaster() {
-        var chance = Random.Range(1, 101);
-        
-        if (chance < triggerThreshold)
-            return true;
-        
-        return false;
-        
+        return Random.Range(1, 101) < triggerThreshold;
     }
 
     public void triggerDisaster() {
