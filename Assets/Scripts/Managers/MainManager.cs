@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class MainManager : MonoBehaviour {
     
-	public MouseInputManager mouseInputManager;
-    public Settings settingsManager;
-    public SceneManager sceneManager;
-    public StateManager stateManager;
+	private TowerSelector towerSelector;
+    private Settings settingsManager;
+    private SceneManager sceneManager;
+    private StateManager stateManager;
+    private LevelManager levelManager;
+    private PlayerManager playerManager;
 
     void Awake() {
 	    DontDestroyOnLoad(this);
 	    
-	    mouseInputManager = GameObject.Find("MouseManager").GetComponent<MouseInputManager>();
+	    towerSelector = GameObject.Find("MouseManager").GetComponent<TowerSelector>();
 	    settingsManager = GameObject.Find("SettingsManager").GetComponent<Settings>();
 	    sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 	    stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
+	    levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+	    playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
 
-    public MouseInputManager getMouseManager() {
-	    return this.mouseInputManager;
+    public TowerSelector getTowerSelector() {
+	    return this.towerSelector;
     }
 
     public Settings getSettingsManager() {
@@ -32,5 +36,13 @@ public class MainManager : MonoBehaviour {
 
     public StateManager getStateManager() {
 	    return this.stateManager;
+    }
+
+    public LevelManager getLevelManager() {
+	    return this.levelManager;
+    }
+
+    public PlayerManager getPlayerManager() {
+	    return this.playerManager;
     }
 }

@@ -1,0 +1,1 @@
+﻿public enum RoundState { Spawning, Waiting, InProgress };

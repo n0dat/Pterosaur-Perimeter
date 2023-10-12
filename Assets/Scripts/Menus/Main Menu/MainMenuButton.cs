@@ -10,7 +10,7 @@ public class MainMenuButton : MonoBehaviour {
     private string sceneToLoad;
     
     [SerializeField]
-    private bool isExitButton, isLevelStartButton, isSettingsExitButton, isSettingsEnterButton;
+    private bool isLevelStartButton, isSettingsExitButton, isSettingsEnterButton;
     
     private MainManager mainManager;
 
@@ -20,12 +20,14 @@ public class MainMenuButton : MonoBehaviour {
             Debug.Log("MainMenuButton : Unable to get MainManager component.");
     }
 
-    public void ButtonPressed() {
+    public void buttonPressed() {
         var sceneLoader = mainManager.getSceneManager();
         if (sceneLoader != null) {
             mainManager.getSceneManager().loadScene(sceneToLoad);
-            if (isLevelStartButton)
+            if (isLevelStartButton) {
                 mainManager.getStateManager().setGameState(StateManager.GameState.Playing);
+                mainManager.getTowerSelector().getNewCamera();
+            }
             if (isSettingsExitButton)
                 mainManager.getSettingsManager().saveSettings();
             if (isSettingsEnterButton)
@@ -35,7 +37,7 @@ public class MainMenuButton : MonoBehaviour {
             Debug.Log("Unable to get Scene Manager.");
     }
 
-    public void ExitGame() {
+    public void exitGame() {
     #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
     #else

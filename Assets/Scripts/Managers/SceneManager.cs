@@ -7,13 +7,13 @@ public class SceneManager : MonoBehaviour {
     [SerializeField]
     private Scene currentScene;
     
-    private StateManager stateManager;
+    private MainManager mainManager;
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
         
         currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
-        stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
+        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
     }
 
     public Scene getCurrentScene() {
@@ -31,6 +31,6 @@ public class SceneManager : MonoBehaviour {
     }
 
     public void onLoadSceneComplete(AsyncOperation asyncOp) {
-        GameObject.Find("MouseManager").GetComponent<MouseInputManager>().getNewCamera();
+        GameObject.Find("MouseManager").GetComponent<TowerSelector>().getNewCamera();
     }
 }

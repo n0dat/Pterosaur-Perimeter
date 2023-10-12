@@ -748,7 +748,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 716896826}
         m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
-        m_MethodName: ExitGame
+        m_MethodName: exitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -967,7 +967,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1420403745}
         m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
-        m_MethodName: ButtonPressed
+        m_MethodName: buttonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1357,7 +1357,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1985378891}
         m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
-        m_MethodName: ButtonPressed
+        m_MethodName: buttonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

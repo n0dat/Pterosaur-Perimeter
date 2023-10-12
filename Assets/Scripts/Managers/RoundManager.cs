@@ -1,26 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Customs;
 using UnityEngine;
 
 public class RoundManager : MonoBehaviour {
-
-	public enum RoundState { Spawning, Waiting, InProgress };
-
-	[System.Serializable]
-	public class Round {
-		public int roundNumber;
-		public Transform enemy;
-		public int enemyCount;
-		public float spawnRate;
-		public bool isComplete;
-		public CircularBuffer<int> enemies;
-		public float startDelay;
-
-		public void init() {
-			enemies = new CircularBuffer<int>(enemyCount);
-		}
-	}
 	
 	public RoundState state = RoundState.Waiting;
 	public Round[] rounds;
@@ -28,7 +10,6 @@ public class RoundManager : MonoBehaviour {
 	
 	public float roundDelay = 5f;
 	public float roundCountdown;
-	
 	
 	[SerializeField]
 	private GameObject checkpointObject;

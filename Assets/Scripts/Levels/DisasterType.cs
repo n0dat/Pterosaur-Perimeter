@@ -1,0 +1,1 @@
+﻿public enum DisasterType { Meteor, Earthquake, Flood }
