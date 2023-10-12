@@ -17,7 +17,7 @@ public class TowerDropUIHandler : MonoBehaviour
     }
 
     //Called when the mouse hovers over expandHandle.
-    void OnMouseEnter()
+    public void OnMouseEnter()
     {
         Animator animator = towerContainer.GetComponent<Animator>();
         if (this.isExpanded)
@@ -30,11 +30,5 @@ public class TowerDropUIHandler : MonoBehaviour
             this.isExpanded = true;
             animator.SetTrigger("HoveredWhileClosed");
         }
-    }
-    
-    //Called when the mouse leaves the 
-    void OnMouseExit()
-    {
-        
     }
 }

@@ -8,6 +8,8 @@ public class TowerDropper : MonoBehaviour {
     
     [SerializeField]
     private new Camera camera;
+
+    [SerializeField] private TowerDropUIHandler UIHandler;
     
     [SerializeField]
     private GameObject tower;
@@ -67,6 +69,8 @@ public class TowerDropper : MonoBehaviour {
     public void createTower()
     {
         Debug.Log("Button Pressed for Tower.");
+        if (UIHandler)
+            UIHandler.OnMouseEnter();
         towerHeld = true;
         heldTower = instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
     }
