@@ -88,6 +88,7 @@ public class RoundManager : MonoBehaviour {
 
 		for (int i = 0; i < curRound.enemyCount; i++) {
 			spawnEnemy(curRound.enemy);
+			spawnEnemy(); // how to call cavemen enemy?
 			yield return new WaitForSeconds(1f / curRound.spawnRate);
 		}
 		
