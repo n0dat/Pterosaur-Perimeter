@@ -11,7 +11,7 @@ public class Resume : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Sprite newSprite;
     public Sprite oldSprite;
 
-    private bool isHover;
+    // Need to have clicked bool here
     
     // Start is called before the first frame update
     void Start()
@@ -28,8 +28,6 @@ public class Resume : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {   
             image.sprite = newSprite;
-        
-
     }
 
     public void OnPointerExit(PointerEventData eventData){

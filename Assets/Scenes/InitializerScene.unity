@@ -213,9 +213,10 @@ GameObject:
   - component: {fileID: 46217592}
   - component: {fileID: 46217595}
   - component: {fileID: 46217594}
+  - component: {fileID: 46217596}
   - component: {fileID: 46217593}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: SettingButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,6 +323,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46217591}
   m_CullTransparentMesh: 1
+--- !u!114 &46217596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46217591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f61ca8b14b5aa34880aaac9f2c1fcfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  img: {fileID: 46217594}
+  newSprite: {fileID: 1875740054871863250, guid: 1a3e015ae1fd4cb42a71cc89061f9346, type: 3}
+  oldSprite: {fileID: 4645430289796755974, guid: bb05000c6eeb6d648a4f47f851ba749e, type: 3}
 --- !u!1 &144985700
 GameObject:
   m_ObjectHideFlags: 0
