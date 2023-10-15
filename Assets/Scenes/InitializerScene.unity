@@ -1114,6 +1114,7 @@ GameObject:
   - component: {fileID: 952315593}
   - component: {fileID: 952315596}
   - component: {fileID: 952315595}
+  - component: {fileID: 952315597}
   - component: {fileID: 952315594}
   m_Layer: 5
   m_Name: ResumeButton
@@ -1148,7 +1149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952315592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -1223,6 +1224,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952315592}
   m_CullTransparentMesh: 1
+--- !u!114 &952315597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952315592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57de85bd75966e4b8b3168db355f400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 952315595}
+  newSprite: {fileID: -8785275446584589652, guid: b31e670008e668c4c81ad7fee4f7786a, type: 3}
+  oldSprite: {fileID: -8111025609810652003, guid: 9966845967af0df49bc54a854ee69bbd, type: 3}
 --- !u!1 &1012594666
 GameObject:
   m_ObjectHideFlags: 0
