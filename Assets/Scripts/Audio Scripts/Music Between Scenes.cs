@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class BetweenScenes : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    private void Awake () {
         
-    }
+        GameObject[] musicObj = GameObject.FindGameObjectsWithTag("Background Music");
+        if (musicObj.Length > 1) { //If true 2 tracks are playing on top of each other
+                Destroy(this.gameObject);
+            }
+            DontDestroyOnLoad(this.gameObject);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
