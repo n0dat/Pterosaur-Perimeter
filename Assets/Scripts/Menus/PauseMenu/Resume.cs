@@ -16,7 +16,7 @@ public class Resume : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // Start is called before the first frame update
     void Start()
     {
-        isHover = false;
+        //isHover = false; 
     }
 
     // Update is called once per frame

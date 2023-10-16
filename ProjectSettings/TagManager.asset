@@ -10,6 +10,7 @@ TagManager:
   - GroundCollider
   - WaterCollider
   - PathCollider
+  - Background Music
   layers:
   - Default
   - TransparentFX
