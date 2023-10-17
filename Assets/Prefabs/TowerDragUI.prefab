@@ -362,7 +362,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3883227708427087436}
         m_TargetAssemblyTypeName: TowerDropper, Assembly-CSharp
-        m_MethodName: createTower
+        m_MethodName: purchaseTower
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -782,7 +782,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8712758964022927571}
         m_TargetAssemblyTypeName: TowerDropper, Assembly-CSharp
-        m_MethodName: createTower
+        m_MethodName: purchaseTower
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -934,7 +934,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4054670594365872425}
         m_TargetAssemblyTypeName: TowerDropper, Assembly-CSharp
-        m_MethodName: createTower
+        m_MethodName: purchaseTower
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
