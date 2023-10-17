@@ -13,24 +13,22 @@ public class Enemy : MonoBehaviour {
 	
 	[SerializeField] private bool isDisplayingHit = false;
 	
-	private Vector3 targetWaypoint;
-	private int waypointIndex = 0;
-	private List<Vector3> waypoints;
+	public Vector3 targetWaypoint;
+	public int waypointIndex = 0;
+	public List<Vector3> waypoints;
 
-	private RoundManager roundManager;
+	private LevelManager levelManager;
 	private SpriteRenderer spriteRenderer;
 	private static readonly int MColor = Shader.PropertyToID("m_Color");
 
 	void Start() {
-		targetWaypoint = waypoints[0];
 		findTotalDistance();
 		health = 100f;
-		roundManager = GameObject.Find("RoundSpawner")?.GetComponent<RoundManager>();
+		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 	}
 
 	void Update() {
-		
 		// used for targeting
 		distanceCovered += (movementSpeed * Time.deltaTime) / totalDistance;
 		
@@ -44,6 +42,7 @@ public class Enemy : MonoBehaviour {
 
 	public void setWaypoints(List<Vector3> points) {
 		waypoints = points;
+		targetWaypoint = waypoints[0];
 	}
 
 	void getNextCheckpoint() {
@@ -55,15 +54,14 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void OnDestroy() {
-		
 		// cancel hit indication
 		if (isDisplayingHit) {
 			StopCoroutine(indicateHit());
 			isDisplayingHit = false;
 		}
 		
-		if (roundManager != null)
-			roundManager.removeEnemy(this.gameObject.GetInstanceID());
+		if (levelManager != null)
+			levelManager.removeEnemy(this.gameObject.GetInstanceID());
 	}
 
 	public float getTotalDistance() {
@@ -82,8 +80,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public void takeDamage(float damage, Tower attacker) {
-		
-		if (gameObject == null || health <= 0f)
+		if (!gameObject || health <= 0f)
 			return;
 		
 		if (!isDisplayingHit)
@@ -105,7 +102,7 @@ public class Enemy : MonoBehaviour {
 		spriteRenderer.color = Color.red;
 		isDisplayingHit = true;
 		
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(0.2f);
 		
 		spriteRenderer.color = Color.white;
 		isDisplayingHit = false;

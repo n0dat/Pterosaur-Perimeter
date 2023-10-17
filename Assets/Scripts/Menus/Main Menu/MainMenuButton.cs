@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MainMenuButton : MonoBehaviour {
     
     // globals
-    [SerializeField]
-    private string sceneToLoad;
+    [SerializeField] private string sceneToLoad;
     
-    [SerializeField]
-    private bool isLevelStartButton, isSettingsExitButton, isSettingsEnterButton;
+    [SerializeField] private bool isLevelStartButton, isSettingsExitButton, isSettingsEnterButton;
     
     private MainManager mainManager;
 
@@ -22,7 +17,7 @@ public class MainMenuButton : MonoBehaviour {
 
     public void buttonPressed() {
         
-        mainManager.getLevelManager().displayDisasterNotification("METEOR");
+        //mainManager.getLevelManager().displayDisasterNotification("METEOR");
         
         var sceneLoader = mainManager.getSceneManager();
         if (sceneLoader != null) {

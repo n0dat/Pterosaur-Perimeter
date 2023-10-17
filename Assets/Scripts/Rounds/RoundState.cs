@@ -1,1 +1,1 @@
-﻿public enum RoundState { Spawning, Waiting, InProgress };
+﻿public enum RoundState { Spawning, Waiting, InProgress, Stopped };

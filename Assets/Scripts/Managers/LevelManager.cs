@@ -8,25 +8,41 @@ public class LevelManager : MonoBehaviour {
     
     // globals
     [SerializeField] private Level currentLevel;
+    [SerializeField] private Text disasterNotificationText;
+    [SerializeField] private GameObject notif;
+    [SerializeField] private GameObject checkpointObject;
+    [SerializeField] private List<Vector3> checkpoints;
+    [SerializeField] private GameObject levelUI;
     
+    private bool inLevel;
     private MainManager mainManager;
     
-    [SerializeField] private Text disasterNotificationText;
+    public float roundDelay;
+    public float roundCountdown;
     
-    [SerializeField] private GameObject notif;
-
     void Start() {
         DontDestroyOnLoad(this);
-        loadCheckpoints();
         roundCountdown = roundDelay;
-        foreach (var round in rounds)
-	        round.init();
         mainManager = GameObject.Find("MainManager").gameObject.GetComponent<MainManager>();
         disasterNotificationText = notif.GetComponent<Text>();
+        levelUI.SetActive(false);
+        inLevel = false;
+        roundDelay = 5f;
     }
 
     public void loadLevel(Level level) {
         currentLevel = level;
+        levelUI.SetActive(true);
+        currentLevel.loadCheckpoints();
+        checkpoints = currentLevel.getCheckpoints();
+        foreach (var round in currentLevel.rounds)
+	        round.init();
+        inLevel = true;
+    }
+
+    public void exitLevel() {
+	    currentLevel = null;
+	    levelUI.SetActive(false);
     }
 
     public Level getCurrentLevel() {
@@ -37,93 +53,69 @@ public class LevelManager : MonoBehaviour {
         disasterNotificationText.text = "WARNING:    " + str + " incoming!";
     }
     
-    public RoundState state = RoundState.Waiting;
-	public Round[] rounds;
-	public int currentRound = 0;
-	
-	public float roundDelay = 5f;
-	public float roundCountdown;
-	
-	[SerializeField]
-	private GameObject checkpointObject;
-	[SerializeField]
-	private List<Vector3> checkpoints;
-	
 	public void removeEnemy(int enemy) {
-		rounds[currentRound].enemies.remove(enemy);
-	}
-
-	public bool loadCheckpointObject() {
-		checkpointObject = GameObject.Find("Checkpoints") as GameObject;
-		return (checkpointObject != null);
-	}
-
-	public void loadCheckpoints() {
-		if (!loadCheckpointObject())
-			return;
-		foreach (Transform checkpoint in checkpointObject.transform) {
-			var checkpointPos = checkpoint.gameObject.transform.position;
-			checkpoints.Add(new Vector3(checkpointPos.x, checkpointPos.y, 0f));
-		}
-	}
-
-	public void clearCheckpoints() {
-		checkpoints.Clear();
+		currentLevel.rounds[currentLevel.currentRound].enemies.remove(enemy);
 	}
 
 	void Update() {
-		if (state == RoundState.InProgress) {
-			if (!hasEnemies())
-				endRound();
-			else
-				return;
+		if (inLevel) {
+			if (currentLevel.roundState == RoundState.InProgress) {
+				if (!hasEnemies())
+					endRound();
+			}
 		}
+	}
 
-		if (roundCountdown <= 0) {
-			if (state != RoundState.Spawning)
-				StartCoroutine(spawnRound(rounds[currentRound]));
+	public void startRound() {
+		if (currentLevel.roundState == RoundState.Waiting) {
+			StartCoroutine(spawnRound(currentLevel.rounds[currentLevel.currentRound]));
 		}
 		else
-			roundCountdown -= Time.deltaTime;
+			Debug.Log("Round already started");
 	}
 
 	void endRound() {
 		roundCountdown = roundDelay;
 		
-		rounds[currentRound].enemies.clear();
+		currentLevel.rounds[currentLevel.currentRound].enemies.clear();
 
-		if (currentRound + 1 >= rounds.Length) {
-			currentRound = 0;
+		if (currentLevel.currentRound + 1 >= currentLevel.rounds.Length) {
+			currentLevel.currentRound = 0;
 			Debug.Log("All rounds completed. Looping to first round");
-			foreach (var round in rounds)
+			foreach (var round in currentLevel.rounds)
 				round.isComplete = false;
 		}
 		else
-			rounds[currentRound++].isComplete = true;
+			currentLevel.rounds[currentLevel.currentRound++].isComplete = true;
 
-		state = RoundState.Waiting;
+		currentLevel.roundState = RoundState.Waiting;
+		Debug.Log("Current Level new Round State: WAITING");
+		
+		if (mainManager.getSettingsManager().getAutoStartRounds())
+			startRound();
 	}
 
 	bool hasEnemies() {
-		return !rounds[currentRound].enemies.IsEmpty;
+		return !currentLevel.rounds[currentLevel.currentRound].enemies.IsEmpty;
 	}
 
 	IEnumerator spawnRound(Round curRound) {
-		//Debug.Log("Spawning Round: " + curRound.roundNumber);
-		state = RoundState.Spawning;
+		Debug.Log("Spawning Round: " + currentLevel.currentRound);
+		currentLevel.roundState = RoundState.Spawning;
+		Debug.Log("Current Level new Round State: SPAWNING");
 
 		for (int i = 0; i < curRound.enemyCount; i++) {
 			spawnEnemy(curRound.enemy);
 			yield return new WaitForSeconds(1f / curRound.spawnRate);
 		}
 		
-		state = RoundState.InProgress;
+		currentLevel.roundState = RoundState.InProgress;
+		Debug.Log("Current Level new Round State: IN PROGRESs");
 	}
 
 	void spawnEnemy(Transform enemyToSpawn) {
-		//Debug.Log("Spawning Enemy: " + enemyToSpawn.name);
-		var tempEnemy = Instantiate(enemyToSpawn, checkpoints[0], Quaternion.identity);
-		rounds[currentRound].enemies.enqueue(tempEnemy.gameObject.GetInstanceID());
-		tempEnemy.gameObject.GetComponent<Enemy>().setWaypoints(checkpoints);
+		var tempEnemy = Instantiate(enemyToSpawn, currentLevel.getCheckpoints()[0], Quaternion.identity);
+		tempEnemy.gameObject.GetComponent<Enemy>().setWaypoints(currentLevel.getCheckpoints());
+		currentLevel.rounds[currentLevel.currentRound].enemies.enqueue(tempEnemy.gameObject.GetInstanceID());
 	}
 }
