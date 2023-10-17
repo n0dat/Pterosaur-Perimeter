@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+//Script is attached to all buttons in the tower drop UI.
 public class TowerDropper : MonoBehaviour {
     
-    // globals
-    
+    //Required References
+    private new Camera camera; //The camera for the scene. Make sure it is called "Main Camera" or initialization code in "Start()" will not work.
     [SerializeField] private TowerDropUIHandler m_UIHandler; //The UIHandler handles the animation for sliding in and out.
+    [SerializeField] private PlayerManager m_playerManager; //For tower purchasing
+    
     [SerializeField] private string m_towerName; //The name of the prefab tower you want to load upon purchase.
     private GameObject heldTower;
     private bool towerHeld;
     private bool canBePlaced;
-    private new Camera camera; //The camera for the scene. Make sure it is called "Main Camera" or initialization code in "Start()" will not work.
-    
-    
-    //Globals relating to tower purchasing
-    [SerializeField] private PlayerManager m_playerManager;
     [SerializeField] private int m_towerCost;
 
     void Start() {
@@ -54,7 +52,12 @@ public class TowerDropper : MonoBehaviour {
         }
     }
 
-    private void killTower() {
+    private void killTower()
+    {
+        if (!hasAllReferences())
+            return;
+        
+        m_playerManager.skullsCredit(m_towerCost);
         Destroy(heldTower);
         towerHeld = false;
     }
