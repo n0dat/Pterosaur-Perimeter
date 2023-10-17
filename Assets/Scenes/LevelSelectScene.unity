@@ -252,7 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Level_3
-  isExitButton: 0
   isLevelStartButton: 1
   isSettingsExitButton: 0
   isSettingsEnterButton: 0
@@ -2035,7 +2034,7 @@ GameObject:
   - component: {fileID: 535404804}
   - component: {fileID: 535404803}
   - component: {fileID: 535404802}
-  - component: {fileID: 535404801}
+  - component: {fileID: 535404805}
   m_Layer: 5
   m_Name: SelectButton
   m_TagString: Untagged
@@ -2063,23 +2062,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -148.9}
   m_SizeDelta: {x: 143.594, y: 68.877}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &535404801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 535404799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f5e292ae0504fc1a2aeef03d9e417a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: Level_3
-  isExitButton: 0
-  isLevelStartButton: 1
-  isSettingsExitButton: 0
-  isSettingsEnterButton: 0
 --- !u!114 &535404802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2124,8 +2106,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 535404801}
-        m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
+      - m_Target: {fileID: 535404805}
+        m_TargetAssemblyTypeName: LevelSelectButton, Assembly-CSharp
         m_MethodName: buttonPressed
         m_Mode: 1
         m_Arguments:
@@ -2135,7 +2117,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &535404803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2174,6 +2156,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535404799}
   m_CullTransparentMesh: 1
+--- !u!114 &535404805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535404799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d1500c03f58b8498e4d4066d8b9ffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: Level_3
+  levelToLoad: {fileID: 0}
+  levelPrefabName: Level1Prefab
 --- !u!1 &541263307
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,7 +2357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: MainMenuScene
-  isExitButton: 0
   isLevelStartButton: 0
   isSettingsExitButton: 0
   isSettingsEnterButton: 0
@@ -2738,7 +2734,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Level_3
-  isExitButton: 0
   isLevelStartButton: 1
   isSettingsExitButton: 0
   isSettingsEnterButton: 0
@@ -3728,7 +3723,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Level_3
-  isExitButton: 0
   isLevelStartButton: 1
   isSettingsExitButton: 0
   isSettingsEnterButton: 0
@@ -5308,7 +5302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Level_3
-  isExitButton: 0
   isLevelStartButton: 1
   isSettingsExitButton: 0
   isSettingsEnterButton: 0
