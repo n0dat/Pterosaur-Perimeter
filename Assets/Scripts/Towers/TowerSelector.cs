@@ -17,6 +17,7 @@ public class TowerSelector : MonoBehaviour {
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+        mainCamera = null;
         getNewCamera();
     }
 
@@ -25,7 +26,7 @@ public class TowerSelector : MonoBehaviour {
     }
 
     private IEnumerator GetCamera() {
-        while (mainCamera) {
+        while (!mainCamera) {
             mainCamera = Camera.main;
             yield return null;
         }
@@ -38,6 +39,11 @@ public class TowerSelector : MonoBehaviour {
             return;
         
         if (Input.GetMouseButtonDown(0)) {
+            if (!mainCamera) {
+                getNewCamera();
+                return;
+            }
+            
             Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             var mousePos2D = new Vector2(mousePos.x, mousePos.y);
             
