@@ -2,11 +2,12 @@
 
 public class PlayerManager : MonoBehaviour {
     
-    // globals
+    //Required references
     private MainManager mainManager;
+    [SerializeField] private UpdateCurrency currencyTextUIScript;
     
     [SerializeField] private int skulls; //This is our currency
-    [SerializeField] private UpdateCurrency currencyTextUIScript;
+    
     
 
     void Start() {
@@ -25,11 +26,9 @@ public class PlayerManager : MonoBehaviour {
 
     public void skullsCredit(int amount)
     {
-        if (!currencyTextUIScript)
-        {
-            Debug.Log("Missing reference for currencyTextUIScript in PlayerManager");
+        if (!hasAllReferences())
             return;
-        }
+        
         if (amount <= 0)
             return;
         
@@ -47,11 +46,8 @@ public class PlayerManager : MonoBehaviour {
     //If successfully subtracted, true will be returned. Otherwise, a value of false will be returned instead.
     public bool skullsCost(int amount)
     {
-        if (!currencyTextUIScript)
-        {
-            Debug.Log("Missing reference for currencyTextUIScript in PlayerManager");
+        if (!hasAllReferences())
             return false;
-        }
             
         if (amount <= 0)
             return false;
@@ -60,7 +56,7 @@ public class PlayerManager : MonoBehaviour {
 
         if (newSkullsAmount < 0)
         {
-            //Flash current skulls amount to signify player does not have enough.
+            //TODO: Flash current skulls amount to signify player does not have enough.
             return false;
         }
         
@@ -68,5 +64,15 @@ public class PlayerManager : MonoBehaviour {
         currencyTextUIScript.updateCurrencyAmount(skulls);
         return true;
     }
-    
+
+    private bool hasAllReferences()
+    {
+        if (!currencyTextUIScript)
+        {
+            Debug.Log("Missing required references in PlayerManager script.");
+            return false;
+        }
+
+        return true;
+    }
 }
