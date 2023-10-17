@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour {
 
         if (newSkullsAmount < 0)
         {
-            //TODO: Flash current skulls amount to signify player does not have enough.
+            currencyTextUIScript.flashCurrency();
             return false;
         }
         

@@ -81,7 +81,7 @@ public class Tower : MonoBehaviour {
         
         enemyToAttack = null;
         
-        roundManager = GameObject.Find("RoundSpawner").GetComponent<RoundManager>();
+        //roundManager = GameObject.Find("RoundSpawner").GetComponent<RoundManager>();
         
         radiusLine.startWidth = 0.125f;
         radiusLine.endWidth = 0.125f;
