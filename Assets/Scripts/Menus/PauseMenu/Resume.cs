@@ -11,20 +11,11 @@ public class Resume : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Sprite newSprite;
     public Sprite oldSprite;
 
-    // Need to have clicked bool here
+    [SerializeField]
+    private GameObject deactPauseMenue;
     
     // Start is called before the first frame update
-    void Start()
-    {
-        //isHover = false; 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void OnPointerEnter(PointerEventData eventData)
     {   
             image.sprite = newSprite;
@@ -33,4 +24,11 @@ public class Resume : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData){
             image.sprite = oldSprite;        
     }
+
+    public void restResumeImage(){
+        image.sprite = oldSprite;
+    }
+
+
+
 }
