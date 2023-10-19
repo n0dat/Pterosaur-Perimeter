@@ -11,8 +11,12 @@ public class StateManager : MonoBehaviour {
     
     [SerializeField]
     private GameObject pauseMenu;
+
+	private MainManager mainManager;
     
     void Awake() {
+		mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+		
 	    DontDestroyOnLoad(this);
 	    
 	    gameState = GameState.Menu;
@@ -40,6 +44,12 @@ public class StateManager : MonoBehaviour {
 	    pauseMenu.SetActive(false);
 	    Time.timeScale = 1f;
     }
+
+	public void loadMainMenu() {
+		resumeGame();
+		mainManager.getSceneManager().loadScene("MainMenuScene");
+		gameState = GameState.Menu;
+	}
 
     public void setGameState(GameState state) {
 	    gameState = state;
