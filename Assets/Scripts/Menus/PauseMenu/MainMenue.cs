@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MainMenue : MonoBehaviour
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+public class MainMenue : MonoBehaviour, IPointerEnterHandler ,IPointerExitHandler
 {
+    public Image img;
+    [SerializeField]
+    private Sprite newSprite;
+    [SerializeField]
+    private Sprite oldSprite;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +23,24 @@ public class MainMenue : MonoBehaviour
     {
         
     }
+
+    public void OnPointerEnter(PointerEventData eventData){
+        img.sprite = newSprite;
+    }
+
+    public void OnPointerExit(PointerEventData eventData){
+        img.sprite = oldSprite;
+    }
+
+    public void resetSprite() {
+        img.sprite = oldSprite;
+    }
+
+
+
+    
+
+
+
+
 }
