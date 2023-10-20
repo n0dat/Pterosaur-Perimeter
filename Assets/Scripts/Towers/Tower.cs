@@ -10,6 +10,8 @@ public class Tower : MonoBehaviour {
     private enum AttackState { Attacking, Waiting, Initial };
     private enum TargetingMode { First, Last, Strong };
 
+    private Animator m_animator;
+
     [SerializeField]
     private int towerCost, repairCost, radiusLineSegments = 50, killCount;
     
@@ -71,6 +73,7 @@ public class Tower : MonoBehaviour {
         radiusLine.endWidth = 0.125f;
         
         spriteRotator = gameObject.GetComponent<SpriteRotator>();
+        m_animator = gameObject.GetComponent<Animator>();
         
         attackVector = Vector3.zero;
     }
@@ -174,6 +177,7 @@ public class Tower : MonoBehaviour {
     private IEnumerator finishAttack(WaitForAttack waitForAttack) {
         attackInProgress = true;
         attackType.attack(enemyToAttack, gameObject);
+        m_animator.SetTrigger("Attack");
         waitForAttack.setAttackFinished();
         yield return null;
     }
