@@ -96,7 +96,7 @@ public class Tower : MonoBehaviour {
                 //var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1f);
                     
-                spriteRotator.setDir(direction);
+                //spriteRotator.setDir(direction);
                 if (!attackInProgress) {
                     // start attacking
                     if (enemyToAttack && attackState != AttackState.Attacking) {
