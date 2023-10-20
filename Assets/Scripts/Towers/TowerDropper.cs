@@ -45,7 +45,7 @@ public class TowerDropper : MonoBehaviour {
 
     public void dropTower() {   
         // instantiate tower at mouse coordinates if it can be placed
-        if (canBePlaced && towerHeld) {
+        if (towerHeld) {
             instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
             Destroy(heldTower);
             towerHeld = false;
