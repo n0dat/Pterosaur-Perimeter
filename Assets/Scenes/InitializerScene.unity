@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   img: {fileID: 46217594}
-  newSprite: {fileID: 1875740054871863250, guid: 1a3e015ae1fd4cb42a71cc89061f9346, type: 3}
+  newSprite: {fileID: -7140589777123862391, guid: 1a3e015ae1fd4cb42a71cc89061f9346, type: 3}
   oldSprite: {fileID: 4645430289796755974, guid: bb05000c6eeb6d648a4f47f851ba749e, type: 3}
 --- !u!1 &144985700
 GameObject:
@@ -903,6 +903,7 @@ GameObject:
   - component: {fileID: 502269983}
   - component: {fileID: 502269986}
   - component: {fileID: 502269985}
+  - component: {fileID: 502269987}
   - component: {fileID: 502269984}
   m_Layer: 5
   m_Name: MainMenuButton
@@ -973,7 +974,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 502269985}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1965031463}
+        m_TargetAssemblyTypeName: StateManager, Assembly-CSharp
+        m_MethodName: loadMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 502269987}
+        m_TargetAssemblyTypeName: MainMenue, Assembly-CSharp
+        m_MethodName: resetSprite
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &502269985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,6 +1037,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 502269982}
   m_CullTransparentMesh: 1
+--- !u!114 &502269987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502269982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb63a8148d4a4a44c94f1207830d50ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  img: {fileID: 502269985}
+  newSprite: {fileID: -2897384704864963239, guid: 40b3d80a216a90442b9efbc7053c5f68, type: 3}
+  oldSprite: {fileID: 2821829303089357316, guid: 7d4b69072a7c56047abb6ea6d35f599d, type: 3}
 --- !u!1 &509180264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,7 +1439,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952315592}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -1435,7 +1475,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 952315595}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1965031463}
+        m_TargetAssemblyTypeName: StateManager, Assembly-CSharp
+        m_MethodName: resumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 952315597}
+        m_TargetAssemblyTypeName: Resume, Assembly-CSharp
+        m_MethodName: restResumeImage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &952315595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1487,8 +1551,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 952315595}
-  newSprite: {fileID: -8785275446584589652, guid: b31e670008e668c4c81ad7fee4f7786a, type: 3}
+  newSprite: {fileID: -1614337858942475704, guid: b31e670008e668c4c81ad7fee4f7786a, type: 3}
   oldSprite: {fileID: -8111025609810652003, guid: 9966845967af0df49bc54a854ee69bbd, type: 3}
+  deactPauseMenue: {fileID: 0}
 --- !u!1 &1012594666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,7 +1907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1434029817
 Transform:
   m_ObjectHideFlags: 0
