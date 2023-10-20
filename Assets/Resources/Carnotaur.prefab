@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 2710580305813832587}
   - component: {fileID: 5706386540528640116}
   - component: {fileID: 7908955657954321006}
+  - component: {fileID: 4231224392659255488}
+  - component: {fileID: 6253641606800526477}
   m_Layer: 0
   m_Name: Carnotaur
   m_TagString: Untagged
@@ -80,7 +82,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2dbcfe97da6a98c4ba12eb0b414de432, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 10.42, y: 5.12}
@@ -144,9 +146,9 @@ MonoBehaviour:
   attackState: 2
   targetingMode: 0
   roundManager: {fileID: 0}
-  attackType: {fileID: 0}
+  attackType: {fileID: 6253641606800526477}
   towerType: 1
-  spriteRotator: {fileID: 0}
+  spriteRotator: {fileID: 4231224392659255488}
   attackVector: {x: 0, y: 0, z: 0}
 --- !u!120 &2710580305813832587
 LineRenderer:
@@ -324,3 +326,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &4231224392659255488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442971996373495968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63da16466b53cfe459f1a75a30a8eb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteObject: {fileID: 8442971996373495968}
+--- !u!114 &6253641606800526477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442971996373495968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a187c1a94ee3ec84dbc8a54515b779dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackStyle: 0
