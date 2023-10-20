@@ -14,7 +14,7 @@ public class TowerDropper : MonoBehaviour {
     [SerializeField] private string m_towerName; //The name of the prefab tower you want to load upon purchase.
     private GameObject heldTower;
     private bool towerHeld;
-    private bool canBePlaced;
+    private bool canBePlaced = true;
     [SerializeField] private int m_towerCost;
 
     void Start() {
@@ -45,7 +45,7 @@ public class TowerDropper : MonoBehaviour {
 
     public void dropTower() {   
         // instantiate tower at mouse coordinates if it can be placed
-        if (towerHeld) {
+        if (canBePlaced && towerHeld) {
             instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
             Destroy(heldTower);
             towerHeld = false;
