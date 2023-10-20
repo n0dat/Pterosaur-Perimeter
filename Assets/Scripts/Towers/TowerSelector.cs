@@ -80,7 +80,7 @@ public class TowerSelector : MonoBehaviour {
                 towerRef.select();
             }
             else {
-                if (!towerObj)
+                if (towerObj)
                     towerRef.deselect();
                 towerObj = null;
                 towerRef = null;
