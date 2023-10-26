@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour {
 	
-	public enum GameState { Paused, Playing, Menu, Settings };
+	public enum GameState { Paused, Playing, Menu, Settings, DisasterPrompt };
 	
     [SerializeField]
     private GameState gameState;
@@ -30,6 +30,8 @@ public class StateManager : MonoBehaviour {
 			    pauseGame();
 		    else if (gameState == GameState.Paused)
 			    resumeGame();
+		    else if (gameState == GameState.DisasterPrompt)
+			    hideDisasterPrompt();
 	    }
     }
 
@@ -57,5 +59,15 @@ public class StateManager : MonoBehaviour {
 
     public GameState getGameState() {
 	    return gameState;
+    }
+
+    public void showDisasterPrompt() {
+	    gameState = GameState.DisasterPrompt;
+	    Time.timeScale = 1f;
+    }
+
+    public void hideDisasterPrompt() {
+	    gameState = GameState.Playing;
+	    Time.timeScale = 1f;
     }
 }
