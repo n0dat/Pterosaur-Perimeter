@@ -20,10 +20,6 @@ public class PlayerManager : MonoBehaviour {
         skullsCredit(skullsTemp);
     }
 
-    public void readLevelData(Level level) {
-        
-    }
-
     public void skullsCredit(int amount)
     {
         if (!hasAllReferences())

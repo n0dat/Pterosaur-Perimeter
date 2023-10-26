@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Disaster : MonoBehaviour {
@@ -9,7 +8,7 @@ public class Disaster : MonoBehaviour {
     [SerializeField] private int triggerThreshold;
     [SerializeField] private string disasterString;
     
-    private bool disasterTriggered;
+    public bool disasterTriggered;
 
     void Start() {
         disasterTriggered = false;

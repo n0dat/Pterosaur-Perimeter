@@ -8,7 +8,6 @@ public class MainManager : MonoBehaviour {
     private Settings settingsManager;
     private SceneManager sceneManager;
     private StateManager stateManager;
-    private LevelManager levelManager;
     private PlayerManager playerManager;
 
     void Awake() {
@@ -18,7 +17,6 @@ public class MainManager : MonoBehaviour {
 	    settingsManager = GameObject.Find("SettingsManager").GetComponent<Settings>();
 	    sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 	    stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
-	    levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 	    playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
 
@@ -37,11 +35,7 @@ public class MainManager : MonoBehaviour {
     public StateManager getStateManager() {
 	    return this.stateManager;
     }
-
-    public LevelManager getLevelManager() {
-	    return this.levelManager;
-    }
-
+    
     public PlayerManager getPlayerManager() {
 	    return this.playerManager;
     }
