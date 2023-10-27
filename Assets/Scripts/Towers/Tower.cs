@@ -9,39 +9,28 @@ public class Tower : MonoBehaviour {
     public enum TowerType { Water, Land };
     private enum AttackState { Attacking, Waiting, Initial };
     private enum TargetingMode { First, Last, Strong };
-
+    
     private Animator m_animator;
 
     [SerializeField]
     private int towerCost, repairCost, radiusLineSegments = 50, killCount;
-    
     [SerializeField]
     private float durability, attackSpeed, attackDamage, attackRange;
-    
     [SerializeField]
     private bool hasRangeUpgrade, hasAttackSpeedUpgrade, hasDamageUpgrade, isHeld, selected, validPosition, attackInProgress, canAttack;
     
     [SerializeField] private LineRenderer radiusLine;
-    
     [SerializeField] private Collider2D[] enemiesInRange;
-    
     [SerializeField] private GameObject enemyToAttack;
-    
     [SerializeField] private AttackState attackState = AttackState.Initial;
-    
     [SerializeField] private TargetingMode targetingMode = TargetingMode.First;
-
     [SerializeField] private RoundManager roundManager;
-    
     [SerializeField] private AttackType attackType;
-
     [SerializeField] private TowerType towerType;
-    
     [SerializeField] private SpriteRotator spriteRotator;
     
     public Vector3 attackVector;
-    
-    
+
     // initialize most global values
     void Awake() {
         repairCost = 0;
@@ -93,13 +82,9 @@ public class Tower : MonoBehaviour {
             if (enemiesInRange.Length > 0) {
                 setTargetingMode(targetingMode);
                 
-                // face the enemy we are going to attack
                 var direction = enemyToAttack.transform.position - transform.position;
-                //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                //var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1f);
-                    
                 //spriteRotator.setDir(direction);
+                
                 if (!attackInProgress) {
                     // start attacking
                     if (enemyToAttack && attackState != AttackState.Attacking) {
