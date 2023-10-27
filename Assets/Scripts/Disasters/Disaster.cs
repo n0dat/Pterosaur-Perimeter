@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿/*
+
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Disaster : MonoBehaviour {
@@ -27,3 +29,5 @@ public class Disaster : MonoBehaviour {
         disasterTriggered = true;
     }
 }
+
+*/

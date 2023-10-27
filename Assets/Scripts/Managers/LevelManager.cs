@@ -2,33 +2,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour {
     
     // globals
-
-    public enum EventState { NoEvent, Event1, Event2 };
-
-    [SerializeField] private GameObject levelUI;
     [SerializeField] private int startingCurrency;
-    [SerializeField] public Disaster disaster;
+    
+    // pathing
     [SerializeField] private List<Vector3> checkpointsNoEvent, checkpointsEvent1, checkpointsEvent2;
     [SerializeField] private GameObject checkpointObjectNoEvent, checkpointObjectEvent1, checkpointObjectEvent2;
-    [SerializeField] public GameObject disasterPrompt;
-
+    [SerializeField] private GameObject mapNoEvent, mapEvent1, mapEvent2;
+    
+    // managers
     private MainManager mainManager;
     
-    public float roundDelay;
-    public float roundCountdown;
+    // round stuff
+    public float roundDelay; // old
+    public float roundCountdown; // old
     
     public RoundState roundState = RoundState.Waiting;
     public Round[] rounds;
     public int currentRound = 0;
     public int disasterRound;
     
-    public EventState eventState;
+    // disaster stuff
+    public int eventTriggerThreshold; // this is chance every 3 levels that the event triggers
     
+    // ui
+    [SerializeField] public GameObject disasterPrompt;
+    [SerializeField] private GameObject levelUI;
+    
+    // event stuff
+    public enum EventState { NoEvent, Event1, Event2 };
+    public EventState eventState;
+    public EventState futureEvent;
     
     void Start() {
         mainManager = GameObject.Find("MainManager").gameObject.GetComponent<MainManager>();
@@ -44,6 +52,8 @@ public class LevelManager : MonoBehaviour {
         
         foreach (var round in rounds)
 	        round.init();
+        
+        futureEvent = (Random.Range(1, 101) > 50) ? EventState.Event1 : EventState.Event2;
     }
     
 	public void removeEnemy(int enemy) {
@@ -54,11 +64,12 @@ public class LevelManager : MonoBehaviour {
 		if (currentRound == disasterRound) {
 			// play disaster before the round
 			Debug.Log("PLAYING DISASTER!!!");
+			eventState = futureEvent;
 			disasterRound = -2;
 		}
 		if (currentRound != 0 && (currentRound + 1) % 3 == 0 && disasterRound == -1) {
 			Debug.Log("Checking for disaster.");
-			if (disaster.checkDisaster()) {
+			if (Random.Range(1, 101) < eventTriggerThreshold) {
 				showDisasterPrompt();
 				disasterRound = currentRound + 3;
 			}
@@ -161,5 +172,24 @@ public class LevelManager : MonoBehaviour {
 			var checkpointPos = checkpoint.gameObject.transform.position;
 			checkpointsEvent2.Add(new Vector3(checkpointPos.x, checkpointPos.y, 0f));
 		}
+	}
+
+	public void triggerEvent() {
+		if (eventState == EventState.Event1) {
+			mapNoEvent.SetActive(false);
+			mapEvent1.SetActive(false);
+			mapEvent2.SetActive(true);
+		}
+		else if (eventState == EventState.Event2) {
+			mapNoEvent.SetActive(false);
+			mapEvent1.SetActive(false);
+			mapEvent2.SetActive(true);
+		}
+	}
+
+	public void loadMaps() {
+		mapNoEvent.SetActive(true);
+		mapEvent1.SetActive(false);
+		mapEvent2.SetActive(false);
 	}
 }
