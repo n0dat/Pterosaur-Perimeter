@@ -17,7 +17,7 @@ public class Tower : MonoBehaviour {
     [SerializeField]
     private float durability, attackSpeed, attackDamage, attackRange;
     [SerializeField]
-    private bool hasRangeUpgrade, hasAttackSpeedUpgrade, hasDamageUpgrade, isHeld, selected, validPosition, attackInProgress, canAttack;
+    private bool isHeld, selected, validPosition, attackInProgress, canAttack;
     
     [SerializeField] private LineRenderer radiusLine;
     [SerializeField] private Collider2D[] enemiesInRange;
@@ -28,6 +28,12 @@ public class Tower : MonoBehaviour {
     [SerializeField] private AttackType attackType;
     [SerializeField] private TowerType towerType;
     [SerializeField] private SpriteRotator spriteRotator;
+    
+    //Upgrade system
+    [SerializeField] private UpgradeMenuHandler m_upgradeMenuInterface;
+    private int m_damageUpgradeLevel = 0;
+    private int m_rangeUpgradeLevel = 0;
+    private int m_attackSpeedUpgradeLevel = 0;
     
     public Vector3 attackVector;
 
@@ -41,9 +47,6 @@ public class Tower : MonoBehaviour {
         attackDamage = 25f;
         attackRange = 5f;
         
-        hasRangeUpgrade = false;
-        hasAttackSpeedUpgrade = false;
-        hasDamageUpgrade = false;
         isHeld = false;
         selected = false;
         validPosition = true;
@@ -65,6 +68,8 @@ public class Tower : MonoBehaviour {
         m_animator = gameObject.GetComponent<Animator>();
         
         attackVector = Vector3.zero;
+
+        m_upgradeMenuInterface = GameObject.Find("UpgradeMenu").GetComponent<UpgradeMenuHandler>(); //Must be called UpgradeMenu.
     }
     
     // called every frame
@@ -348,6 +353,7 @@ public class Tower : MonoBehaviour {
     public void select() {
         selected = true;
         showRadiusCircle();
+        m_upgradeMenuInterface.upgrade(this);
     }
 
     public void holdTower() {
@@ -437,27 +443,36 @@ public class Tower : MonoBehaviour {
         attackRange = val;
     }
 
-    public bool getHasRangeUpgrade() {
-        return hasRangeUpgrade;
+    
+    //Getters and setters for the upgrade system.
+    public int getRangeUpgradeLevel() {
+        return m_rangeUpgradeLevel;
     }
 
-    public void setHasRangeUpgrade(bool val) {
-        hasRangeUpgrade = val;
+    public void setRangeUpgradeLevel(int val)
+    {
+        if (val < 0 || val > 3)
+            return;
+        m_rangeUpgradeLevel = val;
     }
 
-    public bool getHasAttackSpeedUpgrade() {
-        return hasAttackSpeedUpgrade;
+    public int getAttackSpeedUpgradeLevel() {
+        return m_attackSpeedUpgradeLevel;
     }
 
-    public void setHasAttackSpeedUpgrade(bool val) {
-        hasAttackSpeedUpgrade = val;
+    public void setAttackSpeedUpgradeLevel(int val) {
+        if (val < 0 || val > 3)
+            return;
+        m_attackSpeedUpgradeLevel = val;
     }
 
-    public bool getHasDamageUpgrade() {
-        return hasDamageUpgrade;
+    public int getDamageUpgradeLevel() {
+        return m_damageUpgradeLevel;
     }
 
-    public void setHasDamageUpgrade(bool val) {
-        hasDamageUpgrade = val;
+    public void setDamageUpgradeLevel(int val) {
+        if (val < 0 || val > 3)
+            return;
+        m_damageUpgradeLevel = val;
     }
 }

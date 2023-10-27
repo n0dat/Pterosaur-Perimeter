@@ -16,7 +16,7 @@ public class TowerSelector : MonoBehaviour {
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
-        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+        //mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
         mainCamera = null;
         getNewCamera();
     }
@@ -35,8 +35,8 @@ public class TowerSelector : MonoBehaviour {
     }
 
     void Update() {
-        if (mainManager.getStateManager().getGameState() != StateManager.GameState.Playing)
-            return;
+        //if (mainManager.getStateManager().getGameState() != StateManager.GameState.Playing)
+         //   return;
         
         if (Input.GetMouseButtonDown(0)) {
             if (!mainCamera) {

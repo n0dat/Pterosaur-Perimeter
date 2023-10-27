@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UpgradeMenuHandler : MonoBehaviour
 {
-    public enum UpgradeType
+    private enum UpgradeType
     {
         Damage,
         Range,
@@ -22,9 +22,30 @@ public class UpgradeMenuHandler : MonoBehaviour
     private int m_speedUpgradeLevel = 0;
 
     [SerializeField] private PlayerManager m_levelManager; //For determining purchases.
+    private Tower m_currentTower = null;
 
-    //Allows you to set all three upgrade levels at once. Exposed.
-    public void setUpgradeLevels(int damageLevel, int rangeLevel, int speedLevel)
+    [SerializeField] private Animator m_animator;
+
+    private bool m_isOpen = false;
+
+    //Exposed api for the tower script to interface with.
+    public void upgrade(Tower currentTower)
+    {
+        m_currentTower = currentTower;
+        if (!hasAllReferences())
+            return;
+        
+        setUpgradeLevels(currentTower.getDamageUpgradeLevel(), currentTower.getRangeUpgradeLevel(), currentTower.getAttackSpeedUpgradeLevel());
+
+        if (m_isOpen)
+            return;
+        
+        m_animator.SetTrigger("slideOut");
+        m_isOpen = true;
+    }
+    
+    //Allows you to set all three upgrade levels at once.
+    private void setUpgradeLevels(int damageLevel, int rangeLevel, int speedLevel)
     {
         if (!hasAllReferences())
             return;
@@ -33,8 +54,8 @@ public class UpgradeMenuHandler : MonoBehaviour
         setRangeUpgradeLevel(rangeLevel);
         setSpeedUpgradeLevel(speedLevel);
     }
-    //Handles upgrading a specific skill by one. Exposed.
-    private void incrementUpgrade(UpgradeType type)
+    //Handles upgrading a specific skill by one. This is where calls from towers will be fowarded too.
+    private void incrementUpgradeForTower(UpgradeType type)
     {
         if (!hasAllReferences())
             return;
@@ -43,12 +64,15 @@ public class UpgradeMenuHandler : MonoBehaviour
         {
             case UpgradeType.Damage:
                 setDamageUpgradeLevel(m_damageUpgradeLevel + 1);
+                m_currentTower.setDamageUpgradeLevel(m_damageUpgradeLevel);
                 break;
             case UpgradeType.Range:
                 setRangeUpgradeLevel(m_rangeUpgradeLevel + 1);
+                m_currentTower.setRangeUpgradeLevel(m_rangeUpgradeLevel);
                 break;
             case UpgradeType.Speed:
                 setSpeedUpgradeLevel(m_speedUpgradeLevel + 1);
+                m_currentTower.setAttackSpeedUpgradeLevel(m_speedUpgradeLevel);
                 break;
             default:
                 break;
@@ -81,9 +105,9 @@ public class UpgradeMenuHandler : MonoBehaviour
     
     private bool hasAllReferences()
     {
-        if (!m_damageElementTicks || !m_rangeElementTicks || !m_speedElementTicks || !m_levelManager)
+        if (!m_damageElementTicks || !m_rangeElementTicks || !m_speedElementTicks || !m_levelManager || !m_currentTower || !m_animator)
         {
-            Debug.Log("Missing required references in TowerDropper script.");
+            Debug.Log("Missing required references in UpgradeMenuHandlerScript script.");
             return false;
         }
         return true;
@@ -97,7 +121,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         if (!m_levelManager.skullsCost(100))
             return;
         
-        incrementUpgrade(UpgradeType.Damage);
+        incrementUpgradeForTower(UpgradeType.Damage);
     }
 
     public void upgradeRangeButton()
@@ -108,7 +132,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         if (!m_levelManager.skullsCost(100))
             return;
         
-        incrementUpgrade(UpgradeType.Range);
+        incrementUpgradeForTower(UpgradeType.Range);
     }
 
     public void upgradeSpeedButton()
@@ -119,6 +143,16 @@ public class UpgradeMenuHandler : MonoBehaviour
         if (!m_levelManager.skullsCost(100))
             return;
         
-        incrementUpgrade(UpgradeType.Speed);
+        incrementUpgradeForTower(UpgradeType.Speed);
+    }
+
+    public void exitButton()
+    {
+        if (!hasAllReferences())
+            return;
+
+        m_currentTower = null;
+        m_isOpen = false;
+        m_animator.SetTrigger("slideIn");
     }
 }
