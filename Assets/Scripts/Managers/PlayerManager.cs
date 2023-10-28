@@ -3,9 +3,10 @@
 public class PlayerManager : MonoBehaviour {
     
     //Required references
+    //Health systems.
     [SerializeField] private PlayerHealthUIHandler m_playerHealthUIHandler;
     private int m_playerHealth = 3;
-    
+    //Currency systems.
     [SerializeField] private UpdateCurrency currencyTextUIScript;
     [SerializeField] private int skulls; //This is our currency
 
@@ -64,7 +65,7 @@ public class PlayerManager : MonoBehaviour {
 
     private bool hasAllReferences()
     {
-        if (!currencyTextUIScript)
+        if (!currencyTextUIScript || !m_playerHealthUIHandler)
         {
             Debug.Log("Missing required references in PlayerManager script.");
             return false;
@@ -75,18 +76,29 @@ public class PlayerManager : MonoBehaviour {
 
     public void setPlayerHealth(int val)
     {
-        if (val < 0 || val > 3 || !hasAllReferences())
+        if (val > 3 || !hasAllReferences())
             return;
+        
+        if (val <= 0)
+        {
+            playerOutOfHealth();
+            return;
+        }
+        
         m_playerHealth = val;
         m_playerHealthUIHandler.setHealthLevel(m_playerHealth);
     }
 
     public void hit()
     {
-        if ( !hasAllReferences() || m_playerHealth <= 0)
+        if (!hasAllReferences())
             return;
+        
         m_playerHealth--;
         m_playerHealthUIHandler.setHealthLevel(m_playerHealth);
+        
+        if (m_playerHealth <= 0)
+            playerOutOfHealth();
     }
     
     public void heal()
@@ -95,5 +107,11 @@ public class PlayerManager : MonoBehaviour {
             return;
         m_playerHealth++;
         m_playerHealthUIHandler.setHealthLevel(m_playerHealth);
+    }
+
+    //TODO: Use this function for end of game logic/conditions.
+    private void playerOutOfHealth()
+    {
+        return;
     }
 }
