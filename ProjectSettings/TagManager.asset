@@ -11,6 +11,8 @@ TagManager:
   - WaterCollider
   - PathCollider
   - Background Music
+  - Tack
+  - Tack2
   layers:
   - Default
   - TransparentFX
