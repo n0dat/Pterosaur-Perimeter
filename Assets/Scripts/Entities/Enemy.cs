@@ -21,10 +21,13 @@ public class Enemy : MonoBehaviour {
 	private SpriteRenderer spriteRenderer;
 	private static readonly int MColor = Shader.PropertyToID("m_Color");
 
+	private PlayerManager m_playerManager;
+
 	void Start() {
 		findTotalDistance();
 		health = 100f;
 		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		m_playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 	}
 
@@ -46,7 +49,9 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void getNextCheckpoint() {
+		//Reached the last checkpoint. Decrease player health.
 		if (waypointIndex >= waypoints.Count - 1) {
+			m_playerManager.hit();
 			Destroy(gameObject);
 			return;
 		}

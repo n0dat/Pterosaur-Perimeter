@@ -3,21 +3,22 @@
 public class PlayerManager : MonoBehaviour {
     
     //Required references
-    private MainManager mainManager;
-    [SerializeField] private UpdateCurrency currencyTextUIScript;
+    [SerializeField] private PlayerHealthUIHandler m_playerHealthUIHandler;
+    private int m_playerHealth = 3;
     
+    [SerializeField] private UpdateCurrency currencyTextUIScript;
     [SerializeField] private int skulls; //This is our currency
+
     
     
 
     void Start() {
-        DontDestroyOnLoad(this);
-        //mainManager = GameObject.Find("MainManager").gameObject.GetComponent<MainManager>();
-        
         //Initially set our skulls amount to whatever was set in the unity editor.
         int skullsTemp = skulls;
         skulls = 0;
         skullsCredit(skullsTemp);
+        
+        setPlayerHealth(2);
     }
 
     public void skullsCredit(int amount)
@@ -70,5 +71,29 @@ public class PlayerManager : MonoBehaviour {
         }
 
         return true;
+    }
+
+    public void setPlayerHealth(int val)
+    {
+        if (val < 0 || val > 3 || !hasAllReferences())
+            return;
+        m_playerHealth = val;
+        m_playerHealthUIHandler.setHealthLevel(m_playerHealth);
+    }
+
+    public void hit()
+    {
+        if ( !hasAllReferences() || m_playerHealth <= 0)
+            return;
+        m_playerHealth--;
+        m_playerHealthUIHandler.setHealthLevel(m_playerHealth);
+    }
+    
+    public void heal()
+    {
+        if ( !hasAllReferences() || m_playerHealth >= 3)
+            return;
+        m_playerHealth++;
+        m_playerHealthUIHandler.setHealthLevel(m_playerHealth);
     }
 }
