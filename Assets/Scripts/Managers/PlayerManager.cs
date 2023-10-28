@@ -93,9 +93,12 @@ public class PlayerManager : MonoBehaviour {
     {
         if (!hasAllReferences())
             return;
-        
-        m_playerHealth--;
-        m_playerHealthUIHandler.setHealthLevel(m_playerHealth);
+
+        if (m_playerHealth > 0)
+        {
+            m_playerHealth--;
+            m_playerHealthUIHandler.setHealthLevel(m_playerHealth);
+        }
         
         if (m_playerHealth <= 0)
             playerOutOfHealth();
