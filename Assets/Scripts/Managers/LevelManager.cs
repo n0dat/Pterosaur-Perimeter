@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour {
     public EventState eventState;
     public EventState futureEvent;
     
-    void Start() {
+    void Awake() {
         mainManager = GameObject.Find("MainManager").gameObject.GetComponent<MainManager>();
         
         disasterPrompt.SetActive(false);
@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour {
         disasterRound = -1;
         
         loadCheckpoints();
+        loadMaps();
         
         foreach (var round in rounds)
 	        round.init();
@@ -65,6 +66,7 @@ public class LevelManager : MonoBehaviour {
 			// play disaster before the round
 			Debug.Log("PLAYING DISASTER!!!");
 			eventState = futureEvent;
+			triggerEvent();
 			disasterRound = -2;
 		}
 		if (currentRound != 0 && (currentRound + 1) % 3 == 0 && disasterRound == -1) {

@@ -220,13 +220,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46c078edeaf730438d46406c4550007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tack: {fileID: 1545284588619809782, guid: d3e0de4c272c5524284dc426183c7f4e, type: 3}
+  tackPrefab: {fileID: 2148904124659571058, guid: d3e0de4c272c5524284dc426183c7f4e, type: 3}
   tackSpeed: 5
   numTacks: 8
   shootInterval: 1
   lastShootTime: 0
   maxTackDistance: 10
   totalTacks: 0
+  tacks: []
 --- !u!1 &700211597
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,13 +462,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7150d5a4ff1071f4e9764d35fe0685c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tackPrefab: {fileID: 1545284588619809782, guid: 8d3f3c4b6ec28034aac1e0bdafded624, type: 3}
+  tackPrefab: {fileID: 2148904124659571058, guid: 8d3f3c4b6ec28034aac1e0bdafded624, type: 3}
   tackSpeed: 5
   numTacks: 3
   shootInterval: 1
   lastShootTime: 0
   maxTackDistance: 10
   totalTacks: 0
+  attackAngleStep: 15
+  tacks: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

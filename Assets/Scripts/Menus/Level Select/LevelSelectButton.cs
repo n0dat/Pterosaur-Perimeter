@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class LevelSelectButton : MonoBehaviour {
     [SerializeField] private string sceneToLoad;
-    [SerializeField] private string levelPrefabName;
     
     private MainManager mainManager;
 
