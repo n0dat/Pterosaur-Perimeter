@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour {
 	
-	public enum GameState { Paused, Playing, Menu, Settings, DisasterPrompt };
+	public enum GameState { Paused, Playing, Menu, Settings, DisasterPrompt, End };
 	
     [SerializeField]
     private GameState gameState;
@@ -69,5 +69,9 @@ public class StateManager : MonoBehaviour {
     public void hideDisasterPrompt() {
 	    gameState = GameState.Playing;
 	    Time.timeScale = 1f;
+    }
+
+    public void endGame() {
+	    gameState = GameState.End;
     }
 }

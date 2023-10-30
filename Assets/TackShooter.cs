@@ -44,6 +44,4 @@ public class TackShooter : MonoBehaviour {
             rb.velocity = tack.transform.up * tackSpeed;
         }
     }
-
-
 }
