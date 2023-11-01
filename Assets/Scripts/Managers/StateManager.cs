@@ -6,11 +6,8 @@ public class StateManager : MonoBehaviour {
 	
 	public enum GameState { Paused, Playing, Menu, Settings, DisasterPrompt, End };
 	
-    [SerializeField]
-    private GameState gameState;
-    
-    [SerializeField]
-    private GameObject pauseMenu;
+    [SerializeField] private GameState gameState;
+    [SerializeField] private GameObject pauseMenu;
 
 	private MainManager mainManager;
     

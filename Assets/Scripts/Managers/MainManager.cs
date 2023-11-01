@@ -9,6 +9,7 @@ public class MainManager : MonoBehaviour {
     private SceneManager sceneManager;
     private StateManager stateManager;
     private PlayerManager playerManager;
+    private GameManager gameManager;
 
     void Awake() {
 	    DontDestroyOnLoad(this);
@@ -17,7 +18,7 @@ public class MainManager : MonoBehaviour {
 	    settingsManager = GameObject.Find("SettingsManager").GetComponent<Settings>();
 	    sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 	    stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
-	    playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+	    gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public TowerSelector getTowerSelector() {
@@ -35,8 +36,8 @@ public class MainManager : MonoBehaviour {
     public StateManager getStateManager() {
 	    return this.stateManager;
     }
-    
-    public PlayerManager getPlayerManager() {
-	    return this.playerManager;
+
+    public GameManager getGameManager() {
+	    return this.gameManager;
     }
 }

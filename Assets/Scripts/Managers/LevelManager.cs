@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour {
     
     // globals
     [SerializeField] private int startingCurrency;
+    public int levelIndex = 0;
     
     // pathing
     [SerializeField] private List<Vector3> checkpointsNoEvent, checkpointsEvent1, checkpointsEvent2;
@@ -32,29 +33,23 @@ public class LevelManager : MonoBehaviour {
     // ui
     [SerializeField] public GameObject disasterPrompt;
     [SerializeField] private GameObject levelUI;
+    [SerializeField] private GameObject winUI;
+    [SerializeField] private GameObject loseUI;
     
     // event stuff
     public enum EventState { NoEvent, Event1, Event2 };
     public EventState eventState;
     public EventState futureEvent;
     
+    // player interaction
+    public PlayerManager playerManager;
+    public bool levelWon;
+    
     void Awake() {
         mainManager = GameObject.Find("MainManager").gameObject.GetComponent<MainManager>();
+        playerManager = GameObject.Find("PlayerManager").gameObject.GetComponent<PlayerManager>();
         
-        disasterPrompt.SetActive(false);
-        
-        roundCountdown = roundDelay;
-        roundDelay = 5f;
-        eventState = EventState.NoEvent;
-        disasterRound = -1;
-        
-        loadCheckpoints();
-        loadMaps();
-        
-        foreach (var round in rounds)
-	        round.init();
-        
-        futureEvent = (Random.Range(1, 101) > 50) ? EventState.Event1 : EventState.Event2;
+        resetLevel();
     }
     
 	public void removeEnemy(int enemy) {
@@ -98,6 +93,8 @@ public class LevelManager : MonoBehaviour {
 		if (currentRound + 1 >= rounds.Length) {
 			currentRound = 0;
 			Debug.Log("All rounds completed. Looping to first round");
+			// TODO end the game here as a win
+			endLevel(true);
 			foreach (var round in rounds)
 				round.isComplete = false;
 		}
@@ -193,5 +190,40 @@ public class LevelManager : MonoBehaviour {
 		mapNoEvent.SetActive(true);
 		mapEvent1.SetActive(false);
 		mapEvent2.SetActive(false);
+	}
+
+	public void resetLevel() {
+		disasterPrompt.SetActive(false);
+        
+		roundCountdown = roundDelay;
+		roundDelay = 5f;
+		eventState = EventState.NoEvent;
+		disasterRound = -1;
+		levelWon = false;
+        
+		loadCheckpoints();
+		loadMaps();
+        
+		foreach (var round in rounds)
+			round.init();
+        
+		futureEvent = (Random.Range(1, 101) > 50) ? EventState.Event1 : EventState.Event2;
+		
+		winUI.SetActive(false);
+		loseUI.SetActive(false);
+	}
+
+	public void endLevel(bool condition) {
+		if (condition) {
+			levelWon = true;
+			mainManager.getGameManager().completeLevel(levelIndex);
+			winUI.SetActive(true);
+			loseUI.SetActive(false);
+		}
+		else {
+			levelWon = false;
+			winUI.SetActive(false);
+			loseUI.SetActive(true);
+		}
 	}
 }
