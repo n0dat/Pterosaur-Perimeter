@@ -45,7 +45,6 @@ public class Tower : MonoBehaviour {
         
         attackSpeed = 1.7f;
         attackDamage = 25f;
-        attackRange = 5f;
         
         isHeld = false;
         selected = false;
@@ -89,7 +88,7 @@ public class Tower : MonoBehaviour {
                 setTargetingMode(targetingMode);
                 
                 var direction = enemyToAttack.transform.position - transform.position;
-                //spriteRotator.setDir(direction);
+                spriteRotator.setDir(direction);
                 
                 if (!attackInProgress) {
                     // start attacking

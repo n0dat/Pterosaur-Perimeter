@@ -138,7 +138,6 @@ MonoBehaviour:
   repairCost: 0
   radiusLineSegments: 50
   killCount: 0
-  durability: 10
   attackSpeed: 10
   attackDamage: 10
   attackRange: 50
@@ -156,7 +155,7 @@ MonoBehaviour:
   attackType: {fileID: 765229719627137857}
   towerType: 0
   spriteRotator: {fileID: 954655370649223622}
-  m_upgradeMenuInterface: {fileID: 0}
+  m_health: 50
   attackVector: {x: 0, y: 0, z: 0}
 --- !u!120 &2744641237389063406
 LineRenderer:
