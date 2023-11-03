@@ -8,7 +8,7 @@ public class PunchCaveman : MonoBehaviour
     // Punch caveman ridgetbody
     
     [SerializeField] private float radius;
-    [SerializeField] private float attackDamage = 1.5f;
+    [SerializeField] private int attackDamage = 1;
     private bool isReadyPunch = true;
     
     
@@ -32,11 +32,11 @@ public class PunchCaveman : MonoBehaviour
         if(collider.gameObject.CompareTag("Tower") && isReadyPunch){
             Debug.Log("Made Contact");            
             var tower = collider.gameObject.GetComponent<Tower>();
-            float health = tower.getDurability();
+            int health = tower.getHealth();
             Debug.Log(health);
             health -= attackDamage;
-            tower.setDurability(health);
-            health = tower.getDurability();
+            tower.setHealth(health);
+            health = tower.getHealth();
             Debug.Log(health);
             Debug.Log("The enemy punched : " + isReadyPunch);
 

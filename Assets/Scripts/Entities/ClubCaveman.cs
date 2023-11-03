@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClubCaveman : MonoBehaviour
 {
     [SerializeField] private float clubRadius;
-    [SerializeField] private float clubDamage = 5.5f;
+    [SerializeField] private int clubDamage = 5;
     private bool isReadySwing = true;
     
 
@@ -28,11 +28,11 @@ public class ClubCaveman : MonoBehaviour
             // damage tower
             Debug.Log("Made Contact");
             var tower = collision.gameObject.GetComponent<Tower>();
-            float health = tower.getDurability();
+            int health = tower.getHealth();
             Debug.Log(health);
             health -= clubDamage;
-            tower.setDurability(health);
-            health = tower.getDurability();
+            tower.setHealth(health);
+            health = tower.getHealth();
             Debug.Log(health);
             Debug.Log("The enemy was swinging : " + isReadySwing);
         }

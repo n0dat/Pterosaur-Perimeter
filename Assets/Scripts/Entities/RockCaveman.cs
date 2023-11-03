@@ -7,7 +7,7 @@ public class RockCaveman : MonoBehaviour
     // Start is called before the first frame update
     
     [SerializeField] private float rockRadius;
-    [SerializeField] private float attackDamage = 8.0f;
+    [SerializeField] private int attackDamage = 8;
     private bool isReadyThrow = true;
     [SerializeField] private float rechargeThrow = .18f;
     
@@ -24,12 +24,13 @@ public class RockCaveman : MonoBehaviour
         Debug.Log("Can he throw: " + isReadyThrow);
         if(collision.gameObject.CompareTag("Tower") && isReadyThrow){
             // damage tower
+            //changed this code because it used to be float changed to int
             var tower = collision.gameObject.GetComponent<Tower>();
-            float health = tower.getDurability();
+            int health = tower.getHealth();
             Debug.Log(health);
             health -= attackDamage;
-            tower.setDurability(health);
-            health = tower.getDurability();
+            tower.setHealth(health);
+            health = tower.getHealth();
             Debug.Log(health);
 
             Debug.Log("Made Contact");
