@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour {
 	public void removeEnemy(int enemy) {
 		rounds[currentRound].enemies.remove(enemy);
 	}
-
+	
 	void Update() {
 		if (currentRound == disasterRound) {
 			// play disaster before the round
@@ -193,6 +193,11 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void resetLevel() {
+		var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		for (int i = 0; i < enemies.Length; i++) {
+			Destroy(enemies[i]);
+		}
+
 		disasterPrompt.SetActive(false);
         
 		roundCountdown = roundDelay;
@@ -214,6 +219,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void endLevel(bool condition) {
+		Time.timeScale = 0;
 		if (condition) {
 			levelWon = true;
 			mainManager.getGameManager().completeLevel(levelIndex);

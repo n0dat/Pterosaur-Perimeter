@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tower : MonoBehaviour {
@@ -15,7 +16,7 @@ public class Tower : MonoBehaviour {
     [SerializeField]
     private int towerCost, repairCost, radiusLineSegments = 50, killCount;
     [SerializeField]
-    private float durability, attackSpeed, attackDamage, attackRange;
+    private float attackSpeed, attackDamage, attackRange;
     [SerializeField]
     private bool isHeld, selected, validPosition, attackInProgress, canAttack;
     
@@ -30,10 +31,11 @@ public class Tower : MonoBehaviour {
     [SerializeField] private SpriteRotator spriteRotator;
     
     //Upgrade system
-    [SerializeField] private UpgradeMenuHandler m_upgradeMenuInterface;
+    private UpgradeMenuHandler m_upgradeMenuInterface;
     private int m_damageUpgradeLevel = 0;
     private int m_rangeUpgradeLevel = 0;
     private int m_attackSpeedUpgradeLevel = 0;
+    [SerializeField] private int m_health = 50;
     
     public Vector3 attackVector;
 
@@ -42,10 +44,8 @@ public class Tower : MonoBehaviour {
         repairCost = 0;
         killCount = 0;
         
-        durability = 100f;
         attackSpeed = 1.7f;
         attackDamage = 25f;
-        attackRange = 5f;
         
         isHeld = false;
         selected = false;
@@ -55,14 +55,14 @@ public class Tower : MonoBehaviour {
         
         setLineColorGrey();
         drawRadiusCircle();
-        deselect();
+        
         
         enemiesInRange = Array.Empty<Collider2D>();
         
         enemyToAttack = null;
         
-        radiusLine.startWidth = 0.125f;
-        radiusLine.endWidth = 0.125f;
+        //radiusLine.startWidth = 0.125f;
+        //radiusLine.endWidth = 0.125f;
         
         spriteRotator = gameObject.GetComponent<SpriteRotator>();
         m_animator = gameObject.GetComponent<Animator>();
@@ -70,6 +70,7 @@ public class Tower : MonoBehaviour {
         attackVector = Vector3.zero;
 
         m_upgradeMenuInterface = GameObject.Find("UpgradeMenu").GetComponent<UpgradeMenuHandler>(); //Must be called UpgradeMenu.
+        deselect();
     }
     
     // called every frame
@@ -88,7 +89,7 @@ public class Tower : MonoBehaviour {
                 setTargetingMode(targetingMode);
                 
                 var direction = enemyToAttack.transform.position - transform.position;
-                //spriteRotator.setDir(direction);
+                spriteRotator.setDir(direction);
                 
                 if (!attackInProgress) {
                     // start attacking
@@ -159,15 +160,18 @@ public class Tower : MonoBehaviour {
             StartCoroutine(finishAttack(waitForAttack));
             yield return waitForAttack;
             //attackInProgress = true;
-            yield return new WaitForSeconds(attackSpeed);
+            yield return new WaitForSeconds(getAttackSpeed());
             attackInProgress = false;
         }
     }
 
     private IEnumerator finishAttack(WaitForAttack waitForAttack) {
         attackInProgress = true;
-        attackType.attack(enemyToAttack, gameObject);
-        m_animator.SetTrigger("Attack");
+        //attackType.attack(enemyToAttack, gameObject);
+        var laser = Instantiate(Resources.Load("Laser"), transform.position, Quaternion.identity);
+        laser.GetComponent<Laser>().parent = gameObject.GetComponent<Tower>();
+        laser.GetComponent<Laser>().shoot((enemyToAttack.transform.position - transform.position).normalized, enemyToAttack.GetComponent<Enemy>());
+        //m_animator.SetTrigger("Attack");
         waitForAttack.setAttackFinished();
         yield return null;
     }
@@ -318,7 +322,7 @@ public class Tower : MonoBehaviour {
             float angleIncrement = 2 * Mathf.PI / radiusLineSegments;
 
             for (int i = 0; i < radiusLineSegments + 1; i++, angle += angleIncrement)
-                points[i] = new Vector3(Mathf.Cos(angle) * attackRange, Mathf.Sin(angle) * attackRange, 0f) + transform.position;
+                points[i] = new Vector3(Mathf.Cos(angle) * getAttackRange(), Mathf.Sin(angle) * getAttackRange(), 0f) + transform.position;
 
             radiusLine.positionCount = points.Length;
             radiusLine.SetPositions(points);
@@ -346,11 +350,20 @@ public class Tower : MonoBehaviour {
     }
 
     public void deselect() {
+        Debug.Log("Deselect called on Tower");
         selected = false;
         hideRadiusCircle();
     }
 
+    public void hardDeselect() {
+        Debug.Log("Hard deselect called on Tower");
+        selected = false;
+        hideRadiusCircle();
+        m_upgradeMenuInterface.exitButton();
+    }
+
     public void select() {
+        Debug.Log("Select called on Tower");
         selected = true;
         showRadiusCircle();
         m_upgradeMenuInterface.upgrade(this);
@@ -410,17 +423,9 @@ public class Tower : MonoBehaviour {
     public void setRepairCost(int val) {
         repairCost = val;
     }
-
-    public float getDurability() {
-        return durability;
-    }
-
-    public void setDurability(float val) {
-        durability = val;
-    }
-
+    
     public float getAttackSpeed() {
-        return attackSpeed;
+        return (float)(attackSpeed - (m_attackSpeedUpgradeLevel * 0.35));
     }
 
     public void setAttackSpeed(float val) {
@@ -428,7 +433,7 @@ public class Tower : MonoBehaviour {
     }
 
     public float getAttackDamage() {
-        return attackDamage;
+        return attackDamage + (m_damageUpgradeLevel * 15);
     }
 
     public void setAttackDamage(float val) {
@@ -436,9 +441,9 @@ public class Tower : MonoBehaviour {
     }
 
     public float getAttackRange() {
-        return attackRange;
+        return attackRange + (m_rangeUpgradeLevel * 10);
     }
-
+    
     public void setAttackRange(float val) {
         attackRange = val;
     }
@@ -454,6 +459,8 @@ public class Tower : MonoBehaviour {
         if (val < 0 || val > 3)
             return;
         m_rangeUpgradeLevel = val;
+        drawRadiusCircle();
+        showRadiusCircle();
     }
 
     public int getAttackSpeedUpgradeLevel() {
@@ -474,5 +481,21 @@ public class Tower : MonoBehaviour {
         if (val < 0 || val > 3)
             return;
         m_damageUpgradeLevel = val;
+    }
+
+    public int getHealth()
+    {
+        return m_health;
+    }
+
+    public void setHealth(int val)
+    {
+        if (val < 0)
+            val = 0;
+
+        if (val > 100)
+            val = 100;
+
+        m_health = val;
     }
 }

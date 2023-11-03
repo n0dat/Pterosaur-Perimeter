@@ -115,9 +115,9 @@ Transform:
   m_GameObject: {fileID: 7943741876189340362}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70.02997, y: -30.988903, z: 0.0508768}
-  m_LocalScale: {x: 0.6039968, y: 0.6039968, z: 0.6039968}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8622102487407702457}
   m_Father: {fileID: 0}
@@ -138,13 +138,9 @@ MonoBehaviour:
   repairCost: 0
   radiusLineSegments: 50
   killCount: 0
-  durability: 10
   attackSpeed: 10
   attackDamage: 10
-  attackRange: 10
-  hasRangeUpgrade: 0
-  hasAttackSpeedUpgrade: 0
-  hasDamageUpgrade: 0
+  attackRange: 50
   isHeld: 0
   selected: 0
   validPosition: 0
@@ -159,6 +155,7 @@ MonoBehaviour:
   attackType: {fileID: 765229719627137857}
   towerType: 0
   spriteRotator: {fileID: 954655370649223622}
+  m_health: 50
   attackVector: {x: 0, y: 0, z: 0}
 --- !u!120 &2744641237389063406
 LineRenderer:
@@ -181,7 +178,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -201,7 +198,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
