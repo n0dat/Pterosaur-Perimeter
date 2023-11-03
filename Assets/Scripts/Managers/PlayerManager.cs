@@ -18,8 +18,6 @@ public class PlayerManager : MonoBehaviour {
         int skullsTemp = skulls;
         skulls = 0;
         skullsCredit(skullsTemp);
-        
-        setPlayerHealth(2);
     }
 
     public void skullsCredit(int amount)

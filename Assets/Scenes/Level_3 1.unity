@@ -16673,6 +16673,34 @@ PrefabInstance:
       propertyPath: checkpointObjectNoEvent
       value: 
       objectReference: {fileID: 712987740}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[1].spawnRate
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[2].spawnRate
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[0].enemyCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[1].enemyCount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[2].enemyCount
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[1].roundNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[2].roundNumber
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2967833508958221598, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: m_Camera
       value: 
@@ -16911,6 +16939,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 966715656}
+    - target: {fileID: 4197056503916779200, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197056503916779200, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4562662837223247766, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
       propertyPath: m_Name
       value: UI
@@ -16975,6 +17011,26 @@ PrefabInstance:
       propertyPath: m_levelManager
       value: 
       objectReference: {fileID: 692206120}
+    - target: {fileID: 7323136512677573748, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5824645
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323136512677573748, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5824645
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323136512677573748, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.5824645
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323136512677573748, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323136512677573748, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -357
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
