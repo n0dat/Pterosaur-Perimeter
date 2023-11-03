@@ -160,7 +160,7 @@ public class Tower : MonoBehaviour {
             StartCoroutine(finishAttack(waitForAttack));
             yield return waitForAttack;
             //attackInProgress = true;
-            yield return new WaitForSeconds(attackSpeed);
+            yield return new WaitForSeconds(getAttackSpeed());
             attackInProgress = false;
         }
     }
@@ -322,7 +322,7 @@ public class Tower : MonoBehaviour {
             float angleIncrement = 2 * Mathf.PI / radiusLineSegments;
 
             for (int i = 0; i < radiusLineSegments + 1; i++, angle += angleIncrement)
-                points[i] = new Vector3(Mathf.Cos(angle) * attackRange, Mathf.Sin(angle) * attackRange, 0f) + transform.position;
+                points[i] = new Vector3(Mathf.Cos(angle) * getAttackRange(), Mathf.Sin(angle) * getAttackRange(), 0f) + transform.position;
 
             radiusLine.positionCount = points.Length;
             radiusLine.SetPositions(points);
@@ -425,7 +425,7 @@ public class Tower : MonoBehaviour {
     }
     
     public float getAttackSpeed() {
-        return attackSpeed + (m_attackSpeedUpgradeLevel * 15);
+        return (float)(attackSpeed - (m_attackSpeedUpgradeLevel * 0.35));
     }
 
     public void setAttackSpeed(float val) {
@@ -441,9 +441,9 @@ public class Tower : MonoBehaviour {
     }
 
     public float getAttackRange() {
-        return attackRange;
+        return attackRange + (m_rangeUpgradeLevel * 10);
     }
-
+    
     public void setAttackRange(float val) {
         attackRange = val;
     }
@@ -459,6 +459,8 @@ public class Tower : MonoBehaviour {
         if (val < 0 || val > 3)
             return;
         m_rangeUpgradeLevel = val;
+        drawRadiusCircle();
+        showRadiusCircle();
     }
 
     public int getAttackSpeedUpgradeLevel() {
