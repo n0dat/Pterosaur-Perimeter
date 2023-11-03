@@ -15,7 +15,7 @@ public class Tower : MonoBehaviour {
     [SerializeField]
     private int towerCost, repairCost, radiusLineSegments = 50, killCount;
     [SerializeField]
-    private float durability, attackSpeed, attackDamage, attackRange;
+    private float attackSpeed, attackDamage, attackRange;
     [SerializeField]
     private bool isHeld, selected, validPosition, attackInProgress, canAttack;
     
@@ -34,6 +34,7 @@ public class Tower : MonoBehaviour {
     private int m_damageUpgradeLevel = 0;
     private int m_rangeUpgradeLevel = 0;
     private int m_attackSpeedUpgradeLevel = 0;
+    private int m_health = 50;
     
     public Vector3 attackVector;
 
@@ -42,7 +43,6 @@ public class Tower : MonoBehaviour {
         repairCost = 0;
         killCount = 0;
         
-        durability = 100f;
         attackSpeed = 1.7f;
         attackDamage = 25f;
         attackRange = 5f;
@@ -61,8 +61,8 @@ public class Tower : MonoBehaviour {
         
         enemyToAttack = null;
         
-        radiusLine.startWidth = 0.125f;
-        radiusLine.endWidth = 0.125f;
+        //radiusLine.startWidth = 0.125f;
+        //radiusLine.endWidth = 0.125f;
         
         spriteRotator = gameObject.GetComponent<SpriteRotator>();
         m_animator = gameObject.GetComponent<Animator>();
@@ -410,15 +410,7 @@ public class Tower : MonoBehaviour {
     public void setRepairCost(int val) {
         repairCost = val;
     }
-
-    public float getDurability() {
-        return durability;
-    }
-
-    public void setDurability(float val) {
-        durability = val;
-    }
-
+    
     public float getAttackSpeed() {
         return attackSpeed;
     }
@@ -474,5 +466,21 @@ public class Tower : MonoBehaviour {
         if (val < 0 || val > 3)
             return;
         m_damageUpgradeLevel = val;
+    }
+
+    public int getHealth()
+    {
+        return m_health;
+    }
+
+    public void setHealth(int val)
+    {
+        if (val < 0)
+            val = 0;
+
+        if (val > 100)
+            val = 100;
+
+        m_health = val;
     }
 }

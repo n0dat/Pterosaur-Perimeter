@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class UpgradeMenuHandler : MonoBehaviour
 {
+    public void Update()
+    {
+        if (!m_currentTower)
+            return;
+
+        if (m_currentTower.getHealth() == m_healthValue)
+            return;
+
+        m_healthValue = m_currentTower.getHealth();
+        m_healthElementHandler.setHealth(m_healthValue);
+    }
     private enum UpgradeType
     {
         Damage,
@@ -24,7 +35,11 @@ public class UpgradeMenuHandler : MonoBehaviour
     [SerializeField] private PlayerManager m_levelManager; //For determining purchases.
     private Tower m_currentTower = null;
 
+    [SerializeField] private HealthElementHandler m_healthElementHandler;
+    private int m_healthValue;
+
     [SerializeField] private Animator m_animator;
+    
 
     private bool m_isOpen = false;
 
@@ -36,7 +51,9 @@ public class UpgradeMenuHandler : MonoBehaviour
             return;
         
         setUpgradeLevels(currentTower.getDamageUpgradeLevel(), currentTower.getRangeUpgradeLevel(), currentTower.getAttackSpeedUpgradeLevel());
-
+        m_healthValue = m_currentTower.getHealth();
+        m_healthElementHandler.setHealth(m_healthValue);
+        
         if (m_isOpen)
             return;
         
@@ -105,7 +122,7 @@ public class UpgradeMenuHandler : MonoBehaviour
     
     private bool hasAllReferences()
     {
-        if (!m_damageElementTicks || !m_rangeElementTicks || !m_speedElementTicks || !m_levelManager || !m_currentTower || !m_animator)
+        if (!m_healthElementHandler || !m_damageElementTicks || !m_rangeElementTicks || !m_speedElementTicks || !m_levelManager || !m_currentTower || !m_animator)
         {
             Debug.Log("Missing required references in UpgradeMenuHandlerScript script.");
             return false;
@@ -144,6 +161,19 @@ public class UpgradeMenuHandler : MonoBehaviour
             return;
         
         incrementUpgradeForTower(UpgradeType.Speed);
+    }
+
+    public void healButton()
+    {
+        if (!hasAllReferences() || m_healthValue >= 100)
+            return;
+
+        if (!m_levelManager.skullsCost(100))
+            return;
+        
+        m_healthValue = 100;
+        m_healthElementHandler.setHealth(m_healthValue);
+        m_currentTower.setHealth(m_healthValue);
     }
 
     public void exitButton()
