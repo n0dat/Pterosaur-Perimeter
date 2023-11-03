@@ -15,7 +15,7 @@ public class TowerSelector : MonoBehaviour {
     private MainManager mainManager;
 
     void Awake() {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
         //mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
         mainCamera = null;
         getNewCamera();
@@ -50,12 +50,15 @@ public class TowerSelector : MonoBehaviour {
             var hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
             if (!hit.collider) {
                 if (towerObj) {
-                    towerRef.deselect();
+                    towerRef.hardDeselect();
                     towerObj = null;
                     towerRef = null;
                 }
                 return;
             }
+            
+            if (hit.collider.gameObject.CompareTag("UI"))
+                return;
 
             if (hit.collider.gameObject.CompareTag("Tower")) { // hit a Tower game object
                 if (hit.collider.gameObject.GetComponent<Tower>().beingHeld())
@@ -65,7 +68,7 @@ public class TowerSelector : MonoBehaviour {
                     towerRef = towerObj.gameObject.GetComponent<Tower>();
                     if (hit.collider.gameObject.GetInstanceID() == towerObj.GetInstanceID()) {
                         if (towerRef.isSelected())
-                            towerRef.deselect();
+                            towerRef.hardDeselect();
                         else
                             towerRef.select();
                         return;
@@ -81,7 +84,7 @@ public class TowerSelector : MonoBehaviour {
             }
             else {
                 if (towerObj)
-                    towerRef.deselect();
+                    towerRef.hardDeselect();
                 towerObj = null;
                 towerRef = null;
             }

@@ -13,6 +13,7 @@ TagManager:
   - Background Music
   - Tack
   - Tack2
+  - UI
   layers:
   - Default
   - TransparentFX
@@ -52,4 +53,7 @@ TagManager:
     locked: 0
   - name: UI_Upper
     uniqueID: 3986102971
+    locked: 0
+  - name: UI_Top
+    uniqueID: 3825640189
     locked: 0

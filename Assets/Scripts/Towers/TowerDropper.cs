@@ -19,6 +19,7 @@ public class TowerDropper : MonoBehaviour {
 
     void Start() {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        m_playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
 
     void Update() {
