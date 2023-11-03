@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 5110921954108796589}
   - component: {fileID: 498524998726884848}
   - component: {fileID: 9160740815599593331}
-  - component: {fileID: 3286021458265890497}
   - component: {fileID: 7856822877599368202}
   - component: {fileID: 8493222611627406000}
+  - component: {fileID: 2689775449729253985}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: ClubCircle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7e89bddeb08561e4bbcbe774038a0667, type: 2}
+  m_Color: {r: 0, g: 1, b: 0.93370366, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -108,21 +108,6 @@ MonoBehaviour:
   targetWaypoint: {x: 0, y: 0, z: 0}
   waypointIndex: 0
   waypoints: []
---- !u!114 &3286021458265890497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3450490256633212312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ea274e083d8be246a7bdd266e7cb4b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 1.5
-  attackDamage: 1.5
-  rechargeHit: 3
 --- !u!58 &7856822877599368202
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -185,3 +170,18 @@ Rigidbody2D:
   m_SleepingMode: 2
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &2689775449729253985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3450490256633212312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316789b0fe259504591697d2607a82ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clubRadius: 2
+  clubDamage: 5.5
+  rechargeClub: 4.5
