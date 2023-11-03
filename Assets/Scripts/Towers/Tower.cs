@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tower : MonoBehaviour {
@@ -166,7 +167,10 @@ public class Tower : MonoBehaviour {
 
     private IEnumerator finishAttack(WaitForAttack waitForAttack) {
         attackInProgress = true;
-        attackType.attack(enemyToAttack, gameObject);
+        //attackType.attack(enemyToAttack, gameObject);
+        var laser = Instantiate(Resources.Load("Laser"), transform.position, Quaternion.identity);
+        laser.GetComponent<Laser>().parent = gameObject.GetComponent<Tower>();
+        laser.GetComponent<Laser>().shoot((enemyToAttack.transform.position - transform.position).normalized, enemyToAttack.GetComponent<Enemy>());
         //m_animator.SetTrigger("Attack");
         waitForAttack.setAttackFinished();
         yield return null;
@@ -421,7 +425,7 @@ public class Tower : MonoBehaviour {
     }
     
     public float getAttackSpeed() {
-        return attackSpeed;
+        return attackSpeed + (m_attackSpeedUpgradeLevel * 15);
     }
 
     public void setAttackSpeed(float val) {
@@ -429,7 +433,7 @@ public class Tower : MonoBehaviour {
     }
 
     public float getAttackDamage() {
-        return attackDamage;
+        return attackDamage + (m_damageUpgradeLevel * 15);
     }
 
     public void setAttackDamage(float val) {
