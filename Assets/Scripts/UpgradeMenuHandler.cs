@@ -40,12 +40,13 @@ public class UpgradeMenuHandler : MonoBehaviour
 
     [SerializeField] private Animator m_animator;
     
-
     private bool m_isOpen = false;
 
     //Exposed api for the tower script to interface with.
     public void upgrade(Tower currentTower)
     {
+        
+        Debug.Log("Upgrade called in upgrade menu handler");
         m_currentTower = currentTower;
         if (!hasAllReferences())
             return;
@@ -124,6 +125,8 @@ public class UpgradeMenuHandler : MonoBehaviour
     {
         if (!m_healthElementHandler || !m_damageElementTicks || !m_rangeElementTicks || !m_speedElementTicks || !m_levelManager || !m_currentTower || !m_animator)
         {
+            if (!m_currentTower)
+                Debug.Log("Missing the tower reference");
             Debug.Log("Missing required references in UpgradeMenuHandlerScript script.");
             return false;
         }
@@ -185,4 +188,5 @@ public class UpgradeMenuHandler : MonoBehaviour
         m_isOpen = false;
         m_animator.SetTrigger("slideIn");
     }
+    
 }

@@ -30,11 +30,11 @@ public class Tower : MonoBehaviour {
     [SerializeField] private SpriteRotator spriteRotator;
     
     //Upgrade system
-    [SerializeField] private UpgradeMenuHandler m_upgradeMenuInterface;
+    private UpgradeMenuHandler m_upgradeMenuInterface;
     private int m_damageUpgradeLevel = 0;
     private int m_rangeUpgradeLevel = 0;
     private int m_attackSpeedUpgradeLevel = 0;
-    private int m_health = 50;
+    [SerializeField] private int m_health = 50;
     
     public Vector3 attackVector;
 
@@ -55,7 +55,7 @@ public class Tower : MonoBehaviour {
         
         setLineColorGrey();
         drawRadiusCircle();
-        deselect();
+        
         
         enemiesInRange = Array.Empty<Collider2D>();
         
@@ -70,6 +70,7 @@ public class Tower : MonoBehaviour {
         attackVector = Vector3.zero;
 
         m_upgradeMenuInterface = GameObject.Find("UpgradeMenu").GetComponent<UpgradeMenuHandler>(); //Must be called UpgradeMenu.
+        deselect();
     }
     
     // called every frame
@@ -167,7 +168,7 @@ public class Tower : MonoBehaviour {
     private IEnumerator finishAttack(WaitForAttack waitForAttack) {
         attackInProgress = true;
         attackType.attack(enemyToAttack, gameObject);
-        m_animator.SetTrigger("Attack");
+        //m_animator.SetTrigger("Attack");
         waitForAttack.setAttackFinished();
         yield return null;
     }
@@ -346,11 +347,20 @@ public class Tower : MonoBehaviour {
     }
 
     public void deselect() {
+        Debug.Log("Deselect called on Tower");
         selected = false;
         hideRadiusCircle();
     }
 
+    public void hardDeselect() {
+        Debug.Log("Hard deselect called on Tower");
+        selected = false;
+        hideRadiusCircle();
+        m_upgradeMenuInterface.exitButton();
+    }
+
     public void select() {
+        Debug.Log("Select called on Tower");
         selected = true;
         showRadiusCircle();
         m_upgradeMenuInterface.upgrade(this);
