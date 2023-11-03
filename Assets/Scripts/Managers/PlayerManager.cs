@@ -5,15 +5,16 @@ public class PlayerManager : MonoBehaviour {
     //Required references
     //Health systems.
     [SerializeField] private PlayerHealthUIHandler m_playerHealthUIHandler;
-    private int m_playerHealth = 3;
+    [SerializeField] private int m_playerHealth = 3;
     //Currency systems.
     [SerializeField] private UpdateCurrency currencyTextUIScript;
     [SerializeField] private int skulls; //This is our currency
 
-    
+    private LevelManager levelManager;
     
 
     void Start() {
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         //Initially set our skulls amount to whatever was set in the unity editor.
         int skullsTemp = skulls;
         skulls = 0;
@@ -113,6 +114,6 @@ public class PlayerManager : MonoBehaviour {
     //TODO: Use this function for end of game logic/conditions.
     private void playerOutOfHealth()
     {
-        return;
+        levelManager.endLevel(false);
     }
 }

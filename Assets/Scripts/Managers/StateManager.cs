@@ -65,10 +65,26 @@ public class StateManager : MonoBehaviour {
 
     public void hideDisasterPrompt() {
 	    gameState = GameState.Playing;
-	    Time.timeScale = 1f;
+	    Time.timeScale = 0f;
     }
 
     public void endGame() {
 	    gameState = GameState.End;
+    }
+
+    public void showEndPrompt() {
+	    gameState = GameState.End;
+	    Time.timeScale = 0f;
+    }
+
+    public void hideEndPrompt(bool val) {
+	    if (val) {
+		    gameState = GameState.Playing;
+		    Time.timeScale = 1f;
+	    }
+	    else {
+		    gameState = GameState.Menu;
+		    Time.timeScale = 1f;
+	    }
     }
 }

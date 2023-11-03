@@ -12,9 +12,11 @@ public class EndScreenButton : MonoBehaviour {
 
     public void restartLevel() {
         levelManager.resetLevel();
+        mainManager.getStateManager().hideEndPrompt(true);
     }
 
     public void exit(bool state) {
+        mainManager.getStateManager().hideEndPrompt(false);
         mainManager.getStateManager().setGameState(StateManager.GameState.Menu);
         mainManager.getSceneManager().loadScene("LevelSelectScene");
     }

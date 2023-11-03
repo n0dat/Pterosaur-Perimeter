@@ -291,6 +291,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 20355605374223757, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20355605374223757, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20355605374223757, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205459738018961685, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205459738018961685, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0a11e9cb6a2c94e19b676b527f52ef74, type: 3}
+    - target: {fileID: 1305360159765944908, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874262938848939446, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3081819707119636475, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4245686194158834098, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
       propertyPath: m_Camera
       value: 
