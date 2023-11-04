@@ -1,42 +1,55 @@
+using System.Collections.Specialized;
+using UnityEditor;
 using UnityEngine;
 
 public class AttackType : MonoBehaviour {
 
-    private enum AttackStyle { Single, Swipe };
-    [SerializeField] private AttackStyle attackStyle = AttackStyle.Single;
-    
-    private float coneAngle = 45f;
-    private float coneDistance = 50f;
+    private enum AttackStyle { Single, Triple, Circle };
+    [SerializeField] private AttackStyle attackStyle;
+    public Transform projectile;
+    public float laserSpeed = 10f;
 
     public void attack(GameObject sourceEnemy, GameObject sourceTower) {
         var tower = sourceTower.GetComponent<Tower>();
         var enemy = sourceEnemy.GetComponent<Enemy>();
         
-        if (attackStyle == AttackStyle.Single) { // attack a single enemy every hit
-            enemy.takeDamage(tower.getAttackDamage(), tower);
-        }
-        else if (attackStyle == AttackStyle.Swipe) { // 'slash' or 'swipe' attacking multiple enemies every hit
-            Debug.Log("Swipe Started");
-            coneDistance = tower.getAttackRange();
-            
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, coneDistance);
+        var direction = (enemy.transform.position - transform.position).normalized;
 
-            foreach (Collider2D collider in colliders) {
-                Debug.Log("Collider");
-                Vector2 directionToCollider = collider.transform.position - transform.position;
-                
-                //float angleToCollider = Vector2.Angle(collider.transform.position.normalized, transform.position.normalized);
-                float angleToCollider = Mathf.Atan2(directionToCollider.y, directionToCollider.x) * Mathf.Rad2Deg;
-                
-                if (angleToCollider < 0)
-                    angleToCollider += 360;
-                
-                if (angleToCollider <= coneAngle * 0.5f) {
-                    Debug.Log("Angle to collider: " + angleToCollider);
-                    Debug.Log("Attacking");
-                    enemy.takeDamage(tower.getAttackDamage(), tower);
+        switch (attackStyle) {
+            case AttackStyle.Single:
+                var laserSingle = Instantiate(projectile, transform.position, Quaternion.identity);
+                var laserSingleComp = laserSingle.GetComponent<Laser>();
+                laserSingleComp.parent = tower;
+                laserSingleComp.shoot(direction, enemy);
+                break;
+            case AttackStyle.Triple:
+                for (int i = -15; i <= 15; i += 15) {
+                    var targetDirection = enemy.transform.position - transform.position;
+                    var baseAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+                    var angle = baseAngle + i;
+                    var rot = Quaternion.Euler(0f, 0f, angle);
+                    Vector3 localDirection = rot * Vector3.right;
+                    Vector3 worldDirection = transform.TransformDirection(localDirection);
+                    var laserTriple = Instantiate(projectile, transform.position, rot);
+                    var laserTripleComp = laserTriple.GetComponent<Laser>();
+                    laserTripleComp.parent = tower;
+                    laserTripleComp.shoot(worldDirection, enemy);
                 }
-            }
+                break;
+            case AttackStyle.Circle:
+                for (int i = 0; i < 8; i++) {
+                    float angle = i * 360f / 8;
+                    Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+                    Vector3 localDirection = Quaternion.Euler(0.0f, 0.0f, angle) * Vector3.right;
+                    Vector3 worldDirection = transform.TransformDirection(localDirection);
+                    var laserCircle = Instantiate(projectile, transform.position, rotation);
+                    var laserCircleComp = laserCircle.GetComponent<Laser>();
+                    laserCircleComp.parent = tower;
+                    laserCircleComp.shoot(worldDirection, enemy);
+                }
+                break;
+            default:
+                break;
         }
     }
 }

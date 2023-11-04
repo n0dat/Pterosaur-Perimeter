@@ -19,7 +19,7 @@ public class Laser : MonoBehaviour {
     
     void Update() {
         transform.position += direction * (speed * Time.deltaTime);
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 2.5f);
     }
 
     public void shoot(Vector3 targetDirection, Enemy hit) {

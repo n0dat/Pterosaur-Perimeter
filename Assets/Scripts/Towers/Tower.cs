@@ -167,10 +167,10 @@ public class Tower : MonoBehaviour {
 
     private IEnumerator finishAttack(WaitForAttack waitForAttack) {
         attackInProgress = true;
-        //attackType.attack(enemyToAttack, gameObject);
-        var laser = Instantiate(Resources.Load("Laser"), transform.position, Quaternion.identity);
-        laser.GetComponent<Laser>().parent = gameObject.GetComponent<Tower>();
-        laser.GetComponent<Laser>().shoot((enemyToAttack.transform.position - transform.position).normalized, enemyToAttack.GetComponent<Enemy>());
+        attackType.attack(enemyToAttack, gameObject);
+        //var laser = Instantiate(Resources.Load("Laser"), transform.position, Quaternion.identity);
+        //laser.GetComponent<Laser>().parent = gameObject.GetComponent<Tower>();
+        //laser.GetComponent<Laser>().shoot((enemyToAttack.transform.position - transform.position).normalized, enemyToAttack.GetComponent<Enemy>());
         //m_animator.SetTrigger("Attack");
         waitForAttack.setAttackFinished();
         yield return null;
@@ -178,7 +178,7 @@ public class Tower : MonoBehaviour {
 
     private void getEnemiesInRadius() {
         var temp = new List<Collider2D>();
-        foreach (var enemy in Physics2D.OverlapCircleAll(transform.position, attackRange))
+        foreach (var enemy in Physics2D.OverlapCircleAll(transform.position, getAttackRange()))
             if (enemy.gameObject.CompareTag("Enemy"))
                 temp.Add(enemy);
         

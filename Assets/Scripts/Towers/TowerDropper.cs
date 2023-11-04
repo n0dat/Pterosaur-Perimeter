@@ -16,6 +16,8 @@ public class TowerDropper : MonoBehaviour {
     private bool towerHeld;
     private bool canBePlaced = true;
     [SerializeField] private int m_towerCost;
+    
+    [SerializeField] private Transform towerToSpawn;
 
     void Start() {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -39,9 +41,9 @@ public class TowerDropper : MonoBehaviour {
 
     public GameObject instantiateTower(Vector3 loc) {
         loc.z = 0;
-        var obj = Instantiate(Resources.Load(m_towerName), loc, Quaternion.identity) as GameObject;
+        var obj = Instantiate(towerToSpawn, loc, Quaternion.identity);
         obj.transform.SetParent(null);
-        return obj;
+        return obj.gameObject;
     }
 
     public void dropTower() {   
