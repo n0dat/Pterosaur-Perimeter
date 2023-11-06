@@ -4,31 +4,38 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour {
-	
-	
-	[SerializeField]
-	private float totalDistance = 0f, distanceCovered = 0f;
-	public float health = 0f;
-	public float movementSpeed = 10f;
-	
-	[SerializeField] private bool isDisplayingHit = false;
-	
+
+	public enum FacingDirection { Up, Down, Left, Right, Unknown };
+
+	// movement
+	[SerializeField] private float totalDistance = 0f, distanceCovered = 0f;
 	public Vector3 targetWaypoint;
 	public int waypointIndex = 0;
 	public List<Vector3> waypoints;
+	public float nextCheckpointThreshold = 0.2f;
+	public FacingDirection facingDirection = FacingDirection.Down;
+	public float facingThreshold = 10f;
+	public float rotationSpeed = 50f;
+	public Quaternion targetRotation;
 
+	// ui
 	private LevelManager levelManager;
 	private SpriteRenderer spriteRenderer;
+	[SerializeField] private bool isDisplayingHit = false;
 	private static readonly int MColor = Shader.PropertyToID("m_Color");
-
+	public float hitDelay = 0.2f;
+	public GameObject sprite;
+	
+	// other
+	public float health = 100f;
+	public float movementSpeed = 10f;
 	private PlayerManager m_playerManager;
-
+	
 	void Start() {
 		findTotalDistance();
-		health = 100f;
 		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		m_playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+		spriteRenderer = sprite.GetComponent<SpriteRenderer>();
 	}
 
 	void Update() {
@@ -37,8 +44,10 @@ public class Enemy : MonoBehaviour {
 		
 		Vector3 dir = targetWaypoint - transform.position;
 		transform.Translate(dir.normalized * (Time.deltaTime * movementSpeed), Space.World);
-
-		if (Vector3.Distance(transform.position, targetWaypoint) <= 0.2f) {
+		
+		sprite.transform.rotation = Quaternion.RotateTowards(sprite.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+		
+		if (Vector3.Distance(transform.position, targetWaypoint) <= nextCheckpointThreshold) {
 			getNextCheckpoint();
 		}
 	}
@@ -56,6 +65,8 @@ public class Enemy : MonoBehaviour {
 			return;
 		}
 		targetWaypoint = waypoints[++waypointIndex];
+		facingDirection = getFacingDirection(targetWaypoint);
+		updateRotation(targetWaypoint);
 	}
 
 	private void OnDestroy() {
@@ -107,9 +118,31 @@ public class Enemy : MonoBehaviour {
 		spriteRenderer.color = Color.red;
 		isDisplayingHit = true;
 		
-		yield return new WaitForSeconds(0.2f);
+		yield return new WaitForSeconds(hitDelay);
 		
 		spriteRenderer.color = Color.white;
 		isDisplayingHit = false;
+	}
+
+	public FacingDirection getFacingDirection(Vector3 target) {
+		var angle = Vector3.Angle(transform.up, (target - transform.position));
+		if (Mathf.Abs(angle - 0f) < facingThreshold)
+			return FacingDirection.Up;
+		if (Mathf.Abs(angle - 90f) < facingThreshold)
+			return FacingDirection.Left;
+		if (Mathf.Abs(angle - 180f) < facingThreshold)
+			return FacingDirection.Down;
+		if (Mathf.Abs(angle - 270f) < facingThreshold)
+			return FacingDirection.Right;
+		return FacingDirection.Unknown;
+	}
+
+	public void updateRotation(Vector3 target) {
+		Vector3 direction = target - sprite.transform.position;
+		var angle = Mathf.Atan2(direction.y, direction.x);
+		var angleDegrees = angle * Mathf.Rad2Deg + -90f;
+		targetRotation = Quaternion.Euler(0, 0, angleDegrees);
+		//sprite.transform.rotation = Quaternion.RotateTowards(sprite.transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+		//sprite.transform.rotation = rotation;
 	}
 }

@@ -48,7 +48,6 @@ public class PunchCaveman : MonoBehaviour
             
             return;
         }
-        
     }
 
     IEnumerator WaitAndCharge(float rechargeHit){

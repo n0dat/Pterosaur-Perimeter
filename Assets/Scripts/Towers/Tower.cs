@@ -494,5 +494,23 @@ public class Tower : MonoBehaviour {
             val = 100;
 
         m_health = val;
+        
+        if (m_health == 0)
+            Destroy(this.gameObject);
+    }
+
+    // damage to tower
+    public void takeDamage(int val) {
+        Debug.Log("Taking damage");
+        StartCoroutine(hit());
+        setHealth(getHealth() - val);
+    }
+
+    IEnumerator hit() {
+        Debug.Log("Tower called hit");
+        var prevColor = spriteRotator.getRenderer().color;
+        spriteRotator.getRenderer().color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRotator.getRenderer().color = prevColor;
     }
 }
