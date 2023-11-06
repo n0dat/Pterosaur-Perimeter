@@ -135,6 +135,9 @@ public class UpgradeMenuHandler : MonoBehaviour
 
     public void upgradeDamageButton()
     {
+        if (!hasAllReferences())
+            return;
+        
         if (m_damageUpgradeLevel >= 3)
             return;
 
@@ -146,6 +149,9 @@ public class UpgradeMenuHandler : MonoBehaviour
 
     public void upgradeRangeButton()
     {
+        if (!hasAllReferences())
+            return;
+        
         if (m_rangeUpgradeLevel >= 3)
             return;
 
@@ -157,6 +163,9 @@ public class UpgradeMenuHandler : MonoBehaviour
 
     public void upgradeSpeedButton()
     {
+        if (!hasAllReferences())
+            return;
+        
         if (m_speedUpgradeLevel >= 3)
             return;
 
