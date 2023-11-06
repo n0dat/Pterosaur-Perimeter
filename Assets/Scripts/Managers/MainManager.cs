@@ -14,7 +14,7 @@ public class MainManager : MonoBehaviour {
     void Awake() {
 	    DontDestroyOnLoad(this);
 	    
-	    towerSelector = GameObject.Find("MouseManager").GetComponent<TowerSelector>();
+	    //towerSelector = GameObject.Find("MouseManager").GetComponent<TowerSelector>();
 	    settingsManager = GameObject.Find("SettingsManager").GetComponent<Settings>();
 	    sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 	    stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();

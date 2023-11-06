@@ -16986,6 +16986,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 966715656}
+    - target: {fileID: 6676847182294961851, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
+      propertyPath: m_timeForDoubleClick
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6805912898539161667, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.28858817

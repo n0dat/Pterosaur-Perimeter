@@ -110,6 +110,7 @@ public class Enemy : MonoBehaviour {
 		
 		if (health <= 0) {
 			attacker.enemyKilled();
+			m_playerManager.skullsCredit(100);
 			Destroy(gameObject);
 		}
 	}
