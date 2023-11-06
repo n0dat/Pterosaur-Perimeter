@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEditor;
 using UnityEngine;
 
 public class AttackType : MonoBehaviour {
 
-    private enum AttackStyle { Single, Triple, Circle };
+    private enum AttackStyle { Single, Triple, Circle, Heal };
     [SerializeField] private AttackStyle attackStyle;
     public Transform projectile;
     public float laserSpeed = 10f;
@@ -17,12 +18,14 @@ public class AttackType : MonoBehaviour {
 
         switch (attackStyle) {
             case AttackStyle.Single:
+                // TODO: PLAY ATTACK ANIMATION HERE
                 var laserSingle = Instantiate(projectile, transform.position, Quaternion.identity);
                 var laserSingleComp = laserSingle.GetComponent<Laser>();
                 laserSingleComp.parent = tower;
                 laserSingleComp.shoot(direction, enemy);
                 break;
             case AttackStyle.Triple:
+                // TODO: PLAY ATTACK ANIMATION HERE
                 for (int i = -15; i <= 15; i += 15) {
                     var targetDirection = enemy.transform.position - transform.position;
                     var baseAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
@@ -37,6 +40,7 @@ public class AttackType : MonoBehaviour {
                 }
                 break;
             case AttackStyle.Circle:
+                // TODO: PLAY ATTACK ANIMATION HERE
                 for (int i = 0; i < 8; i++) {
                     float angle = i * 360f / 8;
                     Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
@@ -48,7 +52,14 @@ public class AttackType : MonoBehaviour {
                     laserCircleComp.shoot(worldDirection, enemy);
                 }
                 break;
-            default:
+            case AttackStyle.Heal:
+                // TODO: PLAY HEALING ANIMATION HERE
+                foreach (var enemyCollider in Physics2D.OverlapCircleAll(transform.position, tower.getAttackRange())) {
+                    if (enemyCollider.gameObject.CompareTag("Tower")) {
+                        var targetTower = enemyCollider.gameObject.GetComponent<Tower>();
+                        targetTower.setHealth(targetTower.getHealth() + 5);
+                    }
+                }
                 break;
         }
     }
