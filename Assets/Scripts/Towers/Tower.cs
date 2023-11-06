@@ -513,4 +513,10 @@ public class Tower : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
         spriteRotator.getRenderer().color = prevColor;
     }
+    
+    // tower gets healed by support tower
+    public void heal(int val) {
+        setHealth(getHealth() + val);
+        // TODO: PLAY HEALED SOUND
+    }
 }
