@@ -2925,63 +2925,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1001 &592453558
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 443.01202
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -85.35727
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7943741876189340362, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
-      propertyPath: m_Name
-      value: Triceratops
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
 --- !u!1 &643187752
 GameObject:
   m_ObjectHideFlags: 0
@@ -4062,6 +4005,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 712987741}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1678678471
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 260.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -33.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943741876189340362, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
+      propertyPath: m_Name
+      value: T-Rex
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
 --- !u!1 &1702397146
 GameObject:
   m_ObjectHideFlags: 0
@@ -39904,4 +39904,4 @@ SceneRoots:
   - {fileID: 77327371}
   - {fileID: 3789781104042030866}
   - {fileID: 780821793}
-  - {fileID: 592453558}
+  - {fileID: 1678678471}
