@@ -24,7 +24,6 @@ public class MainMenuButton : MonoBehaviour {
             mainManager.getSceneManager().loadScene(sceneToLoad);
             if (isLevelStartButton) {
                 mainManager.getStateManager().setGameState(StateManager.GameState.Playing);
-                mainManager.getTowerSelector().getNewCamera();
             }
             if (isSettingsExitButton)
                 mainManager.getSettingsManager().saveSettings();

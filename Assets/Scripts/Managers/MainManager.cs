@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MainManager : MonoBehaviour {
     
-	private TowerSelector towerSelector;
     private Settings settingsManager;
     private SceneManager sceneManager;
     private StateManager stateManager;
@@ -14,15 +13,10 @@ public class MainManager : MonoBehaviour {
     void Awake() {
 	    DontDestroyOnLoad(this);
 	    
-	    //towerSelector = GameObject.Find("MouseManager").GetComponent<TowerSelector>();
 	    settingsManager = GameObject.Find("SettingsManager").GetComponent<Settings>();
 	    sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 	    stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
 	    gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
-
-    public TowerSelector getTowerSelector() {
-	    return this.towerSelector;
     }
 
     public Settings getSettingsManager() {

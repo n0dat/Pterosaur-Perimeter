@@ -16,7 +16,6 @@ public class LevelSelectButton : MonoBehaviour {
         if (sceneLoader) {
             mainManager.getSceneManager().loadScene(sceneToLoad);
             mainManager.getStateManager().setGameState(StateManager.GameState.Playing);
-            mainManager.getTowerSelector().getNewCamera();
         }
         else {
             Debug.Log("Unable to get Scene Manager");
