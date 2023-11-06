@@ -155,7 +155,7 @@ MonoBehaviour:
   attackType: {fileID: 765229719627137857}
   towerType: 0
   spriteRotator: {fileID: 954655370649223622}
-  m_health: 50
+  m_health: 100
   attackVector: {x: 0, y: 0, z: 0}
 --- !u!120 &2744641237389063406
 LineRenderer:
