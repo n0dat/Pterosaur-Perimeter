@@ -6,8 +6,14 @@ public class UpgradeMenuHandler : MonoBehaviour
 {
     public void Update()
     {
-        if (!m_currentTower)
+        if (!m_currentTower) {
+            if (m_isOpen) {
+                m_currentTower = null;
+                m_isOpen = false;
+                m_animator.SetTrigger("slideIn");
+            }
             return;
+        }
 
         if (m_currentTower.getHealth() == m_healthValue)
             return;

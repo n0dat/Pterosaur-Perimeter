@@ -4,6 +4,7 @@ public class EndScreenButton : MonoBehaviour {
     // globals
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private MainManager mainManager;
+    [SerializeField] private string sceneName;
 
     void Awake() {
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
@@ -11,6 +12,7 @@ public class EndScreenButton : MonoBehaviour {
     }
 
     public void restartLevel() {
+        mainManager.getSceneManager().loadScene("sceneName");
         levelManager.resetLevel();
         mainManager.getStateManager().hideEndPrompt(true);
     }

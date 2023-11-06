@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private bool[] levelsCompleted = {false, false, false, false, false};
 
     void Awake() {
+        DontDestroyOnLoad(this);
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
     }
 

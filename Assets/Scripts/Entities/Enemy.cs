@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public void takeDamage(float damage, Tower attacker) {
-		if (!gameObject || health <= 0f)
+		if (!gameObject)
 			return;
 		
 		if (!isDisplayingHit)
