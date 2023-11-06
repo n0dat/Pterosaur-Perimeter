@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 public class TowerSelector : MonoBehaviour {
@@ -13,6 +14,11 @@ public class TowerSelector : MonoBehaviour {
     private Tower towerRef;
     
     private MainManager mainManager;
+
+    //Manage double clicks.
+    [SerializeField] private double m_timeForDoubleClick = 0.5; //Time to allow for double click in seconds.
+    private double m_timeLastClick = 0;
+    
 
     void Awake() {
         //DontDestroyOnLoad(this.gameObject);
@@ -61,6 +67,13 @@ public class TowerSelector : MonoBehaviour {
                 return;
 
             if (hit.collider.gameObject.CompareTag("Tower")) { // hit a Tower game object
+                
+                if (Time.time - m_timeLastClick > m_timeForDoubleClick)
+                {
+                    m_timeLastClick = Time.time;
+                    return;
+                }
+                
                 if (hit.collider.gameObject.GetComponent<Tower>().beingHeld())
                     return;
 
@@ -78,9 +91,13 @@ public class TowerSelector : MonoBehaviour {
                         towerRef.deselect();
                 }
                 
+                
+                
                 towerObj = hit.collider.gameObject;
                 towerRef = towerObj.GetComponent<Tower>();
                 towerRef.select();
+
+                m_timeLastClick = Time.time;
             }
             else {
                 if (towerObj)

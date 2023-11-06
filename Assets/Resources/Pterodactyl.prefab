@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 88b5e583473efc742a667fbb94ad6768, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d6dd6acc69e30584290bdb0cbf1cd29e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 954655370649223622}
   - component: {fileID: 765229719627137857}
   m_Layer: 0
-  m_Name: T-Rex
+  m_Name: Pterodactyl
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,12 +138,12 @@ MonoBehaviour:
   repairCost: 0
   radiusLineSegments: 50
   killCount: 0
-  attackSpeed: 2.3
-  attackDamage: 35
-  attackRange: 50
+  attackSpeed: 1
+  attackDamage: 15
+  attackRange: 75
   isHeld: 0
   selected: 0
-  validPosition: 1
+  validPosition: 0
   attackInProgress: 0
   canAttack: 0
   radiusLine: {fileID: 2744641237389063406}
@@ -360,4 +360,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackStyle: 0
   projectile: {fileID: 4745291768391468024, guid: 4fca6a6c51384be48b20e1330a091677, type: 3}
-  laserSpeed: 90
+  laserSpeed: 10

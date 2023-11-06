@@ -71,7 +71,7 @@ public class TowerDropper : MonoBehaviour {
         if (!hasAllReferences())
             return;
         //Attempt to actually purchase the tower given the player's currency amount.
-        if (!m_playerManager.skullsCost(m_towerCost)) //TODO: Flash currency counter in updateCurrency script
+        if (!m_playerManager.skullsCost(m_towerCost)) 
             return;
         
         m_UIHandler.OnMouseEnter();

@@ -44,9 +44,6 @@ public class Tower : MonoBehaviour {
         repairCost = 0;
         killCount = 0;
         
-        attackSpeed = 1.7f;
-        attackDamage = 25f;
-        
         isHeld = false;
         selected = false;
         validPosition = true;

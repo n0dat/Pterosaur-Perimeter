@@ -138,7 +138,7 @@ MonoBehaviour:
   repairCost: 0
   radiusLineSegments: 50
   killCount: 0
-  attackSpeed: 10
+  attackSpeed: 1.7
   attackDamage: 10
   attackRange: 50
   isHeld: 0
@@ -358,4 +358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a187c1a94ee3ec84dbc8a54515b779dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackStyle: 0
+  attackStyle: 1
+  projectile: {fileID: 4745291768391468024, guid: 4fca6a6c51384be48b20e1330a091677, type: 3}
+  laserSpeed: 10
