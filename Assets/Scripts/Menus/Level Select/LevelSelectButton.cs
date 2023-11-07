@@ -4,6 +4,11 @@ public class LevelSelectButton : MonoBehaviour {
     [SerializeField] private string sceneToLoad;
     
     private MainManager mainManager;
+    
+    //Locked level logic.
+    [SerializeField] private GameObject m_lockedIcon;
+    [SerializeField] private AudioHandler m_audioHandler;
+    private bool m_isLocked = true;
 
     void Start() {
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
@@ -12,6 +17,13 @@ public class LevelSelectButton : MonoBehaviour {
     }
 
     public void buttonPressed() {
+
+        if (m_isLocked)
+        {
+            m_audioHandler.playAudio("LevelLocked");
+            return;
+        }
+        
         var sceneLoader = mainManager.getSceneManager();
         if (sceneLoader) {
             mainManager.getSceneManager().loadScene(sceneToLoad);
@@ -20,5 +32,17 @@ public class LevelSelectButton : MonoBehaviour {
         else {
             Debug.Log("Unable to get Scene Manager");
         }
+    }
+    
+    public void lockLevel()
+    {
+        m_isLocked = true;
+        m_lockedIcon.SetActive(true);
+    }
+
+    public void unlockLevel()
+    {
+        m_isLocked = false;
+        m_lockedIcon.SetActive(false);
     }
 }
