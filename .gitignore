@@ -83,3 +83,4 @@ Assets/*/._*.cs
 Assets/*/*/._*.cs
 Assets/*/*/*/._*.cs
 settings.ini
+*.meta
