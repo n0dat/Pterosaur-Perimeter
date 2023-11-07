@@ -7,7 +7,7 @@ using UnityEngine;
 public class Tower : MonoBehaviour {
     
     // globals
-    public enum TowerType { Water, Land };
+    public enum TowerType { Water, Land }
     private enum AttackState { Attacking, Waiting, Initial };
     private enum TargetingMode { First, Last, Strong };
     
@@ -18,7 +18,7 @@ public class Tower : MonoBehaviour {
     [SerializeField]
     private float attackSpeed, attackDamage, attackRange;
     [SerializeField]
-    private bool isHeld, selected, validPosition, attackInProgress, canAttack;
+    private bool isHeld, selected, validPosition, attackInProgress;
     
     [SerializeField] private LineRenderer radiusLine;
     [SerializeField] private Collider2D[] enemiesInRange;
@@ -52,7 +52,6 @@ public class Tower : MonoBehaviour {
         
         setLineColorGrey();
         drawRadiusCircle();
-        
         
         enemiesInRange = Array.Empty<Collider2D>();
         
@@ -92,7 +91,6 @@ public class Tower : MonoBehaviour {
                     // start attacking
                     if (enemyToAttack && attackState != AttackState.Attacking) {
                         attackState = AttackState.Attacking;
-                        canAttack = false;
                         StartCoroutine(attackRoutine());
                     }
                 }
