@@ -37,7 +37,7 @@ public class Tower : MonoBehaviour {
     private int m_attackSpeedUpgradeLevel = 0;
     private int m_health = 100;
 
-    [SerializeField] private HealthBarUIHandler m_healthBar;
+    [SerializeField] private HealthUIHandler m_healthBar;
     
     public Vector3 attackVector;
 

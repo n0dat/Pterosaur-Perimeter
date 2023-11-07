@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBarUIHandler : MonoBehaviour
+public class HealthUIHandler : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Slider m_slider;
 
