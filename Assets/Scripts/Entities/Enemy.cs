@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour {
 	private static readonly int MColor = Shader.PropertyToID("m_Color");
 	public float hitDelay = 0.2f;
 	public GameObject sprite;
+	[SerializeField] private HealthBarUIHandler m_healthBarHandler;
 	
 	// other
 	public float health = 100f;
@@ -107,6 +108,8 @@ public class Enemy : MonoBehaviour {
 		}
 		
 		health -= damage;
+		
+		m_healthBarHandler.setHealth((int)health);
 		
 		if (health <= 0) {
 			attacker.enemyKilled();

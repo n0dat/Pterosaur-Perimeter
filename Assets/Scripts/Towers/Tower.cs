@@ -35,7 +35,9 @@ public class Tower : MonoBehaviour {
     private int m_damageUpgradeLevel = 0;
     private int m_rangeUpgradeLevel = 0;
     private int m_attackSpeedUpgradeLevel = 0;
-    [SerializeField] private int m_health = 50;
+    private int m_health = 100;
+
+    [SerializeField] private HealthBarUIHandler m_healthBar;
     
     public Vector3 attackVector;
 
@@ -492,6 +494,7 @@ public class Tower : MonoBehaviour {
             val = 100;
 
         m_health = val;
+        m_healthBar.setHealth(m_health);
         
         if (m_health == 0)
             Destroy(this.gameObject);
