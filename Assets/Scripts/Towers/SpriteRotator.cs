@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpriteRotator : MonoBehaviour {
     // globals
     [SerializeField] private GameObject spriteObject;
-    private SpriteRenderer renderer;
+    private new SpriteRenderer renderer;
 
     void Awake() {
         spriteObject = gameObject.transform.GetChild(0).gameObject;
@@ -19,6 +19,6 @@ public class SpriteRotator : MonoBehaviour {
     }
 
     public SpriteRenderer getRenderer() {
-        return this.renderer;
+        return renderer;
     }
 }

@@ -153,7 +153,7 @@ MonoBehaviour:
   targetingMode: 0
   roundManager: {fileID: 0}
   attackType: {fileID: 765229719627137857}
-  towerType: 0
+  towerType: 1
   spriteRotator: {fileID: 954655370649223622}
   m_healthBar: {fileID: 4236639763527542759}
   attackVector: {x: 0, y: 0, z: 0}

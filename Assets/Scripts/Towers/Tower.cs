@@ -156,7 +156,6 @@ public class Tower : MonoBehaviour {
             WaitForAttack waitForAttack = new WaitForAttack();
             StartCoroutine(finishAttack(waitForAttack));
             yield return waitForAttack;
-            //attackInProgress = true;
             yield return new WaitForSeconds(getAttackSpeed());
             attackInProgress = false;
         }
@@ -165,9 +164,6 @@ public class Tower : MonoBehaviour {
     private IEnumerator finishAttack(WaitForAttack waitForAttack) {
         attackInProgress = true;
         attackType.attack(enemyToAttack, gameObject);
-        //var laser = Instantiate(Resources.Load("Laser"), transform.position, Quaternion.identity);
-        //laser.GetComponent<Laser>().parent = gameObject.GetComponent<Tower>();
-        //laser.GetComponent<Laser>().shoot((enemyToAttack.transform.position - transform.position).normalized, enemyToAttack.GetComponent<Enemy>());
         //m_animator.SetTrigger("Attack");
         waitForAttack.setAttackFinished();
         yield return null;

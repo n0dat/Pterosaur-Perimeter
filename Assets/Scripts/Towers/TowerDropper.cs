@@ -11,7 +11,6 @@ public class TowerDropper : MonoBehaviour {
     [SerializeField] private TowerDropUIHandler m_UIHandler; //The UIHandler handles the animation for sliding in and out.
     [SerializeField] private PlayerManager m_playerManager; //For tower purchasing
     
-    [SerializeField] private string m_towerName; //The name of the prefab tower you want to load upon purchase.
     private GameObject heldTower;
     private bool towerHeld;
     private bool canBePlaced = true;
@@ -29,9 +28,11 @@ public class TowerDropper : MonoBehaviour {
             var loc = camera.ScreenToWorldPoint(Input.mousePosition);
             loc.z = 0;
             heldTower.transform.position = loc;
-            heldTower.GetComponent<Tower>().holdTower();
-
-            if (Input.GetMouseButtonDown(0) && heldTower.GetComponent<Tower>().isValidPosition())
+            
+            var towerRef = heldTower.GetComponent<Tower>();
+            towerRef.holdTower();
+            
+            if (Input.GetMouseButtonDown(0) && towerRef.isValidPosition())
                 dropTower();
             
             if (Input.GetMouseButtonDown(1))
@@ -55,8 +56,7 @@ public class TowerDropper : MonoBehaviour {
         }
     }
 
-    private void killTower()
-    {
+    private void killTower() {
         if (!hasAllReferences())
             return;
         
@@ -65,8 +65,7 @@ public class TowerDropper : MonoBehaviour {
         towerHeld = false;
     }
 
-    public void purchaseTower()
-    {
+    public void purchaseTower() {
         //Make sure references are actually set
         if (!hasAllReferences())
             return;
@@ -79,14 +78,11 @@ public class TowerDropper : MonoBehaviour {
         heldTower = instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
     }
 
-    private bool hasAllReferences()
-    {
-        if (!m_playerManager || !m_UIHandler || !camera)
-        {
+    private bool hasAllReferences() {
+        if (!m_playerManager || !m_UIHandler || !camera) {
             Debug.Log("Missing required references in TowerDropper script.");
             return false;
         }
-
         return true;
     }
     
