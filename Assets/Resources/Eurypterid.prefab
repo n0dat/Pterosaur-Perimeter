@@ -155,8 +155,10 @@ MonoBehaviour:
   attackType: {fileID: 765229719627137857}
   towerType: 0
   spriteRotator: {fileID: 954655370649223622}
-  m_healthBar: {fileID: 0}
-  attackVector: {x: 0, y: 0, z: 0}
+  levelManager: {fileID: 0}
+  m_healthBar: {fileID: 6078400144420056589}
+  isHealingTower: 1
+  readyToHeal: 1
 --- !u!120 &2744641237389063406
 LineRenderer:
   serializedVersion: 2
@@ -474,3 +476,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3510516916959271646, guid: 22dd3e502331afb4b9adfa43a9f73375, type: 3}
   m_PrefabInstance: {fileID: 192318027274308330}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6078400144420056589 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6264947436368815335, guid: 22dd3e502331afb4b9adfa43a9f73375, type: 3}
+  m_PrefabInstance: {fileID: 192318027274308330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d78f34ec394b14aac4c327a323c356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

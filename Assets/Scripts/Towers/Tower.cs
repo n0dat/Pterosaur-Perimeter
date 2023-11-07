@@ -34,6 +34,7 @@ public class Tower : MonoBehaviour {
     [SerializeField] private AttackType attackType;
     [SerializeField] private TowerType towerType;
     [SerializeField] private SpriteRotator spriteRotator;
+    [SerializeField] private LevelManager levelManager;
     
     //Upgrade system
     private UpgradeMenuHandler m_upgradeMenuInterface;
@@ -42,10 +43,12 @@ public class Tower : MonoBehaviour {
     private int m_attackSpeedUpgradeLevel = 0;
     private int m_health = 100;
 
+    // ui
     [SerializeField] private HealthUIHandler m_healthBar;
     
-    public Vector3 attackVector;
-
+    // towr healing
+    [SerializeField] private bool isHealingTower = false, readyToHeal = true;
+    
     // initialize most global values
     void Awake() {
         repairCost = 0;
@@ -61,17 +64,12 @@ public class Tower : MonoBehaviour {
         drawRadiusCircle();
         
         enemiesInRange = Array.Empty<Collider2D>();
-        
         enemyToAttack = null;
-        
-        //radiusLine.startWidth = 0.125f;
-        //radiusLine.endWidth = 0.125f;
         
         spriteRotator = gameObject.GetComponent<SpriteRotator>();
         m_animator = gameObject.GetComponent<Animator>();
         
-        attackVector = Vector3.zero;
-
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         m_upgradeMenuInterface = GameObject.Find("UpgradeMenu").GetComponent<UpgradeMenuHandler>(); //Must be called UpgradeMenu.
         deselect();
     }
@@ -83,6 +81,13 @@ public class Tower : MonoBehaviour {
             drawRadiusCircle();
         }
         else { // ran when tower is placed
+
+            if (isHealingTower) {
+                if (readyToHeal && levelManager.roundState != RoundState.Waiting)
+                    StartCoroutine(healTowers());
+                
+                return;
+            }
             
             // check if enemies are within attack radius of tower
             getEnemiesInRadius();
@@ -92,7 +97,8 @@ public class Tower : MonoBehaviour {
                 setTargetingMode(targetingMode);
                 
                 var direction = enemyToAttack.transform.position - transform.position;
-                spriteRotator.setDir(direction);
+                if (!isHealingTower)
+                    spriteRotator.setDir(direction);
                 
                 if (!attackInProgress) {
                     // start attacking
@@ -522,7 +528,12 @@ public class Tower : MonoBehaviour {
         // TODO: PLAY HEALED SOUND
     }
 
-
+    private IEnumerator healTowers() {
+        readyToHeal = false;
+        attackType.heal(getAttackRange());
+        yield return new WaitForSeconds(getAttackSpeed());
+        readyToHeal = true;
+    }
 
     // Was using this method to test to make sure that the healing was working
     // Diego Morales

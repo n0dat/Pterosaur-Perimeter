@@ -51,15 +51,16 @@ public class AttackType : MonoBehaviour {
                     laserCircleComp.shoot(worldDirection, enemy);
                 }
                 break;
-            case AttackStyle.Heal:
-                // TODO: PLAY HEALING ANIMATION HERE
-                foreach (var enemyCollider in Physics2D.OverlapCircleAll(transform.position, tower.getAttackRange())) {
-                    if (enemyCollider.gameObject.CompareTag("Tower")) {
-                        var targetTower = enemyCollider.gameObject.GetComponent<Tower>();
-                        targetTower.setHealth(targetTower.getHealth() + 5);
-                    }
-                }
-                break;
+        }
+    }
+
+    public void heal(float range) {
+        foreach (var collider in Physics2D.OverlapCircleAll(transform.position, range)) {
+            if (collider.gameObject.CompareTag("Tower")) {
+                var targetTower = collider.gameObject.GetComponent<Tower>();
+                if (targetTower)
+                    targetTower.heal(5);
+            }
         }
     }
 }
