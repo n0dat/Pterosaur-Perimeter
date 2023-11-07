@@ -20,6 +20,11 @@ public class Tower : MonoBehaviour {
     [SerializeField]
     private bool isHeld, selected, validPosition, attackInProgress;
     
+    /// Diego Testing healing working
+    //[SerializeField] public int towerHealth = 50;
+    ///
+
+
     [SerializeField] private LineRenderer radiusLine;
     [SerializeField] private Collider2D[] enemiesInRange;
     [SerializeField] private GameObject enemyToAttack;
@@ -516,4 +521,12 @@ public class Tower : MonoBehaviour {
         setHealth(getHealth() + val);
         // TODO: PLAY HEALED SOUND
     }
+
+
+
+    // Was using this method to test to make sure that the healing was working
+    // Diego Morales
+    /*public void testHealth(int valueHealth){
+        towerHealth += valueHealth;
+    }*/
 }
