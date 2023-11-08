@@ -117,13 +117,23 @@ public class LevelManager : MonoBehaviour {
 		roundState = RoundState.Spawning;
 		Debug.Log("Current Level new Round State: SPAWNING");
 
+		foreach (var round in curRound.subRounds)
+			StartCoroutine(spawnSubRound(round));
+		
+		roundState = RoundState.InProgress;
+		Debug.Log("Current Level new Round State: IN PROGRESs");
+
+		yield return null;
+	}
+
+	IEnumerator spawnSubRound(Round curRound) {
+		Debug.Log("Spawning sub round");
+		yield return new WaitForSeconds(curRound.startDelay);
+		
 		for (int i = 0; i < curRound.enemyCount; i++) {
 			spawnEnemy(curRound.enemy);
 			yield return new WaitForSeconds(1f / curRound.spawnRate);
 		}
-		
-		roundState = RoundState.InProgress;
-		Debug.Log("Current Level new Round State: IN PROGRESs");
 	}
 
 	void spawnEnemy(Transform enemyToSpawn) {

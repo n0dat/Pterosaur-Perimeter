@@ -1652,7 +1652,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 34a9cccdf864c2c4aad93746c7335b13, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f1fa08f42531b094a83b155316094dc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1660,7 +1660,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &498267023
@@ -1673,7 +1673,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 544.6, y: 8.5, z: 0}
-  m_LocalScale: {x: 69.99999, y: 69.99999, z: 69.99999}
+  m_LocalScale: {x: 70, y: 70, z: 70}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -17077,11 +17077,11 @@ PrefabInstance:
       objectReference: {fileID: 692206120}
     - target: {fileID: 1806905847836033780, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1806905847836033780, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3492922886279164711, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
       propertyPath: m_playerManager
@@ -17101,7 +17101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4562662837223247766, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6613631760425204348, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
       propertyPath: m_Camera

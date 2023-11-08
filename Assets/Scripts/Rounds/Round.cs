@@ -10,12 +10,10 @@ public class Round {
     public bool isComplete;
     public CircularBuffer<int> enemies;
     public float startDelay;
+    public Round[] subRounds;
 
     public void init() {
         enemies = new CircularBuffer<int>(enemyCount);
     }
 
-    //public Transform spawnEnemy(Vector3 initialPosition) {
-    //    
-    //}
 }
