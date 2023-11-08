@@ -32,6 +32,9 @@ public class Enemy : MonoBehaviour {
 	public float movementSpeed = 10f;
 	private PlayerManager m_playerManager;
 	
+	//Audio
+	[SerializeField] private EnemyAudioHandler m_audioHandler;
+	
 	void Start() {
 		findTotalDistance();
 		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
@@ -62,6 +65,7 @@ public class Enemy : MonoBehaviour {
 		//Reached the last checkpoint. Decrease player health.
 		if (waypointIndex >= waypoints.Count - 1) {
 			m_playerManager.hit();
+			m_audioHandler.eggSteal();
 			Destroy(gameObject);
 			return;
 		}
@@ -79,6 +83,7 @@ public class Enemy : MonoBehaviour {
 		
 		if (levelManager != null)
 			levelManager.removeEnemy(this.gameObject.GetInstanceID());
+		
 	}
 
 	public float getTotalDistance() {
@@ -108,6 +113,7 @@ public class Enemy : MonoBehaviour {
 		}
 		
 		health -= damage;
+		m_audioHandler.damage();
 		
 		m_healthBarHandler.setHealth((int)health);
 		
@@ -115,6 +121,7 @@ public class Enemy : MonoBehaviour {
 			attacker.enemyKilled();
 			m_playerManager.skullsCredit(100);
 			Destroy(gameObject);
+			m_audioHandler.death();
 		}
 	}
 
