@@ -48,6 +48,8 @@ public class Tower : MonoBehaviour {
     
     // towr healing
     [SerializeField] private bool isHealingTower = false, readyToHeal = true;
+
+    [SerializeField] private TowerAudioSpawner m_audioHandler;
     
     // initialize most global values
     void Awake() {
@@ -175,6 +177,7 @@ public class Tower : MonoBehaviour {
     private IEnumerator finishAttack(WaitForAttack waitForAttack) {
         attackInProgress = true;
         attackType.attack(enemyToAttack, gameObject);
+        m_audioHandler.shoot();
         //m_animator.SetTrigger("Attack");
         waitForAttack.setAttackFinished();
         yield return null;

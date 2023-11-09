@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 7872759482940629387}
   - component: {fileID: 954655370649223622}
   - component: {fileID: 765229719627137857}
+  - component: {fileID: 2436084140638479804}
   m_Layer: 0
   m_Name: T-Rex
   m_TagString: Tower
@@ -155,8 +156,11 @@ MonoBehaviour:
   attackType: {fileID: 765229719627137857}
   towerType: 1
   spriteRotator: {fileID: 954655370649223622}
+  levelManager: {fileID: 0}
   m_healthBar: {fileID: 4428117412000254044}
-  attackVector: {x: 0, y: 0, z: 0}
+  isHealingTower: 0
+  readyToHeal: 1
+  m_audioHandler: {fileID: 2436084140638479804}
 --- !u!120 &2744641237389063406
 LineRenderer:
   serializedVersion: 2
@@ -360,6 +364,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackStyle: 0
   projectile: {fileID: 4745291768391468024, guid: 4fca6a6c51384be48b20e1330a091677, type: 3}
+--- !u!114 &2436084140638479804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943741876189340362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f3f16d12f5b3fc428e9b665e772cdba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_towerAudio: {fileID: 3637127418228153351, guid: 5dae7a0febe87b84782744938d571d4e, type: 3}
 --- !u!1001 &7746831082187566267
 PrefabInstance:
   m_ObjectHideFlags: 0
