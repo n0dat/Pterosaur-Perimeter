@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour {
     
+    [SerializeField] private Enemy m_enemy;
     public float attackDelay = 0.5f;
     public bool readyToAttack = true;
     public int damage = 20;
@@ -17,6 +18,7 @@ public class EnemyAttack : MonoBehaviour {
     IEnumerator attack(Tower towerToAttack) {
         if (towerToAttack) {
             // TODO: trigger attack animation for the caveman here
+            m_enemy.attack();
             towerToAttack.takeDamage(damage);
             yield return new WaitForSeconds(attackDelay);
             readyToAttack = true;

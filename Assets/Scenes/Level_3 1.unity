@@ -16841,6 +16841,26 @@ PrefabInstance:
       propertyPath: rounds.Array.data[2].roundNumber
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[0].subRounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[0].subRounds.Array.data[0].enemy
+      value: 
+      objectReference: {fileID: 5110921954108796589, guid: be787fb6869204ea2a2de1d09e202430, type: 3}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[0].subRounds.Array.data[0].spawnRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[0].subRounds.Array.data[0].enemyCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[0].subRounds.Array.data[0].roundNumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2967833508958221598, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: m_Camera
       value: 

@@ -32,8 +32,9 @@ public class Enemy : MonoBehaviour {
 	public float movementSpeed = 10f;
 	private PlayerManager m_playerManager;
 	
-	//Audio
-	[SerializeField] private EnemyAudioHandler m_audioHandler;
+	//Audio and animation
+	[SerializeField] private EnemyAudioSpawner m_audioHandler;
+	[SerializeField] private Animator m_animator;
 	
 	void Start() {
 		findTotalDistance();
@@ -120,8 +121,8 @@ public class Enemy : MonoBehaviour {
 		if (health <= 0) {
 			attacker.enemyKilled();
 			m_playerManager.skullsCredit(100);
-			Destroy(gameObject);
 			m_audioHandler.death();
+			Destroy(gameObject);
 		}
 	}
 
@@ -155,5 +156,13 @@ public class Enemy : MonoBehaviour {
 		targetRotation = Quaternion.Euler(0, 0, angleDegrees);
 		//sprite.transform.rotation = Quaternion.RotateTowards(sprite.transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 		//sprite.transform.rotation = rotation;
+	}
+
+	//Handles animation and sound.
+	public void attack()
+	{
+		m_animator.SetTrigger("hit");
+		m_audioHandler.hit();
+		m_audioHandler.quip();
 	}
 }
