@@ -169,3 +169,8 @@ MonoBehaviour:
   m_hitClips:
   - {fileID: 8300000, guid: c0c8845a3ad9430478f8b94769df216b, type: 3}
   - {fileID: 8300000, guid: a44414e3813f22644b816cc5540963a9, type: 3}
+  m_damageBaseClips:
+  - {fileID: 8300000, guid: d6932e1a7c458404098693dac46e6b7f, type: 3}
+  - {fileID: 8300000, guid: c59a4e966b391844a9f5522aa0be6a5b, type: 3}
+  - {fileID: 8300000, guid: da296d30b36951d4a8704bc3c27e2301, type: 3}
+  - {fileID: 8300000, guid: 7f586925a51b5f84aa2638ad24b38dfe, type: 3}

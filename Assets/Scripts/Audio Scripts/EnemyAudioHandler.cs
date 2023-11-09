@@ -13,6 +13,7 @@ public class EnemyAudioHandler : MonoBehaviour
     [SerializeField] private List<AudioClip> m_eggStealClips;
     [SerializeField] private List<AudioClip> m_quipClips;
     [SerializeField] private List<AudioClip> m_hitClips;
+    [SerializeField] private List<AudioClip> m_damageBaseClips;
 
     public void hit()
     {
@@ -23,14 +24,17 @@ public class EnemyAudioHandler : MonoBehaviour
 
     public void damage()
     {
+        AudioClip clip = m_damageBaseClips[Random.Range(0, m_damageBaseClips.Count)];
+        m_audioSource.PlayOneShot(clip, 0.1f);
+        
         //Only play a damage sound 25 percent of the time.
         if (m_damageClips.Count <= 0 || Random.Range(0, 2) == 0)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, clip.length + 0.1f);
             return;
         }
         
-        AudioClip clip = m_damageClips[Random.Range(0, m_damageClips.Count)];
+        clip = m_damageClips[Random.Range(0, m_damageClips.Count)];
         m_audioSource.PlayOneShot(clip);
         Destroy(gameObject, clip.length + 0.1f);
     }
@@ -57,8 +61,8 @@ public class EnemyAudioHandler : MonoBehaviour
 
     public void eggSteal()
     {
-        //Only play a damage sound 25 percent of the time.
-        if (m_eggStealClips.Count <= 0 || Random.Range(0, 2) != 0)
+        //Only play an egg steal 1/4 of the time.
+        if (m_eggStealClips.Count <= 0 || Random.Range(0, 4) != 0)
         {
             Destroy(gameObject);
             return;
