@@ -29,6 +29,8 @@ public class LevelManager : MonoBehaviour {
     
     // disaster stuff
     public int eventTriggerThreshold; // this is chance every 3 levels that the event triggers
+
+	private Disaster disaster;
     
     // ui
     [SerializeField] public GameObject disasterPrompt;
@@ -60,7 +62,11 @@ public class LevelManager : MonoBehaviour {
 		if (currentRound == disasterRound) {
 			// play disaster before the round
 			Debug.Log("PLAYING DISASTER!!!");
+			//
 			eventState = futureEvent;
+			// random number for loaction to hit between 1 - 2
+			int location = Random.Range(1,2);
+			disaster.setLocation(location);
 			triggerEvent();
 			disasterRound = -2;
 		}
@@ -184,12 +190,12 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void triggerEvent() {
-		if (eventState == EventState.Event1) {
+		if (eventState == EventState.Event1 && disaster.getLocationOne()) {
 			mapNoEvent.SetActive(false);
 			mapEvent1.SetActive(false);
 			mapEvent2.SetActive(true);
 		}
-		else if (eventState == EventState.Event2) {
+		else if (eventState == EventState.Event2 && disaster.getLocationTwo()) {
 			mapNoEvent.SetActive(false);
 			mapEvent1.SetActive(false);
 			mapEvent2.SetActive(true);
