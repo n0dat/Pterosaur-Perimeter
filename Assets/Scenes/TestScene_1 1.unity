@@ -621,6 +621,7 @@ GameObject:
   - component: {fileID: 568184059}
   - component: {fileID: 568184061}
   - component: {fileID: 568184060}
+  - component: {fileID: 568184063}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -746,6 +747,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &568184063
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568184058}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 48bf2fa40e8dab04391b11fa8f5dcd86, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &569302713
 GameObject:
   m_ObjectHideFlags: 0
@@ -24540,6 +24562,8 @@ MonoBehaviour:
   m_healthBarHandler: {fileID: 0}
   health: 0
   movementSpeed: 10
+  m_audioHandler: {fileID: 0}
+  m_animator: {fileID: 0}
 --- !u!4 &2059126385
 Transform:
   m_ObjectHideFlags: 0
