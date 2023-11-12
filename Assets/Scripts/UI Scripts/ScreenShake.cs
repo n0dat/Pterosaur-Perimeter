@@ -9,9 +9,12 @@ using Random = UnityEngine.Random;
 public class ScreenShake : MonoBehaviour
 {
     [SerializeField] private Image m_whiteCover;
+    [SerializeField] private GameObject m_meteor;
+    private Vector3 m_originalMeteorPosition;
     
     public void Start()
     {
+        m_originalMeteorPosition = m_meteor.transform.position;
         shake();
     }
     
@@ -19,6 +22,7 @@ public class ScreenShake : MonoBehaviour
     {
         m_whiteCover.gameObject.SetActive(true);
         StartCoroutine(shakeCamera(2f, 3f));
+        StartCoroutine(moveMeteor(new Vector3(430f, -76.4f, 0f)));
     }
     
     private IEnumerator shakeCamera(float duration = 1f, float magnitudeFactor = 1f)
@@ -89,5 +93,17 @@ public class ScreenShake : MonoBehaviour
             trans = 0;
         
         m_whiteCover.color = new Color(m_whiteCover.color.r, m_whiteCover.color.g, m_whiteCover.color.b, trans);
+    }
+
+    public IEnumerator moveMeteor(Vector3 finalMeteorPosition)
+    {
+        Vector3 translationVector = finalMeteorPosition - m_originalMeteorPosition;
+
+        while (Vector3.Distance(m_meteor.transform.position, finalMeteorPosition) > 5f)
+        {
+            m_meteor.transform.Translate(translationVector * Time.deltaTime*0.5f, Space.Self);
+            yield return null;
+        }
+        m_meteor.transform.position = m_originalMeteorPosition;
     }
 }
