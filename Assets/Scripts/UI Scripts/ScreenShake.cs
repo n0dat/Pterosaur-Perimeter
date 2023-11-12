@@ -17,6 +17,7 @@ public class ScreenShake : MonoBehaviour
     
     public void shake()
     {
+        m_whiteCover.gameObject.SetActive(true);
         StartCoroutine(shakeCamera(2f, 3f));
     }
     
@@ -74,6 +75,8 @@ public class ScreenShake : MonoBehaviour
             setCoverTransparency(trans);
             yield return null;
         }
+        
+        m_whiteCover.gameObject.SetActive(false);
     }
 
     //Set the transparancy of the white cover. 0 to 1.
