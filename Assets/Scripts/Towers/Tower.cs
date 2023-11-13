@@ -83,7 +83,6 @@ public class Tower : MonoBehaviour {
             drawRadiusCircle();
         }
         else { // ran when tower is placed
-
             if (isHealingTower) {
                 if (readyToHeal && levelManager.roundState != RoundState.Waiting)
                     StartCoroutine(healTowers());
@@ -208,40 +207,18 @@ public class Tower : MonoBehaviour {
         if (isHeld) {
             Debug.Log("Colliding with: " + collision.gameObject.name);
             var col = collision.gameObject;
-            /*
-            if (towerType == TowerType.Land) {
-                if (col.CompareTag("WaterCollider") || col.CompareTag("Tower") || col.CompareTag("PathCollider"))
-                    setValidPosition(false);
-                else if (col.CompareTag("GroundCollider"))
-                    setValidPosition(true);;
-            }
 
-            if (towerType == TowerType.Water) {
-                if (col.CompareTag("GroundCollider") || col.CompareTag("Tower") || col.CompareTag("PathCollider"))
-                    setValidPosition(false);
-                else if (col.CompareTag("WaterCollider"))
-                    setValidPosition(true);
+            if (col.CompareTag("TowerCollider") || col.CompareTag("Tower")) {
+                setValidPosition(false);
             }
-            */
             
-            /*
-            if (towerType == TowerType.Water) {
-                if (col.CompareTag("WaterCollider"))
-                    setValidPosition(true);
-                else
-                    setValidPosition(false);
-            }
-
             if (towerType == TowerType.Land) {
                 if (col.CompareTag("GroundCollider"))
                     setValidPosition(true);
-                else
-                    setValidPosition(false);
             }
-            */
-            if (col.CompareTag("PathCollider"))
-            {
-                setValidPosition(false);
+            else if (towerType == TowerType.Water) {
+                if (col.CompareTag("WaterCollider"))
+                    setValidPosition(true);
             }
         }
     }
@@ -250,38 +227,19 @@ public class Tower : MonoBehaviour {
         if (isHeld) {
             Debug.Log("Stopped Colliding with: " + collision.gameObject.name);
             var col = collision.gameObject;
+            
+            if (col.CompareTag("TowerCollider") || col.CompareTag("Tower")) {
+                setValidPosition(true);
+            }
 
-            /*
             if (towerType == TowerType.Land) {
                 if (col.CompareTag("GroundCollider"))
                     setValidPosition(false);
-                else if ((col.CompareTag("Tower") || col.CompareTag("WaterCollider") || col.CompareTag("PathCollider")) && !col.CompareTag("GroundCollider"))
-                    setValidPosition(true);
             }
-
-            if (towerType == TowerType.Water) {
+            else if (towerType == TowerType.Water) {
                 if (col.CompareTag("WaterCollider"))
                     setValidPosition(false);
-                if (col.CompareTag("Tower") && !col.CompareTag("WaterCollider"))
-                    setValidPosition(true);
             }
-            */
-            
-            /*
-            if (towerType == TowerType.Water)
-                if (col.CompareTag("WaterCollider"))
-                    setValidPosition(false);
-            
-            if (towerType == TowerType.Land)
-                if (col.CompareTag("GroundCollider"))
-                    setValidPosition(false);
-            */
-
-            if (col.CompareTag("PathCollider"))
-            {
-                setValidPosition(true);
-            }
-                
         }
     }
 
@@ -292,32 +250,22 @@ public class Tower : MonoBehaviour {
     //
 
     public void setLineColorGrey() {
-        //radiusLine.material.SetColor("_Color",  new Color(49, 49, 49));
-        // set the color to the material on the radius line instead
-        //radiusLine.startColor = new Color(49, 49, 49);
-        //radiusLine.endColor = new Color(49, 49, 49);
         var gradient = new Gradient();
         var tempColorKeys = radiusLine.colorGradient.colorKeys;
         for (int i = 0; i < tempColorKeys.Length; i++)
             tempColorKeys[i].color = Color.grey;
             
         gradient.colorKeys = tempColorKeys;
-            
         radiusLine.colorGradient = gradient;
     }
 
     public void setLineColorRed() {
-        //radiusLine.material.SetColor("_Color", new Color(224f, 67f, 85f, 0.85f));
-        //radiusLine.startColor = new Color(224f, 67f, 85f, 0.85f);
-        //radiusLine.endColor = new Color(224f, 67f, 85f, 0.85f);
-        
         var gradient = new Gradient();
         var tempColorKeys = radiusLine.colorGradient.colorKeys;
         for (int i = 0; i < tempColorKeys.Length; i++)
             tempColorKeys[i].color = Color.red;
             
         gradient.colorKeys = tempColorKeys;
-            
         radiusLine.colorGradient = gradient;
     }
     
