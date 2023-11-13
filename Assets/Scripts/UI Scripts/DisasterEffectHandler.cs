@@ -20,18 +20,18 @@ public class DisasterEffectHandler : MonoBehaviour
         m_originalMeteorPosition = m_meteor.transform.position;
         m_originalEarthQuakePosition = m_earthQuake.transform.position;
         
-        meteorDisastor(new Vector3(430f, -200.4f, 0f), 2f);
+        meteorDisaster(new Vector3(430f, -200.4f, 0f), 2f);
         //earthQuakeDisastor(new Vector3(430f, -200.4f, 0f), 2f);
     }
 
-    public void earthQuakeDisastor(Vector3 earthQuakeTo, float duration)
+    public void earthQuakeDisaster(Vector3 earthQuakeTo, float duration)
     {
         m_whiteCover.gameObject.SetActive(true);
         StartCoroutine(shakeCamera(duration, 3f));
         StartCoroutine(moveEarthQuake(earthQuakeTo, duration));
     }
     
-    public void meteorDisastor(Vector3 meteorTo, float duration)
+    public void meteorDisaster(Vector3 meteorTo, float duration)
     {
         m_whiteCover.gameObject.SetActive(true);
         StartCoroutine(shakeCamera(duration, 3f));
