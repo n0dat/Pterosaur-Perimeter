@@ -3781,6 +3781,7 @@ Transform:
   m_Children:
   - {fileID: 178446714}
   - {fileID: 1223860974}
+  - {fileID: 1718534214}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &966715658
@@ -3841,6 +3842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_whiteCover: {fileID: 178446709}
   m_meteor: {fileID: 1223860972}
+  m_earthQuake: {fileID: 1718534213}
 --- !u!1 &967658126
 GameObject:
   m_ObjectHideFlags: 0
@@ -4552,6 +4554,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1017754697}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1718534213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7951566089845458996, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+  m_PrefabInstance: {fileID: 274018037776931136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1718534214 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+  m_PrefabInstance: {fileID: 274018037776931136}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1734776585
 GameObject:
   m_ObjectHideFlags: 0
@@ -5204,6 +5216,63 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &274018037776931136
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 966715657}
+    m_Modifications:
+    - target: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -204.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 172.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344542615012317981, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951566089845458996, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
+      propertyPath: m_Name
+      value: Earth Quake
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f707ad1f8ef48544b86380515e6d2e6b, type: 3}
 --- !u!1839735485 &278948618475182150
 Tilemap:
   m_ObjectHideFlags: 0
