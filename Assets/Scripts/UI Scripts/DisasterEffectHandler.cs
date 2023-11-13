@@ -126,7 +126,7 @@ public class DisasterEffectHandler : MonoBehaviour
 
         while (trans > 0f)
         {
-            trans -= 0.01f;
+            trans -= Time.deltaTime*1.5f;
             setCoverTransparency(trans);
             yield return null;
         }
