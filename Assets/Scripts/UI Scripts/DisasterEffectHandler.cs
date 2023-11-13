@@ -10,12 +10,25 @@ public class DisasterEffectHandler : MonoBehaviour
 {
     [SerializeField] private Image m_whiteCover;
     [SerializeField] private GameObject m_meteor;
+    [SerializeField] private GameObject m_earthQuake;
+
+    private Vector3 m_originalEarthQuakePosition;
     private Vector3 m_originalMeteorPosition;
     
     public void Start()
     {
         m_originalMeteorPosition = m_meteor.transform.position;
+        m_originalEarthQuakePosition = m_earthQuake.transform.position;
+        
         meteorDisastor(new Vector3(430f, -200.4f, 0f), 2f);
+        //earthQuakeDisastor(new Vector3(430f, -200.4f, 0f), 2f);
+    }
+
+    public void earthQuakeDisastor(Vector3 earthQuakeTo, float duration)
+    {
+        m_whiteCover.gameObject.SetActive(true);
+        StartCoroutine(shakeCamera(duration, 3f));
+        StartCoroutine(moveEarthQuake(earthQuakeTo, duration));
     }
     
     public void meteorDisastor(Vector3 meteorTo, float duration)
@@ -115,5 +128,12 @@ public class DisasterEffectHandler : MonoBehaviour
             yield return new WaitForSeconds(timeLeft);
                 
         m_meteor.transform.position = m_originalMeteorPosition;
+    }
+
+    public IEnumerator moveEarthQuake(Vector3 earthQuakePosition, float duration)
+    {
+        m_earthQuake.transform.position = earthQuakePosition;
+        yield return new WaitForSeconds(duration);
+        m_earthQuake.transform.position = m_originalEarthQuakePosition;
     }
 }
