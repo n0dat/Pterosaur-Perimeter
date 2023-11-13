@@ -11,6 +11,7 @@ public class DisasterEffectHandler : MonoBehaviour
     [SerializeField] private Image m_whiteCover;
     [SerializeField] private GameObject m_meteor;
     [SerializeField] private GameObject m_earthQuake;
+    [SerializeField] private AudioSource m_audio;
 
     private Vector3 m_originalEarthQuakePosition;
     private Vector3 m_originalMeteorPosition;
@@ -20,7 +21,7 @@ public class DisasterEffectHandler : MonoBehaviour
         m_originalMeteorPosition = m_meteor.transform.position;
         m_originalEarthQuakePosition = m_earthQuake.transform.position;
         
-        meteorDisaster(new Vector3(430f, -200.4f, 0f), 2f);
+        meteorDisaster(new Vector3(430f, -200.4f, 0f), 2.5f);
         //earthQuakeDisastor(new Vector3(430f, -200.4f, 0f), 2f);
     }
 
@@ -37,13 +38,50 @@ public class DisasterEffectHandler : MonoBehaviour
         StartCoroutine(shakeCamera(duration, 3f));
         StartCoroutine(moveMeteor(meteorTo, duration));
     }
+
+    private void startRumble()
+    {
+        StartCoroutine(fadeInRumble());
+    }
+
+    private void stopRumble()
+    {
+        StartCoroutine(fadeOutRumble());
+    }
+
+    private IEnumerator fadeInRumble()
+    {
+        m_audio.volume = 0f;
+        m_audio.mute = false;
+
+        while (m_audio.volume < 1f)
+        {
+            m_audio.volume += 0.005f;
+            yield return null;
+        }
+    }
+
+    private IEnumerator fadeOutRumble()
+    {
+        m_audio.volume = 1f;
+
+        while (m_audio.volume > 0f)
+        {
+            m_audio.volume -= 0.005f;
+            yield return null;
+        }
+
+        m_audio.mute = true;
+    }
     
     private IEnumerator shakeCamera(float duration = 1f, float magnitudeFactor = 1f)
     {
-        StartCoroutine(flashCover(duration));
         Vector3 originalCameraPosition = transform.position;
         float timer = Time.time;
-
+        
+        startRumble();
+        StartCoroutine(flashCover(duration));
+        
         while (Time.time - timer < duration)
         {
             transform.position = originalCameraPosition + magnitudeFactor * (Vector3)Random.insideUnitCircle;
@@ -51,7 +89,7 @@ public class DisasterEffectHandler : MonoBehaviour
         }
 
         transform.position = originalCameraPosition;
-
+        stopRumble();
         StartCoroutine(fadeCover(1f));
     }
 
