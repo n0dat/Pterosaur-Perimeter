@@ -13,6 +13,7 @@ public class DisasterEffectHandler : MonoBehaviour
     [SerializeField] private GameObject m_earthQuake;
     [SerializeField] private AudioSource m_audio;
 
+    private bool m_inProgress = false;
     private Vector3 m_originalEarthQuakePosition;
     private Vector3 m_originalMeteorPosition;
     
@@ -22,20 +23,28 @@ public class DisasterEffectHandler : MonoBehaviour
         m_originalEarthQuakePosition = m_earthQuake.transform.position;
         
         meteorDisaster(new Vector3(430f, -200.4f, 0f), 2.5f);
-        //earthQuakeDisastor(new Vector3(430f, -200.4f, 0f), 2f);
+        earthQuakeDisaster(new Vector3(430f, -200.4f, 0f), 2f);
     }
 
     public void earthQuakeDisaster(Vector3 earthQuakeTo, float duration)
     {
+        if (m_inProgress)
+            return;
+        
+        m_inProgress = true;
         m_whiteCover.gameObject.SetActive(true);
-        StartCoroutine(shakeCamera(duration, 3f));
+        StartCoroutine(shakeAndFlashCamera(duration, 3f));
         StartCoroutine(moveEarthQuake(earthQuakeTo, duration));
     }
     
     public void meteorDisaster(Vector3 meteorTo, float duration)
     {
+        if (m_inProgress)
+            return;
+        
+        m_inProgress = true;
         m_whiteCover.gameObject.SetActive(true);
-        StartCoroutine(shakeCamera(duration, 3f));
+        StartCoroutine(shakeAndFlashCamera(duration, 3f));
         StartCoroutine(moveMeteor(meteorTo, duration));
     }
 
@@ -74,7 +83,7 @@ public class DisasterEffectHandler : MonoBehaviour
         m_audio.mute = true;
     }
     
-    private IEnumerator shakeCamera(float duration = 1f, float magnitudeFactor = 1f)
+    private IEnumerator shakeAndFlashCamera(float duration = 1f, float magnitudeFactor = 1f)
     {
         Vector3 originalCameraPosition = transform.position;
         float timer = Time.time;
@@ -132,6 +141,8 @@ public class DisasterEffectHandler : MonoBehaviour
         }
         
         m_whiteCover.gameObject.SetActive(false);
+
+        m_inProgress = false;
     }
 
     //Set the transparancy of the white cover. 0 to 1.
