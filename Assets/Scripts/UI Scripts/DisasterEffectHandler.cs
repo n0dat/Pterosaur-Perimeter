@@ -56,7 +56,7 @@ public class DisasterEffectHandler : MonoBehaviour
 
         while (m_audio.volume < 1f)
         {
-            m_audio.volume += 0.01f;
+            m_audio.volume += Time.deltaTime;
             yield return null;
         }
     }
@@ -67,7 +67,7 @@ public class DisasterEffectHandler : MonoBehaviour
 
         while (m_audio.volume > 0f)
         {
-            m_audio.volume -= 0.01f;
+            m_audio.volume -= Time.deltaTime;
             yield return null;
         }
 
