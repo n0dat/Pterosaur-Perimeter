@@ -15,14 +15,14 @@ public class ScreenShake : MonoBehaviour
     public void Start()
     {
         m_originalMeteorPosition = m_meteor.transform.position;
-        shake();
+        meteorDisastor(new Vector3(430f, -200.4f, 0f), 2f);
     }
     
-    public void shake()
+    public void meteorDisastor(Vector3 meteorTo, float duration)
     {
         m_whiteCover.gameObject.SetActive(true);
-        StartCoroutine(shakeCamera(2f, 3f));
-        StartCoroutine(moveMeteor(new Vector3(430f, -76.4f, 0f)));
+        StartCoroutine(shakeCamera(duration, 3f));
+        StartCoroutine(moveMeteor(meteorTo, duration));
     }
     
     private IEnumerator shakeCamera(float duration = 1f, float magnitudeFactor = 1f)
@@ -95,13 +95,17 @@ public class ScreenShake : MonoBehaviour
         m_whiteCover.color = new Color(m_whiteCover.color.r, m_whiteCover.color.g, m_whiteCover.color.b, trans);
     }
 
-    public IEnumerator moveMeteor(Vector3 finalMeteorPosition)
+    public IEnumerator moveMeteor(Vector3 finalMeteorPosition, float duration)
     {
         Vector3 translationVector = finalMeteorPosition - m_originalMeteorPosition;
+        float startTime = Time.time;
 
         while (Vector3.Distance(m_meteor.transform.position, finalMeteorPosition) > 5f)
         {
-            m_meteor.transform.Translate(translationVector * Time.deltaTime*0.5f, Space.Self);
+            if (Time.time - startTime >= duration)
+                break;
+            
+            m_meteor.transform.Translate(translationVector * Time.deltaTime*0.3f, Space.Self);
             yield return null;
         }
         m_meteor.transform.position = m_originalMeteorPosition;
