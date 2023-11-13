@@ -8,7 +8,7 @@ public class LevelSelectionHandler : MonoBehaviour
 
     public void Start()
     {
-        unlockTier(3);
+        unlockTier(5);
     }
     
     public void unlockTier(int tier)

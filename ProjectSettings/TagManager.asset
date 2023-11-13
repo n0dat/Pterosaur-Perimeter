@@ -15,6 +15,7 @@ TagManager:
   - Tack2
   - UI
   - EnemyAttack
+  - TowerCollider
   layers:
   - Default
   - TransparentFX

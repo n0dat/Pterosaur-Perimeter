@@ -66,7 +66,8 @@ public class TowerSelector : MonoBehaviour {
             if (hit.collider.gameObject.CompareTag("UI"))
                 return;
 
-            if (hit.collider.gameObject.CompareTag("Tower")) { // hit a Tower game object
+            if (hit.collider.gameObject.CompareTag("TowerCollider")) { // hit a Tower game object
+                Debug.Log("Clicked on tower collider");
                 
                 if (Time.time - m_timeLastClick > m_timeForDoubleClick)
                 {
@@ -74,12 +75,12 @@ public class TowerSelector : MonoBehaviour {
                     return;
                 }
                 
-                if (hit.collider.gameObject.GetComponent<Tower>().beingHeld())
+                if (hit.collider.transform.parent.gameObject.GetComponent<Tower>().beingHeld())
                     return;
 
                 if (towerObj) {
                     towerRef = towerObj.gameObject.GetComponent<Tower>();
-                    if (hit.collider.gameObject.GetInstanceID() == towerObj.GetInstanceID()) {
+                    if (hit.collider.transform.parent.gameObject.GetInstanceID() == towerObj.GetInstanceID()) {
                         if (towerRef.isSelected())
                             towerRef.hardDeselect();
                         else
@@ -93,7 +94,7 @@ public class TowerSelector : MonoBehaviour {
                 
                 
                 
-                towerObj = hit.collider.gameObject;
+                towerObj = hit.collider.transform.parent.gameObject;
                 towerRef = towerObj.GetComponent<Tower>();
                 towerRef.select();
 
