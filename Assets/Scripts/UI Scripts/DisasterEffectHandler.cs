@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
 
-public class ScreenShake : MonoBehaviour
+public class DisasterEffectHandler : MonoBehaviour
 {
     [SerializeField] private Image m_whiteCover;
     [SerializeField] private GameObject m_meteor;
@@ -108,6 +108,12 @@ public class ScreenShake : MonoBehaviour
             m_meteor.transform.Translate(translationVector * Time.deltaTime*0.3f, Space.Self);
             yield return null;
         }
+
+        float timeLeft = duration - (Time.time - startTime);
+
+        if (timeLeft > 0)
+            yield return new WaitForSeconds(timeLeft);
+                
         m_meteor.transform.position = m_originalMeteorPosition;
     }
 }
