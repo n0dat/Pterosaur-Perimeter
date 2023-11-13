@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,13 @@ public class Slider : MonoBehaviour {
     }
 
     public void updateText() {
-        label.GetComponent<UnityEngine.UI.Text>().text = Mathf.RoundToInt(slider.value).ToString();
+        var textComponent = label.GetComponent<TextMeshProUGUI>();
+        if (!textComponent) {
+            Debug.Log("Unable to get the TextMeshPro component of the label");
+            return;
+        }
+
+        label.GetComponent<TextMeshProUGUI>().SetText(Mathf.RoundToInt(slider.value).ToString());
     }
 
     public void updateSetting() {

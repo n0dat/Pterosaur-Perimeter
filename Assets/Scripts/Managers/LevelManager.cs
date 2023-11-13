@@ -29,8 +29,6 @@ public class LevelManager : MonoBehaviour {
     
     // disaster stuff
     public int eventTriggerThreshold; // this is chance every 3 levels that the event triggers
-
-	private Disaster disaster;
     
     // ui
     [SerializeField] public GameObject disasterPrompt;
@@ -42,10 +40,16 @@ public class LevelManager : MonoBehaviour {
     public enum EventState { NoEvent, Event1, Event2 };
     public EventState eventState;
     public EventState futureEvent;
+    public int eventType;
     
     // player interaction
     public PlayerManager playerManager;
     public bool levelWon;
+    
+    // disasters
+    [SerializeField] private DisasterEffectHandler disasterEffectHandler;
+    [SerializeField] private Vector3 event1Location;
+    [SerializeField]private Vector3 event2Location;
     
     void Awake() {
         mainManager = GameObject.Find("MainManager").gameObject.GetComponent<MainManager>();
@@ -60,19 +64,15 @@ public class LevelManager : MonoBehaviour {
 	
 	void Update() {
 		if (currentRound == disasterRound) {
-			// play disaster before the round
 			Debug.Log("PLAYING DISASTER!!!");
-			//
 			eventState = futureEvent;
-			// random number for loaction to hit between 1 - 2
-			int location = Random.Range(1,2);
-			disaster.setLocation(location);
 			triggerEvent();
 			disasterRound = -2;
 		}
 		if (currentRound != 0 && (currentRound + 1) % 3 == 0 && disasterRound == -1) {
 			Debug.Log("Checking for disaster.");
 			if (Random.Range(1, 101) < eventTriggerThreshold) {
+				Debug.Log("We have a disaster incoming");
 				showDisasterPrompt();
 				disasterRound = currentRound + 3;
 			}
@@ -190,12 +190,32 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void triggerEvent() {
-		if (eventState == EventState.Event1 && disaster.getLocationOne()) {
-			mapNoEvent.SetActive(false);
-			mapEvent1.SetActive(false);
-			mapEvent2.SetActive(true);
+		if (eventState == EventState.Event1) {
+			if (eventType == 1)
+				disasterEffectHandler.meteorDisaster(event1Location, 3f);
+			else 
+				disasterEffectHandler.earthQuakeDisaster(event1Location, 3f);
+			
+			StartCoroutine(switchMap(3.1f, 1));
 		}
-		else if (eventState == EventState.Event2 && disaster.getLocationTwo()) {
+		else if (eventState == EventState.Event2) {
+			if (eventType == 1)
+				disasterEffectHandler.meteorDisaster(event2Location, 3f);
+			else 
+				disasterEffectHandler.earthQuakeDisaster(event2Location, 3f);
+			
+			StartCoroutine(switchMap(3.1f, 2));
+		}
+	}
+
+	private IEnumerator switchMap(float duration, int eventNum) {
+		yield return new WaitForSeconds(duration);
+		if (eventNum == 1) {
+			mapNoEvent.SetActive(false);
+			mapEvent1.SetActive(true);
+			mapEvent2.SetActive(false);
+		}
+		else if (eventNum == 2) {
 			mapNoEvent.SetActive(false);
 			mapEvent1.SetActive(false);
 			mapEvent2.SetActive(true);
@@ -228,7 +248,7 @@ public class LevelManager : MonoBehaviour {
 		foreach (var round in rounds)
 			round.init();
         
-		futureEvent = (Random.Range(1, 101) > 50) ? EventState.Event1 : EventState.Event2;
+		futureEvent = (Random.Range(1, 3) == 1) ? EventState.Event1 : EventState.Event2;
 		
 		winUI.SetActive(false);
 		loseUI.SetActive(false);
