@@ -76,7 +76,7 @@ public class TowerDropper : MonoBehaviour {
         if (!m_playerManager.skullsCost(m_towerCost)) 
             return;
         
-        m_UIHandler.OnMouseEnter();
+        //m_UIHandler.OnMouseEnter();
         towerHeld = true;
         heldTower = instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
     }

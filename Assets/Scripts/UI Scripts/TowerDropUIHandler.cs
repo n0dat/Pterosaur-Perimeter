@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TowerDropUIHandler : MonoBehaviour
+public class TowerDropUIHandler : MonoBehaviour, IPointerEnterHandler
 {
     //These variables MUST be set in unity for the script to work.
     [SerializeField] private GameObject towerContainer;
@@ -15,11 +15,9 @@ public class TowerDropUIHandler : MonoBehaviour
         //Default when level loads will be expanded.
         this.isExpanded = true;
     }
-
-    //Called when the mouse hovers over expandHandle.
-    public void OnMouseEnter()
+    
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Mouse entered the button");
         Animator animator = towerContainer.GetComponent<Animator>();
         if (this.isExpanded)
         {
