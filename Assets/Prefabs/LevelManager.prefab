@@ -48,7 +48,7 @@ Canvas:
   m_GameObject: {fileID: 2216543469882145738}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -59,7 +59,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -308864325
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &1739946646655106761
@@ -74,12 +74,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_ReferenceResolution: {x: 1600, y: 900}
+  m_ScreenMatchMode: 1
+  m_MatchWidthOrHeight: 0.502
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -268,9 +268,10 @@ GameObject:
   - component: {fileID: 4833226993318305573}
   - component: {fileID: 7673256852233764402}
   - component: {fileID: 640513593657577910}
+  - component: {fileID: 3833980471138101285}
   m_Layer: 5
   m_Name: StartRoundButton
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,14 +285,14 @@ RectTransform:
   m_GameObject: {fileID: 5301652510465760019}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1604817709006192876}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7, y: -268}
+  m_AnchoredPosition: {x: -4, y: -380}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4833226993318305573
@@ -388,6 +389,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!61 &3833980471138101285
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5301652510465760019}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &5797868011944282662
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingCurrency: 500
+  levelIndex: 0
   checkpointsNoEvent: []
   checkpointsEvent1: []
   checkpointsEvent2: []
@@ -665,47 +712,69 @@ MonoBehaviour:
   rounds:
   - roundNumber: 1
     enemy: {fileID: 5110921954108796589, guid: be787fb6869204ea2a2de1d09e202430, type: 3}
-    enemyCount: 1
+    enemyCount: 10
     spawnRate: 0.5
     isComplete: 0
     startDelay: 0
+    subRounds:
+    - roundNumber: 1
+      enemy: {fileID: 5110921954108796589, guid: be787fb6869204ea2a2de1d09e202430, type: 3}
+      enemyCount: 10
+      spawnRate: 0.5
+      isComplete: 0
+      startDelay: 0
+      subRounds: []
   - roundNumber: 2
     enemy: {fileID: 5110921954108796589, guid: be787fb6869204ea2a2de1d09e202430, type: 3}
-    enemyCount: 1
-    spawnRate: 0.5
+    enemyCount: 20
+    spawnRate: 0.4
     isComplete: 0
     startDelay: 0
+    subRounds: []
   - roundNumber: 3
     enemy: {fileID: 5110921954108796589, guid: be787fb6869204ea2a2de1d09e202430, type: 3}
-    enemyCount: 1
-    spawnRate: 0.5
+    enemyCount: 30
+    spawnRate: 0.35
     isComplete: 0
     startDelay: 0
+    subRounds: []
   - roundNumber: 4
     enemy: {fileID: 5110921954108796589, guid: be787fb6869204ea2a2de1d09e202430, type: 3}
     enemyCount: 1
     spawnRate: 0.5
     isComplete: 0
     startDelay: 0
+    subRounds: []
   - roundNumber: 5
     enemy: {fileID: 5110921954108796589, guid: be787fb6869204ea2a2de1d09e202430, type: 3}
     enemyCount: 1
     spawnRate: 0.5
     isComplete: 0
     startDelay: 0
+    subRounds: []
   - roundNumber: 6
     enemy: {fileID: 5110921954108796589, guid: be787fb6869204ea2a2de1d09e202430, type: 3}
     enemyCount: 1
     spawnRate: 0.5
     isComplete: 0
     startDelay: 0
+    subRounds: []
   currentRound: 0
   disasterRound: 0
-  eventTriggerThreshold: 0
+  eventTriggerThreshold: 100
   disasterPrompt: {fileID: 7545921366605147998}
   levelUI: {fileID: 2216543469882145738}
+  winUI: {fileID: 0}
+  loseUI: {fileID: 0}
   eventState: 0
   futureEvent: 0
+  eventType: 1
+  playerManager: {fileID: 0}
+  levelWon: 0
+  disasterEffectHandler: {fileID: 0}
+  event1Location: {x: 372.6, y: -59.1, z: 0}
+  event2Location: {x: 392.2, y: -141.5, z: 0}
+  disasterDestructionRange: 0
 --- !u!1 &7545921366605147998
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &838465226803337977
 RectTransform:
   m_ObjectHideFlags: 0

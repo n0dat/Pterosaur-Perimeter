@@ -12,9 +12,9 @@ public class EndScreenButton : MonoBehaviour {
     }
 
     public void restartLevel() {
-        mainManager.getSceneManager().loadScene("sceneName");
-        levelManager.resetLevel();
         mainManager.getStateManager().hideEndPrompt(true);
+        mainManager.getSceneManager().reloadScene();
+        //levelManager.resetLevel();
     }
 
     public void exit(bool state) {

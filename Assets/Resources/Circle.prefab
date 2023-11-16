@@ -334,10 +334,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemy: {fileID: 9160740815599593331}
-  attackDelay: 1.5
+  attackDelay: 2
   readyToAttack: 1
-  damage: 20
-  range: 20
+  damage: 5
+  range: 25
+  isAttackingEnemy: 1
 --- !u!1 &9194719120366156845
 GameObject:
   m_ObjectHideFlags: 0

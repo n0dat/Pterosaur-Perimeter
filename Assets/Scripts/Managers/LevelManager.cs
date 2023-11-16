@@ -48,9 +48,9 @@ public class LevelManager : MonoBehaviour {
     
     // disasters
     [SerializeField] private DisasterEffectHandler disasterEffectHandler;
-    [SerializeField] private Vector3 event1Location;
-    [SerializeField]private Vector3 event2Location;
-    
+    [SerializeField] private Vector3 event1Location, event2Location;
+    [SerializeField] private float disasterDestructionRange;
+
     void Awake() {
         mainManager = GameObject.Find("MainManager").gameObject.GetComponent<MainManager>();
         playerManager = GameObject.Find("PlayerManager").gameObject.GetComponent<PlayerManager>();
@@ -198,7 +198,7 @@ public class LevelManager : MonoBehaviour {
 			
 			StartCoroutine(switchMap(3.1f, 1));
 		}
-		else if (eventState == EventState.Event2) {
+		if (eventState == EventState.Event2) {
 			if (eventType == 1)
 				disasterEffectHandler.meteorDisaster(event2Location, 3f);
 			else 
@@ -210,16 +210,38 @@ public class LevelManager : MonoBehaviour {
 
 	private IEnumerator switchMap(float duration, int eventNum) {
 		yield return new WaitForSeconds(duration);
+
+		// here we need to switch the map and also do a raycast to remove all enemies and towers within that raycast
+		
 		if (eventNum == 1) {
+			destroyWithinRadius(event1Location, disasterDestructionRange);
+			
 			mapNoEvent.SetActive(false);
 			mapEvent1.SetActive(true);
 			mapEvent2.SetActive(false);
 		}
-		else if (eventNum == 2) {
+		if (eventNum == 2) {
+			destroyWithinRadius(event2Location, disasterDestructionRange);
+
 			mapNoEvent.SetActive(false);
 			mapEvent1.SetActive(false);
 			mapEvent2.SetActive(true);
 		}
+	}
+
+	private void destroyWithinRadius(Vector3 target, float range) {
+		var transforms = new List<Transform>();
+		foreach (var colr in Physics2D.OverlapCircleAll(transform.position, range)) {
+			if (colr.gameObject.CompareTag("Tower"))
+				transforms.Add(colr.gameObject.transform);
+			else if (colr.gameObject.CompareTag("Enemy"))
+				transforms.Add(colr.gameObject.transform);
+		}
+
+		if (transforms.Count > 0)
+			for (int i = transforms.Count - 1; i >= 0; i--)
+				Destroy(transforms[i].gameObject);
+		
 	}
 
 	public void loadMaps() {
@@ -230,9 +252,8 @@ public class LevelManager : MonoBehaviour {
 
 	public void resetLevel() {
 		var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-		for (int i = 0; i < enemies.Length; i++) {
+		for (int i = 0; i < enemies.Length; i++)
 			Destroy(enemies[i]);
-		}
 
 		disasterPrompt.SetActive(false);
         

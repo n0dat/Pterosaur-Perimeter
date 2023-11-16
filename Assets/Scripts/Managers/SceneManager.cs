@@ -26,4 +26,8 @@ public class SceneManager : MonoBehaviour {
         if (asyncLoad == null)
             Debug.Log("Failed to load scene : " + sceneToLoad);
     }
+
+    public void reloadScene() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
 }

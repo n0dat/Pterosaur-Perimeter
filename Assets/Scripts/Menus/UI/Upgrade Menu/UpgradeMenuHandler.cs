@@ -47,6 +47,8 @@ public class UpgradeMenuHandler : MonoBehaviour
     [SerializeField] private Animator m_animator;
     
     private bool m_isOpen = false;
+    
+    [SerializeField] private TowerSellButton m_towerSellButton;
 
     //Exposed api for the tower script to interface with.
     public void upgrade(Tower currentTower)
@@ -56,6 +58,9 @@ public class UpgradeMenuHandler : MonoBehaviour
         m_currentTower = currentTower;
         if (!hasAllReferences())
             return;
+        
+        m_currentTower.calculateValue();
+        m_towerSellButton.setValue(m_currentTower.getValue());
         
         setUpgradeLevels(currentTower.getDamageUpgradeLevel(), currentTower.getRangeUpgradeLevel(), currentTower.getAttackSpeedUpgradeLevel());
         m_healthValue = m_currentTower.getHealth();
@@ -78,6 +83,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         setRangeUpgradeLevel(rangeLevel);
         setSpeedUpgradeLevel(speedLevel);
     }
+    
     //Handles upgrading a specific skill by one. This is where calls from towers will be fowarded too.
     private void incrementUpgradeForTower(UpgradeType type)
     {
@@ -133,7 +139,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         {
             if (!m_currentTower)
                 Debug.Log("Missing the tower reference");
-            Debug.Log("Missing required references in UpgradeMenuHandlerScript script.");
+            Debug.Log("Missing required references in UpgradeMenuHandlerScript script. Nobody knows which lol.");
             return false;
         }
         return true;
@@ -151,6 +157,9 @@ public class UpgradeMenuHandler : MonoBehaviour
             return;
         
         incrementUpgradeForTower(UpgradeType.Damage);
+        
+        m_currentTower.calculateValue();
+        m_towerSellButton.setValue(m_currentTower.getValue());
     }
 
     public void upgradeRangeButton()
@@ -165,6 +174,9 @@ public class UpgradeMenuHandler : MonoBehaviour
             return;
         
         incrementUpgradeForTower(UpgradeType.Range);
+        
+        m_currentTower.calculateValue();
+        m_towerSellButton.setValue(m_currentTower.getValue());
     }
 
     public void upgradeSpeedButton()
@@ -179,6 +191,9 @@ public class UpgradeMenuHandler : MonoBehaviour
             return;
         
         incrementUpgradeForTower(UpgradeType.Speed);
+        
+        m_currentTower.calculateValue();
+        m_towerSellButton.setValue(m_currentTower.getValue());
     }
 
     public void healButton()
@@ -203,5 +218,13 @@ public class UpgradeMenuHandler : MonoBehaviour
         m_isOpen = false;
         m_animator.SetTrigger("slideIn");
     }
-    
+
+    public Tower getTower() {
+        return m_currentTower;
+    }
+
+    public bool isOpen() {
+        return m_isOpen;
+    }
+
 }

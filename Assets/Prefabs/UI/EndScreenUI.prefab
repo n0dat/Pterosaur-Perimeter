@@ -97,7 +97,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2667270089633006350
 RectTransform:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -469327107
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &6016645785430918116
@@ -281,7 +281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7209719318397914602
 RectTransform:
   m_ObjectHideFlags: 0
@@ -325,7 +325,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -469327107
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &4010352628551051060
@@ -591,6 +591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
   mainManager: {fileID: 0}
+  sceneName: 
 --- !u!1 &4493187111305317451
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
   mainManager: {fileID: 0}
+  sceneName: 
 --- !u!1 &5484715529122952489
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,6 +889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
   mainManager: {fileID: 0}
+  sceneName: Level_3 1
 --- !u!1 &5751864189302389893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,6 +1387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
   mainManager: {fileID: 0}
+  sceneName: Level_3 1
 --- !u!1 &8232570373782065431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,8 +1415,8 @@ RectTransform:
   m_GameObject: {fileID: 8232570373782065431}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7209719318397914602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

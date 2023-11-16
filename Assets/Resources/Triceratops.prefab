@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f37a2fbbab894d90b66c77481c84960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCost: 0
+  towerCost: 100
   repairCost: 0
   radiusLineSegments: 50
   killCount: 0
@@ -235,6 +235,7 @@ MonoBehaviour:
   towerType: 1
   spriteRotator: {fileID: 954655370649223622}
   levelManager: {fileID: 0}
+  m_value: 0
   m_healthBar: {fileID: 8362352657453483457}
   isHealingTower: 0
   readyToHeal: 1

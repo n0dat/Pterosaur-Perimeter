@@ -5415,7 +5415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d1500c03f58b8498e4d4066d8b9ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Level_5
+  sceneToLoad: Level_3 2
   m_lockedIcon: {fileID: 1579414913}
   m_audioHandler: {fileID: 831247030}
 --- !u!1 &1309022969

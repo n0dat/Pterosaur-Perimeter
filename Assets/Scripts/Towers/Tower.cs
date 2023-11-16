@@ -13,6 +13,7 @@ public class Tower : MonoBehaviour {
     
     private Animator m_animator;
 
+    // member vars
     [SerializeField]
     private int towerCost, repairCost, radiusLineSegments = 50, killCount;
     [SerializeField]
@@ -20,11 +21,7 @@ public class Tower : MonoBehaviour {
     [SerializeField]
     private bool isHeld, selected, validPosition, attackInProgress;
     
-    /// Diego Testing healing working
-    //[SerializeField] public int towerHealth = 50;
-    ///
-
-
+    // references
     [SerializeField] private LineRenderer radiusLine;
     [SerializeField] private Collider2D[] enemiesInRange;
     [SerializeField] private GameObject enemyToAttack;
@@ -36,17 +33,18 @@ public class Tower : MonoBehaviour {
     [SerializeField] private SpriteRotator spriteRotator;
     [SerializeField] private LevelManager levelManager;
     
-    //Upgrade system
+    // upgrade system
     private UpgradeMenuHandler m_upgradeMenuInterface;
     private int m_damageUpgradeLevel = 0;
     private int m_rangeUpgradeLevel = 0;
     private int m_attackSpeedUpgradeLevel = 0;
     private int m_health = 100;
+    [SerializeField] private int m_value = 0;
 
     // ui
     [SerializeField] private HealthUIHandler m_healthBar;
     
-    // towr healing
+    // tower healing
     [SerializeField] private bool isHealingTower = false, readyToHeal = true;
 
     [SerializeField] private TowerAudioSpawner m_audioHandler;
@@ -205,7 +203,7 @@ public class Tower : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (isHeld) {
-            Debug.Log("Colliding with: " + collision.gameObject.name);
+            //Debug.Log("Colliding with: " + collision.gameObject.name);
             var col = collision.gameObject;
 
             if (col.CompareTag("TowerCollider") || col.CompareTag("Tower")) {
@@ -225,7 +223,7 @@ public class Tower : MonoBehaviour {
 
     private void OnCollisionExit2D(Collision2D collision) {
         if (isHeld) {
-            Debug.Log("Stopped Colliding with: " + collision.gameObject.name);
+            //Debug.Log("Stopped Colliding with: " + collision.gameObject.name);
             var col = collision.gameObject;
             
             if (col.CompareTag("TowerCollider") || col.CompareTag("Tower")) {
@@ -485,10 +483,16 @@ public class Tower : MonoBehaviour {
         yield return new WaitForSeconds(getAttackSpeed());
         readyToHeal = true;
     }
+    
+    // tower value calculation for sell button
+    public void calculateValue() {
+        Debug.Log("Damage Upgrade Level: " + m_damageUpgradeLevel);
+        Debug.Log("Range Upgrade Level: " + m_rangeUpgradeLevel);
+        Debug.Log("Attack Speed Upgrade Level: " + m_attackSpeedUpgradeLevel);
+        m_value = (int) (towerCost * 0.8f + m_damageUpgradeLevel * 40 + m_rangeUpgradeLevel * 40 + m_attackSpeedUpgradeLevel * 40);
+    }
 
-    // Was using this method to test to make sure that the healing was working
-    // Diego Morales
-    /*public void testHealth(int valueHealth){
-        towerHealth += valueHealth;
-    }*/
+    public int getValue() {
+        return m_value;
+    }
 }

@@ -51,6 +51,7 @@ public class TowerDropper : MonoBehaviour {
         // instantiate tower at mouse coordinates if it can be placed
         if (canBePlaced && towerHeld) {
             instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
+            
             Destroy(heldTower);
             towerHeld = false;
         }
@@ -61,6 +62,7 @@ public class TowerDropper : MonoBehaviour {
             return;
         
         m_playerManager.skullsCredit(m_towerCost);
+        
         Destroy(heldTower);
         towerHeld = false;
     }
@@ -69,6 +71,7 @@ public class TowerDropper : MonoBehaviour {
         //Make sure references are actually set
         if (!hasAllReferences())
             return;
+        
         //Attempt to actually purchase the tower given the player's currency amount.
         if (!m_playerManager.skullsCost(m_towerCost)) 
             return;
@@ -83,6 +86,7 @@ public class TowerDropper : MonoBehaviour {
             Debug.Log("Missing required references in TowerDropper script.");
             return false;
         }
+        
         return true;
     }
     

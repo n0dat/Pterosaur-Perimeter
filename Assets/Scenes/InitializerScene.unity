@@ -134,8 +134,8 @@ GameObject:
   - component: {fileID: 46217592}
   - component: {fileID: 46217595}
   - component: {fileID: 46217594}
-  - component: {fileID: 46217596}
   - component: {fileID: 46217593}
+  - component: {fileID: 46217596}
   m_Layer: 5
   m_Name: SettingButton
   m_TagString: Untagged
@@ -205,7 +205,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 46217594}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 46217596}
+        m_TargetAssemblyTypeName: ResumeMenuButton, Assembly-CSharp
+        m_MethodName: resetSprite
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &46217594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,10 +265,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 46217591}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f61ca8b14b5aa34880aaac9f2c1fcfd, type: 3}
+  m_Script: {fileID: 11500000, guid: 41996cdbeef740b29ada13ff4195be8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 46217594}
+  image: {fileID: 46217594}
   newSprite: {fileID: -7140589777123862391, guid: 1a3e015ae1fd4cb42a71cc89061f9346, type: 3}
   oldSprite: {fileID: 4645430289796755974, guid: bb05000c6eeb6d648a4f47f851ba749e, type: 3}
 --- !u!1 &293223734
@@ -486,8 +498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b76a01af42cb04791cd1f908a8d6f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enabledSprite: {fileID: 0}
-  disabledSprite: {fileID: 0}
+  enabledSprite: {fileID: 2075109535}
+  disabledSprite: {fileID: 1197166594}
 --- !u!1 &502269982
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,8 +511,8 @@ GameObject:
   - component: {fileID: 502269983}
   - component: {fileID: 502269986}
   - component: {fileID: 502269985}
-  - component: {fileID: 502269987}
   - component: {fileID: 502269984}
+  - component: {fileID: 502269987}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -584,7 +596,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 1
       - m_Target: {fileID: 502269987}
-        m_TargetAssemblyTypeName: MainMenue, Assembly-CSharp
+        m_TargetAssemblyTypeName: ResumeMenuButton, Assembly-CSharp
         m_MethodName: resetSprite
         m_Mode: 1
         m_Arguments:
@@ -642,10 +654,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 502269982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb63a8148d4a4a44c94f1207830d50ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 41996cdbeef740b29ada13ff4195be8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 502269985}
+  image: {fileID: 502269985}
   newSprite: {fileID: -2897384704864963239, guid: 40b3d80a216a90442b9efbc7053c5f68, type: 3}
   oldSprite: {fileID: 2821829303089357316, guid: 7d4b69072a7c56047abb6ea6d35f599d, type: 3}
 --- !u!1 &519109818
@@ -990,8 +1002,8 @@ GameObject:
   - component: {fileID: 952315593}
   - component: {fileID: 952315596}
   - component: {fileID: 952315595}
-  - component: {fileID: 952315597}
   - component: {fileID: 952315594}
+  - component: {fileID: 952315597}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -1075,8 +1087,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 1
       - m_Target: {fileID: 952315597}
-        m_TargetAssemblyTypeName: Resume, Assembly-CSharp
-        m_MethodName: restResumeImage
+        m_TargetAssemblyTypeName: ResumeMenuButton, Assembly-CSharp
+        m_MethodName: resetSprite
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1085,7 +1097,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &952315595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1133,13 +1145,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 952315592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57de85bd75966e4b8b3168db355f400, type: 3}
+  m_Script: {fileID: 11500000, guid: 41996cdbeef740b29ada13ff4195be8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 952315595}
   newSprite: {fileID: -1614337858942475704, guid: b31e670008e668c4c81ad7fee4f7786a, type: 3}
   oldSprite: {fileID: -8111025609810652003, guid: 9966845967af0df49bc54a854ee69bbd, type: 3}
-  deactPauseMenue: {fileID: 0}
 --- !u!1 &1012594666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1222,7 @@ MonoBehaviour:
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1600, y: 900}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1434,10 +1445,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1600, y: 900}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1454,7 +1465,7 @@ Canvas:
   m_GameObject: {fileID: 1361714978}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

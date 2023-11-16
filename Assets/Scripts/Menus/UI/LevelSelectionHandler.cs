@@ -20,15 +20,14 @@ public class LevelSelectionHandler : MonoBehaviour
             tier = m_levelSelectionButtons.Count;
 
         int i = 0;
-        for (i = i; i < tier; i++)
+        for (; i < tier; i++)
         {
             m_levelSelectionButtons[i].unlockLevel();
         }
 
-        for (i = i; i < m_levelSelectionButtons.Count; i++)
+        for (; i < m_levelSelectionButtons.Count; i++)
         {
             m_levelSelectionButtons[i].lockLevel();
         }
     }
-    
 }

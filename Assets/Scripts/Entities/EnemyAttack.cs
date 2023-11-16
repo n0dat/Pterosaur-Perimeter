@@ -9,14 +9,15 @@ public class EnemyAttack : MonoBehaviour {
     public bool readyToAttack = true;
     public int damage = 20;
     public float range = 20f;
+    [SerializeField] private bool isAttackingEnemy = false;
 
     void Update() {
-        if (readyToAttack) {
+        if (isAttackingEnemy && readyToAttack) {
             var towers = new List<Tower>();
             foreach (var tower in Physics2D.OverlapCircleAll(transform.position, range))
-                if (tower.gameObject.CompareTag("Tower"))
-                    towers.Add(tower.gameObject.GetComponent<Tower>());
-            
+                if (tower.gameObject.CompareTag("TowerCollider"))
+                    towers.Add(tower.transform.parent.gameObject.GetComponent<Tower>());
+        
             if (towers.Count > 0)
                 StartCoroutine(attack(towers[Random.Range(0, towers.Count)]));
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TowerDropUIHandler : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class TowerDropUIHandler : MonoBehaviour
     //Called when the mouse hovers over expandHandle.
     public void OnMouseEnter()
     {
+        Debug.Log("Mouse entered the button");
         Animator animator = towerContainer.GetComponent<Animator>();
         if (this.isExpanded)
         {
