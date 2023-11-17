@@ -55,7 +55,7 @@ public class TowerSelector : MonoBehaviour {
 
             RaycastHit2D hit = new RaycastHit2D();
             foreach (var hits in Physics2D.RaycastAll(mousePos2D, Vector2.zero)) {
-                Debug.Log("Hit collider: " + hits.collider.gameObject.tag);
+                //Debug.Log("Hit collider: " + hits.collider.gameObject.tag);
                 if (hits.collider.gameObject.CompareTag("UI"))
                     return;
                 if (hits.collider.gameObject.CompareTag("TowerCollider"))

@@ -103,7 +103,7 @@ public class LevelManager : MonoBehaviour {
 			roundState = RoundState.Spawning;
 			StartCoroutine(spawnRound(rounds[currentRound]));
 			setRoundCounter();
-			switchButtons();
+			//switchButtons();
 		}
 		else
 			Debug.Log("Round already started");
@@ -128,7 +128,7 @@ public class LevelManager : MonoBehaviour {
 		roundState = RoundState.Waiting;
 		Debug.Log("Current Level new Round State: WAITING");
 		
-		switchButtons();
+		//switchButtons();
 		
 		if (mainManager.getSettingsManager().getAutoStartRounds())
 			startRound();

@@ -465,10 +465,9 @@ public class Tower : MonoBehaviour {
 
     IEnumerator hit() {
         Debug.Log("Tower called hit");
-        var prevColor = spriteRotator.getRenderer().color;
         spriteRotator.getRenderer().color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        spriteRotator.getRenderer().color = prevColor;
+        spriteRotator.getRenderer().color = Color.white;
     }
     
     // tower gets healed by support tower
