@@ -50,7 +50,7 @@ public class EnemyAudioHandler : MonoBehaviour
         
         AudioClip clip;
 
-        if (Random.Range(0, 10) != 0) // 90 percent of the time, play a normal death clip.
+        if (Random.Range(0, 3) != 0) // 90 percent of the time, play a normal death clip.
             clip = m_normalDeathClips[Random.Range(0, m_normalDeathClips.Count)];
         else
             clip = m_dramaticDeathClips[Random.Range(0, m_dramaticDeathClips.Count)];
