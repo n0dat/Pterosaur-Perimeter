@@ -19,7 +19,7 @@ public class TowerDropper : MonoBehaviour {
     [SerializeField] private Transform towerToSpawn;
 
     void Start() {
-        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        camera = GameObject.Find("LevelCamera").GetComponent<Camera>();
         m_playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
 

@@ -135,6 +135,7 @@ public class UpgradeMenuHandler : MonoBehaviour
     
     private bool hasAllReferences()
     {
+        /*
         if (!m_healthElementHandler || !m_damageElementTicks || !m_rangeElementTicks || !m_speedElementTicks || !m_levelManager || !m_currentTower || !m_animator)
         {
             if (!m_currentTower)
@@ -142,6 +143,7 @@ public class UpgradeMenuHandler : MonoBehaviour
             Debug.Log("Missing required references in UpgradeMenuHandlerScript script. Nobody knows which lol.");
             return false;
         }
+        */
         return true;
     }
 
