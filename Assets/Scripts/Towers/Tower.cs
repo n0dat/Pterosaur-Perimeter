@@ -11,7 +11,7 @@ public class Tower : MonoBehaviour {
     private enum AttackState { Attacking, Waiting, Initial };
     private enum TargetingMode { First, Last, Strong };
     
-    private Animator m_animator;
+    [SerializeField] private Animator m_animator;
 
     // member vars
     [SerializeField]
@@ -67,7 +67,6 @@ public class Tower : MonoBehaviour {
         enemyToAttack = null;
         
         spriteRotator = gameObject.GetComponent<SpriteRotator>();
-        m_animator = gameObject.GetComponent<Animator>();
         
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         m_upgradeMenuInterface = GameObject.Find("UpgradeMenu").GetComponent<UpgradeMenuHandler>(); //Must be called UpgradeMenu.
@@ -175,7 +174,8 @@ public class Tower : MonoBehaviour {
         attackInProgress = true;
         attackType.attack(enemyToAttack, gameObject);
         m_audioHandler.shoot();
-        //m_animator.SetTrigger("Attack");
+        if (m_animator)
+            m_animator.SetTrigger("shoot");
         waitForAttack.setAttackFinished();
         yield return null;
     }
