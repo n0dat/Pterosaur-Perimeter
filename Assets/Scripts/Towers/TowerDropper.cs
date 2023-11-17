@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
 //Script is attached to all buttons in the tower drop UI.
@@ -76,17 +77,18 @@ public class TowerDropper : MonoBehaviour {
         if (!m_playerManager.skullsCost(m_towerCost)) 
             return;
         
-        //m_UIHandler.OnMouseEnter();
+        m_UIHandler.closeMenu();
         towerHeld = true;
         heldTower = instantiateTower(camera.ScreenToWorldPoint(Input.mousePosition));
     }
 
     private bool hasAllReferences() {
+        /*
         if (!m_playerManager || !m_UIHandler || !camera) {
             Debug.Log("Missing required references in TowerDropper script.");
             return false;
         }
-        
+        */
         return true;
     }
     

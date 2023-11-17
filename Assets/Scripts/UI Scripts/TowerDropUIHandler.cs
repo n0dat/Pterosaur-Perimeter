@@ -15,7 +15,16 @@ public class TowerDropUIHandler : MonoBehaviour, IPointerEnterHandler
         //Default when level loads will be expanded.
         this.isExpanded = true;
     }
-    
+
+    public void closeMenu()
+    {
+        if (!isExpanded)
+            return;
+        
+        Animator animator = towerContainer.GetComponent<Animator>();
+        this.isExpanded = false;
+        animator.SetTrigger("HoveredWhileOpened");
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         Animator animator = towerContainer.GetComponent<Animator>();
