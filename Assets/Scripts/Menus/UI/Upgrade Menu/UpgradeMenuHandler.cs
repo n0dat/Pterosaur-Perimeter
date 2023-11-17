@@ -90,6 +90,9 @@ public class UpgradeMenuHandler : MonoBehaviour
         if (!hasAllReferences())
             return;
         
+        if (!m_currentTower)
+            Debug.Log("Missing the tower ref, you gonna get a null noob");
+        
         switch (type)
         {
             case UpgradeType.Damage:
@@ -103,8 +106,6 @@ public class UpgradeMenuHandler : MonoBehaviour
             case UpgradeType.Speed:
                 setSpeedUpgradeLevel(m_speedUpgradeLevel + 1);
                 m_currentTower.setAttackSpeedUpgradeLevel(m_speedUpgradeLevel);
-                break;
-            default:
                 break;
         }
     }
