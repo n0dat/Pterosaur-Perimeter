@@ -435,6 +435,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4562662837223247766, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6613631760425204348, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
       propertyPath: m_Camera
       value: 
@@ -24395,7 +24399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &607523379
 Transform:
   m_ObjectHideFlags: 0
@@ -24431,7 +24435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &643187753
 Transform:
   m_ObjectHideFlags: 0
@@ -59314,6 +59318,10 @@ PrefabInstance:
     - target: {fileID: 7346961991546255126, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: m_Name
       value: LevelManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346961991546255126, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7545921366605147998, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: m_IsActive
