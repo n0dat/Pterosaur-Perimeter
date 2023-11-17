@@ -38077,6 +38077,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 654ab61630bf62e40be49a54c5916662, type: 3}
+--- !u!114 &1072908876 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1471816109441156223, guid: 654ab61630bf62e40be49a54c5916662, type: 3}
+  m_PrefabInstance: {fileID: 1072908875}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2de3aeb176cc94c881dd9c7820a3f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1103014609
 GameObject:
   m_ObjectHideFlags: 0
@@ -59311,11 +59322,11 @@ PrefabInstance:
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: mapEvent1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1364394782}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: mapEvent2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 421150453}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: mapNoEvent
       value: 
@@ -59327,7 +59338,7 @@ PrefabInstance:
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: disasterEffectHandler
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1072908876}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: checkpointObjectEvent1
       value: 

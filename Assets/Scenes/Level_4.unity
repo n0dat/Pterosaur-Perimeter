@@ -25604,7 +25604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &643187753
 Transform:
   m_ObjectHideFlags: 0
@@ -37097,6 +37097,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 654ab61630bf62e40be49a54c5916662, type: 3}
+--- !u!114 &1072908876 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1471816109441156223, guid: 654ab61630bf62e40be49a54c5916662, type: 3}
+  m_PrefabInstance: {fileID: 1072908875}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2de3aeb176cc94c881dd9c7820a3f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1157932373
 GameObject:
   m_ObjectHideFlags: 0
@@ -57633,7 +57644,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 20
-      m_TileSpriteIndex: 20
+      m_TileSpriteIndex: 28
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -57713,7 +57724,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 10
-      m_TileSpriteIndex: 10
+      m_TileSpriteIndex: 20
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -57723,7 +57734,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 11
-      m_TileSpriteIndex: 11
+      m_TileSpriteIndex: 12
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -57943,7 +57954,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 7
-      m_TileSpriteIndex: 7
+      m_TileSpriteIndex: 11
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -58084,18 +58095,18 @@ Tilemap:
     m_Data: {fileID: 2080955877, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 2146786494, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 227178627, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 1433612573, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 65678540, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -1501045710, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
   - m_RefCount: 1
@@ -58111,7 +58122,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: -972852182, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 2120427684, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
+    m_Data: {fileID: 1433612573, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1008435586, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
   - m_RefCount: 1
@@ -58126,8 +58137,8 @@ Tilemap:
     m_Data: {fileID: -518396296, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: -786364106, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 2120427684, guid: 38c4250692bd9e74d868368a6382721d, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 40
     m_Data:
@@ -58279,11 +58290,11 @@ PrefabInstance:
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: mapEvent1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1468130395}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: mapEvent2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 784884938}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: mapNoEvent
       value: 
@@ -58295,7 +58306,7 @@ PrefabInstance:
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: disasterEffectHandler
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1072908876}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: checkpointObjectEvent1
       value: 

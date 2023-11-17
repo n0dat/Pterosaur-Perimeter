@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -35,6 +36,9 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private GameObject levelUI;
     [SerializeField] private GameObject winUI;
     [SerializeField] private GameObject loseUI;
+    [SerializeField] private GameObject roundCounter;
+    [SerializeField] private GameObject pauseButton;
+    [SerializeField] private GameObject startRoundButton;
     
     // event stuff
     public enum EventState { NoEvent, Event1, Event2 };
@@ -61,7 +65,18 @@ public class LevelManager : MonoBehaviour {
 	public void removeEnemy(int enemy) {
 		rounds[currentRound].enemies.remove(enemy);
 	}
-	
+
+	public void switchButtons() {
+		if (pauseButton.activeSelf) {
+			pauseButton.SetActive(false);
+			startRoundButton.SetActive(true);
+		}
+		else {
+			pauseButton.SetActive(true);
+			startRoundButton.SetActive(false);
+		}
+	}
+
 	void Update() {
 		if (currentRound == disasterRound) {
 			Debug.Log("PLAYING DISASTER!!!");
@@ -85,7 +100,10 @@ public class LevelManager : MonoBehaviour {
 
 	public void startRound() {
 		if (roundState == RoundState.Waiting) {
+			roundState = RoundState.Spawning;
 			StartCoroutine(spawnRound(rounds[currentRound]));
+			setRoundCounter();
+			switchButtons();
 		}
 		else
 			Debug.Log("Round already started");
@@ -110,6 +128,8 @@ public class LevelManager : MonoBehaviour {
 		roundState = RoundState.Waiting;
 		Debug.Log("Current Level new Round State: WAITING");
 		
+		switchButtons();
+		
 		if (mainManager.getSettingsManager().getAutoStartRounds())
 			startRound();
 	}
@@ -120,14 +140,20 @@ public class LevelManager : MonoBehaviour {
 
 	IEnumerator spawnRound(Round curRound) {
 		Debug.Log("Spawning Round: " + currentRound);
-		roundState = RoundState.Spawning;
+		
 		Debug.Log("Current Level new Round State: SPAWNING");
+
+		if (curRound.subRounds.Length == 0) {
+			Debug.Log("Rounds are empty, returning");
+			roundState = RoundState.Waiting;
+			yield return null;
+		}
 
 		foreach (var round in curRound.subRounds)
 			StartCoroutine(spawnSubRound(round));
 		
 		roundState = RoundState.InProgress;
-		Debug.Log("Current Level new Round State: IN PROGRESs");
+		Debug.Log("Current Level new Round State: IN PROGRESS");
 
 		yield return null;
 	}
@@ -273,6 +299,9 @@ public class LevelManager : MonoBehaviour {
 		
 		winUI.SetActive(false);
 		loseUI.SetActive(false);
+		
+		pauseButton.SetActive(false);
+		startRoundButton.SetActive(true);
 	}
 
 	public void endLevel(bool condition) {
@@ -288,5 +317,9 @@ public class LevelManager : MonoBehaviour {
 			winUI.SetActive(false);
 			loseUI.SetActive(true);
 		}
+	}
+
+	public void setRoundCounter() {
+		roundCounter.GetComponent<TextMeshProUGUI>().SetText("Round: " + (currentRound));
 	}
 }

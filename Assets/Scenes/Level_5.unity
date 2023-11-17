@@ -14951,15 +14951,19 @@ PrefabInstance:
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: mapEvent1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1972768725}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: mapEvent2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 586692981}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: mapNoEvent
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 643187752}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 1841614392}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: disasterEffectHandler
       value: 
@@ -14967,39 +14971,23 @@ PrefabInstance:
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: checkpointObjectEvent1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1997818140}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: checkpointObjectEvent2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1442478070}
     - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: checkpointObjectNoEvent
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 712987740}
     - target: {fileID: 2967833508958221598, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 625499885}
-    - target: {fileID: 4905336169763388840, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905336169763388840, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1600
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905336169763388840, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 900
-      objectReference: {fileID: 0}
     - target: {fileID: 6615346958539282042, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 625499885}
-    - target: {fileID: 6615346958539282042, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7346961991546255126, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: m_Name
       value: LevelManager
