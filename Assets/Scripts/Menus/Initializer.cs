@@ -4,16 +4,25 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Initializer : MonoBehaviour {
+    
+    // globals
+    public bool playIntro = false;
+   
     void Awake() {
         DontDestroyOnLoad(this);
-        StartCoroutine(delayStart());
+        if (playIntro)
+            StartCoroutine(introStart());
+        else {
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainMenuScene");
+            Destroy(this);
+        }
     }
 
 
-    IEnumerator delayStart() {
+    IEnumerator introStart() {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Test Intro Scene");
         yield return new WaitForSeconds(13f);
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
-        Destroy(this);
+        
     }
 }
