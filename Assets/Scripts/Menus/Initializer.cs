@@ -12,7 +12,7 @@ public class Initializer : MonoBehaviour {
 
     IEnumerator delayStart() {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Test Intro Scene");
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(13f);
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
         Destroy(this);
     }
