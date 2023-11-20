@@ -7,7 +7,7 @@ public class EnemyAttack : MonoBehaviour {
     [SerializeField] private Enemy m_enemy;
     public float attackDelay = 1.5f;
     public bool readyToAttack = true;
-    public int damage = 20;
+    public int damage = 5;
     public float range = 20f;
     [SerializeField] private bool isAttackingEnemy = false;
 

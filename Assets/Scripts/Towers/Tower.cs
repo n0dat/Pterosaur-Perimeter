@@ -1,12 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tower : MonoBehaviour {
     
-    // globals
+    // globalss
     public enum TowerType { Water, Land }
     private enum AttackState { Attacking, Waiting, Initial };
     private enum TargetingMode { First, Last, Strong };
@@ -32,6 +31,8 @@ public class Tower : MonoBehaviour {
     [SerializeField] private TowerType towerType;
     [SerializeField] private SpriteRotator spriteRotator;
     [SerializeField] private LevelManager levelManager;
+    
+    public Color radiusColor;
     
     // upgrade system
     private UpgradeMenuHandler m_upgradeMenuInterface;
@@ -251,7 +252,7 @@ public class Tower : MonoBehaviour {
         var gradient = new Gradient();
         var tempColorKeys = radiusLine.colorGradient.colorKeys;
         for (int i = 0; i < tempColorKeys.Length; i++)
-            tempColorKeys[i].color = Color.grey;
+            tempColorKeys[i].color = new Color(.5f, .5f, 1f, 0.05f);
             
         gradient.colorKeys = tempColorKeys;
         radiusLine.colorGradient = gradient;

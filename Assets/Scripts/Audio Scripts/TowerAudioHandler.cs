@@ -19,7 +19,7 @@ public class TowerAudioHandler : MonoBehaviour
         }
 
         AudioClip clip = m_lazerClips[Random.Range(0, m_lazerClips.Count)];
-        m_audioSource.PlayOneShot(clip, 0.2f);
+        m_audioSource.PlayOneShot(clip, 0.1f);
         Destroy(gameObject, clip.length + 0.1f);
     }
     
