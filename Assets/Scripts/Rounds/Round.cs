@@ -7,7 +7,7 @@ public class Round {
     public Transform enemy;
     public int enemyCount;
     public float spawnRate;
-    public bool isComplete;
+    public bool isComplete = false;
     public CircularBuffer<int> enemies;
     public float startDelay;
     public Round[] subRounds;

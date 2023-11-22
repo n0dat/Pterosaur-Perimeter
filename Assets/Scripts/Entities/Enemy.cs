@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour {
 
-	public enum FacingDirection { Up, Down, Left, Right, Unknown };
+	public enum FacingDirection { Up, Down, Left, Right, Unknown }
+
+	public enum EnemyType { Standard, SingleClub, DoubleClub, Rock }
 
 	// movement
 	[SerializeField] private float totalDistance = 0f, distanceCovered = 0f;
@@ -17,12 +18,13 @@ public class Enemy : MonoBehaviour {
 	public float facingThreshold = 10f;
 	public float rotationSpeed = 50f;
 	public Quaternion targetRotation;
+	public EnemyType enemyType = EnemyType.SingleClub;
+	public float changeThreshold = 0.15f;
 
 	// ui
-	private LevelManager levelManager;
+	public LevelManager levelManager;
 	private SpriteRenderer spriteRenderer;
-	[SerializeField] private bool isDisplayingHit = false;
-	private static readonly int MColor = Shader.PropertyToID("m_Color");
+	private bool isDisplayingHit = false;
 	public float hitDelay = 0.2f;
 	public GameObject sprite;
 	[SerializeField] private HealthUIHandler m_healthBarHandler;
@@ -36,9 +38,10 @@ public class Enemy : MonoBehaviour {
 	[SerializeField] private EnemyAudioSpawner m_audioHandler;
 	[SerializeField] private Animator m_animator;
 	
-	void Start() {
+	void Awake() {
+		setChangeThreshold();
 		findTotalDistance();
-		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		//levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		m_playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 		spriteRenderer = sprite.GetComponent<SpriteRenderer>();
 	}
@@ -82,8 +85,8 @@ public class Enemy : MonoBehaviour {
 			isDisplayingHit = false;
 		}
 		
-		if (levelManager != null)
-			levelManager.removeEnemy(this.gameObject.GetInstanceID());
+		if (levelManager)
+			levelManager.removeEnemy(gameObject.GetInstanceID());
 		
 	}
 
@@ -119,6 +122,7 @@ public class Enemy : MonoBehaviour {
 		m_healthBarHandler.setHealth((int)health);
 		
 		if (health <= 0) {
+			Debug.Log("Enemy killed");
 			attacker.enemyKilled();
 			m_playerManager.skullsCredit(100);
 			m_audioHandler.death();
@@ -154,15 +158,34 @@ public class Enemy : MonoBehaviour {
 		var angle = Mathf.Atan2(direction.y, direction.x);
 		var angleDegrees = angle * Mathf.Rad2Deg + -90f;
 		targetRotation = Quaternion.Euler(0, 0, angleDegrees);
-		//sprite.transform.rotation = Quaternion.RotateTowards(sprite.transform.rotation, rotation, rotationSpeed * Time.deltaTime);
-		//sprite.transform.rotation = rotation;
 	}
 
 	//Handles animation and sound.
-	public void attack()
-	{
+	public void attack() {
+		if (enemyType == EnemyType.Standard)
+			return;
+		
 		m_animator.SetTrigger("hit");
 		m_audioHandler.hit();
 		m_audioHandler.quip();
+	}
+
+	public void setChangeThreshold() {
+		if (enemyType == EnemyType.Standard) {
+			changeThreshold = 0.15f;
+			movementSpeed = 24f;
+		}
+		if (enemyType == EnemyType.SingleClub) {
+			changeThreshold = 0.18f;
+			movementSpeed = 26f;
+		}
+		if (enemyType == EnemyType.DoubleClub) {
+			changeThreshold = 0.2f;
+			movementSpeed = 28f;
+		}
+		if (enemyType == EnemyType.Rock) {
+			changeThreshold = 0.25f;
+			movementSpeed = 30f;
+		}
 	}
 }

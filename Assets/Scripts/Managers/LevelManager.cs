@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour {
@@ -63,7 +65,10 @@ public class LevelManager : MonoBehaviour {
     }
     
 	public void removeEnemy(int enemy) {
-		rounds[currentRound].enemies.remove(enemy);
+		Debug.Log("Remove enemy called");
+		if (!rounds[currentRound].enemies.remove(enemy)) {
+			Debug.Log("Unable to remove enemy from current round list");
+		}
 	}
 
 	public void switchButtons() {
@@ -103,13 +108,17 @@ public class LevelManager : MonoBehaviour {
 			roundState = RoundState.Spawning;
 			StartCoroutine(spawnRound(rounds[currentRound]));
 			setRoundCounter();
+			startRoundButton.GetComponent<Button>().enabled = false;
 			//switchButtons();
+			Debug.Log("End of startRound()");
 		}
 		else
 			Debug.Log("Round already started");
 	}
 
 	void endRound() {
+		Debug.Log("End Round called");
+		startRoundButton.GetComponent<Button>().enabled = true;
 		roundCountdown = roundDelay;
 		
 		rounds[currentRound].enemies.clear();
@@ -135,6 +144,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	bool hasEnemies() {
+		//Debug.Log("total enemies: " + rounds[currentRound].enemies.Count);
 		return !rounds[currentRound].enemies.IsEmpty;
 	}
 
@@ -160,7 +170,8 @@ public class LevelManager : MonoBehaviour {
 
 	IEnumerator spawnSubRound(Round curRound) {
 		Debug.Log("Spawning sub round");
-		yield return new WaitForSeconds(curRound.startDelay);
+		if (curRound.startDelay != 0)
+			yield return new WaitForSeconds(curRound.startDelay);
 		
 		for (int i = 0; i < curRound.enemyCount; i++) {
 			spawnEnemy(curRound.enemy);
@@ -170,8 +181,10 @@ public class LevelManager : MonoBehaviour {
 
 	void spawnEnemy(Transform enemyToSpawn) {
 		var tempEnemy = Instantiate(enemyToSpawn, getCheckpoints()[0], Quaternion.identity);
-		tempEnemy.gameObject.GetComponent<Enemy>().setWaypoints(getCheckpoints());
 		rounds[currentRound].enemies.enqueue(tempEnemy.gameObject.GetInstanceID());
+		var enemyInstance = tempEnemy.gameObject.GetComponent<Enemy>();
+		enemyInstance.setWaypoints(getCheckpoints());
+		enemyInstance.levelManager = GetComponent<LevelManager>();
 	}
 	
 	public void showDisasterPrompt() {
@@ -320,6 +333,6 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void setRoundCounter() {
-		roundCounter.GetComponent<TextMeshProUGUI>().SetText("Round: " + (currentRound));
+		roundCounter.GetComponent<TextMeshProUGUI>().SetText("Round: " + currentRound);
 	}
 }
