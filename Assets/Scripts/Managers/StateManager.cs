@@ -17,7 +17,7 @@ public class StateManager : MonoBehaviour {
 	    DontDestroyOnLoad(this);
 	    
 	    gameState = GameState.Menu;
-	    pauseMenu = gameObject.transform.GetChild(0).gameObject;
+	    pauseMenu = gameObject.transform.GetChild(0).GetChild(0).gameObject;
 	    pauseMenu.SetActive(false);
     }
 
@@ -78,13 +78,7 @@ public class StateManager : MonoBehaviour {
     }
 
     public void hideEndPrompt(bool val) {
-	    if (val) {
-		    gameState = GameState.Playing;
-		    Time.timeScale = 1f;
-	    }
-	    else {
-		    gameState = GameState.Menu;
-		    Time.timeScale = 1f;
-	    }
+	    gameState = val ? GameState.Playing : GameState.Menu;
+	    Time.timeScale = 1f;
     }
 }

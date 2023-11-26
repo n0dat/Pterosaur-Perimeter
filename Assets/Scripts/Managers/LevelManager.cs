@@ -61,6 +61,8 @@ public class LevelManager : MonoBehaviour {
         mainManager = GameObject.Find("MainManager").gameObject.GetComponent<MainManager>();
         playerManager = GameObject.Find("PlayerManager").gameObject.GetComponent<PlayerManager>();
         
+        GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenuHandler>().getNewCamera();
+        
         resetLevel();
     }
     
