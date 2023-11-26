@@ -4,9 +4,7 @@
 
 <h2> About </h2>
 
-Pterosaur Perimeter is a 2D Top Down Tower Defense Game. It has interesting mechanics such as dynamic weather and natural disasters. The enmies can fight back on the towers you place.
-
-It is made using Unity.
+Pterosaur Perimeter is a 2D Top Down Tower Defense Game created in Unity. It has interesting mechanics such as natural disasters and enemies fighting back on towers.
 
 ***
 
