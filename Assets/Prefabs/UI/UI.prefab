@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 650
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -906,7 +906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UIHandler: {fileID: 7568199841164213276}
   m_playerManager: {fileID: 0}
-  m_towerCost: 100
+  m_towerCost: 1500
   towerToSpawn: {fileID: 2230588734787761273, guid: ac8886f35584e2946be2d6e201f87002, type: 3}
 --- !u!1 &651764034817066434
 GameObject:
@@ -1852,7 +1852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UIHandler: {fileID: 7568199841164213276}
   m_playerManager: {fileID: 0}
-  m_towerCost: 100
+  m_towerCost: 750
   towerToSpawn: {fileID: 2230588734787761273, guid: 5a15db506cab58746a8a26094ba9effa, type: 3}
 --- !u!1 &1952126517573251127
 GameObject:
@@ -2351,7 +2351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UIHandler: {fileID: 7568199841164213276}
   m_playerManager: {fileID: 0}
-  m_towerCost: 100
+  m_towerCost: 400
   towerToSpawn: {fileID: 2230588734787761273, guid: f64b6387086040a4ab8490e1807efbf4, type: 3}
 --- !u!1 &2749105514483529748
 GameObject:
@@ -3514,7 +3514,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 400
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4033,7 +4033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UIHandler: {fileID: 7568199841164213276}
   m_playerManager: {fileID: 0}
-  m_towerCost: 100
+  m_towerCost: 650
   towerToSpawn: {fileID: 2230588734787761273, guid: c282c9695b8b64b45804fdf73b825469, type: 3}
 --- !u!1 &4806344556135641714
 GameObject:
@@ -4544,7 +4544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UIHandler: {fileID: 7568199841164213276}
   m_playerManager: {fileID: 0}
-  m_towerCost: 100
+  m_towerCost: 3000
   towerToSpawn: {fileID: 2230588734787761273, guid: 2702e3b336a925f47892ce486a2a1dc8, type: 3}
 --- !u!1 &5306382857071838522
 GameObject:
@@ -5205,7 +5205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 200
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5774,7 +5774,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 3000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5908,7 +5908,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 750
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6613,7 +6613,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 1500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6775,7 +6775,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!222 &7179594056198361079
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6791,7 +6791,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7803251428799356218}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

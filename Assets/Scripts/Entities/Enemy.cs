@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour {
 	public float health = 100f;
 	public float movementSpeed = 10f;
 	private PlayerManager m_playerManager;
+	public int killReward = 50;
 	
 	//Audio and animation
 	[SerializeField] private EnemyAudioSpawner m_audioHandler;
@@ -124,7 +125,7 @@ public class Enemy : MonoBehaviour {
 		if (health <= 0) {
 			Debug.Log("Enemy killed");
 			attacker.enemyKilled();
-			m_playerManager.skullsCredit(100);
+			m_playerManager.skullsCredit(killReward);
 			m_audioHandler.death();
 			Destroy(gameObject);
 		}

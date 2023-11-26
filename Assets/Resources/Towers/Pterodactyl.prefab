@@ -150,7 +150,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: d6dd6acc69e30584290bdb0cbf1cd29e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f33e1d0b3e1e6469896682199dae6c89, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -214,13 +214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f37a2fbbab894d90b66c77481c84960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_animator: {fileID: 0}
   towerCost: 100
   repairCost: 0
   radiusLineSegments: 50
   killCount: 0
-  attackSpeed: 1
-  attackDamage: 15
-  attackRange: 75
+  attackSpeed: 1.35
+  attackDamage: 12
+  attackRange: 50
   isHeld: 0
   selected: 0
   validPosition: 0
@@ -235,6 +236,7 @@ MonoBehaviour:
   towerType: 1
   spriteRotator: {fileID: 954655370649223622}
   levelManager: {fileID: 0}
+  radiusColor: {r: 0, g: 0, b: 0, a: 0}
   m_value: 0
   m_healthBar: {fileID: 2706430827214543864}
   isHealingTower: 0

@@ -204,7 +204,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         if (!hasAllReferences() || m_healthValue >= 100)
             return;
 
-        if (!m_levelManager.skullsCost(100))
+        if (!m_levelManager.skullsCost(200))
             return;
         
         m_healthValue = 100;

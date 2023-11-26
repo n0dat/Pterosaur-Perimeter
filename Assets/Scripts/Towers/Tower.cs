@@ -395,7 +395,7 @@ public class Tower : MonoBehaviour {
     }
 
     public float getAttackRange() {
-        return attackRange + (m_rangeUpgradeLevel * 10);
+        return attackRange + (m_rangeUpgradeLevel * 8);
     }
     
     public void setAttackRange(float val) {

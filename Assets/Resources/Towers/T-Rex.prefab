@@ -241,7 +241,7 @@ MonoBehaviour:
   repairCost: 0
   radiusLineSegments: 50
   killCount: 0
-  attackSpeed: 2.3
+  attackSpeed: 2
   attackDamage: 35
   attackRange: 50
   isHeld: 0
@@ -258,6 +258,7 @@ MonoBehaviour:
   towerType: 1
   spriteRotator: {fileID: 954655370649223622}
   levelManager: {fileID: 0}
+  radiusColor: {r: 0, g: 0, b: 0, a: 0}
   m_value: 0
   m_healthBar: {fileID: 4428117412000254044}
   isHealingTower: 0

@@ -8,6 +8,8 @@ public class AttackType : MonoBehaviour {
     private enum AttackStyle { Single, Triple, Circle, Heal };
     [SerializeField] private AttackStyle attackStyle;
     public Transform projectile;
+    
+    public Tower source;
 
     public void attack(GameObject sourceEnemy, GameObject sourceTower) {
         var tower = sourceTower.GetComponent<Tower>();
