@@ -12,14 +12,22 @@ public class Toggle : MonoBehaviour {
     [SerializeField]
     private UnityEngine.UI.Toggle baseToggle;
     
-    void Start() {
+    public bool isAudio;
+    public bool isFPS;
+    
+    void Awake() {
         if (baseToggle == null)
             baseToggle = gameObject.GetComponent<UnityEngine.UI.Toggle>();
         
-        if (GameObject.Find("SettingsManager") != null)
+        if (GameObject.Find("SettingsManager"))
             settingsManager = GameObject.Find("SettingsManager").GetComponent<Settings>();
         else
             Debug.Log("Unable to find SettingsManager in current Scene");
+        
+        if (isFPS)
+            baseToggle.isOn = settingsManager.getShowFps();
+        if (isAudio)
+            baseToggle.isOn = settingsManager.getPlayAudio();
     }
 
     public void Toggled(bool toggled) {
