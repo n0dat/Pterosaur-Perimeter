@@ -8,7 +8,8 @@ public class MainManager : MonoBehaviour {
     private SceneManager sceneManager;
     private StateManager stateManager;
     private PlayerManager playerManager;
-    private GameManager gameManager;
+    
+    private bool[] levelsCompleted = {false, false, false, false, false};
 
     void Awake() {
 	    DontDestroyOnLoad(this);
@@ -16,7 +17,6 @@ public class MainManager : MonoBehaviour {
 	    settingsManager = GameObject.Find("SettingsManager").GetComponent<Settings>();
 	    sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 	    stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
-	    gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public Settings getSettingsManager() {
@@ -31,7 +31,20 @@ public class MainManager : MonoBehaviour {
 	    return this.stateManager;
     }
 
-    public GameManager getGameManager() {
-	    return this.gameManager;
+    public int getNumLevelsCompleted()
+    {
+	    int count = 0;
+	    
+	    foreach (bool lvl in levelsCompleted)
+	    {
+		    if (lvl)
+			    count++;
+	    }
+
+	    return count;
+    }
+    
+    public void completeLevel(int index) {
+	    levelsCompleted[index] = true;
     }
 }

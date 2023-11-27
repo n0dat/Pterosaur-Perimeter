@@ -323,7 +323,7 @@ public class LevelManager : MonoBehaviour {
 		Time.timeScale = 0;
 		if (condition) {
 			levelWon = true;
-			mainManager.getGameManager().completeLevel(levelIndex);
+			mainManager.completeLevel(levelIndex);
 			winUI.SetActive(true);
 			loseUI.SetActive(false);
 		}

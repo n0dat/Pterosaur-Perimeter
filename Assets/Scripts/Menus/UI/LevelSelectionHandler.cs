@@ -8,7 +8,8 @@ public class LevelSelectionHandler : MonoBehaviour
 
     public void Start()
     {
-        unlockTier(5);
+        MainManager mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+        unlockTier(mainManager.getNumLevelsCompleted()+1);
     }
     
     public void unlockTier(int tier)

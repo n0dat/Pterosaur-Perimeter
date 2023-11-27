@@ -20,7 +20,8 @@ public class SceneManager : MonoBehaviour {
         return currentScene;
     }
 
-    public void loadScene(string sceneToLoad) {
+    public void loadScene(string sceneToLoad)
+    {
         currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         var asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneToLoad);
         if (asyncLoad == null)
@@ -30,4 +31,5 @@ public class SceneManager : MonoBehaviour {
     public void reloadScene() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
+    
 }
