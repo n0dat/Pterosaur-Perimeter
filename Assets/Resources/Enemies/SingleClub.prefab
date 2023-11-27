@@ -221,11 +221,13 @@ MonoBehaviour:
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
   enemyType: 1
   changeThreshold: 0.15
+  levelManager: {fileID: 0}
   hitDelay: 0.2
   sprite: {fileID: 3182256665132170450}
   m_healthBarHandler: {fileID: 6295385884624527283}
-  health: 100
+  health: 80
   movementSpeed: 25
+  killReward: 50
   m_audioHandler: {fileID: 3766428756543186441}
   m_animator: {fileID: 3642663607313875464}
 --- !u!58 &7856822877599368202

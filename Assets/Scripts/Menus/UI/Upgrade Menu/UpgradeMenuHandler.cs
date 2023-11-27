@@ -6,14 +6,16 @@ public class UpgradeMenuHandler : MonoBehaviour
 {
     public void Update()
     {
-        if (!m_currentTower) {
-            if (m_isOpen) {
-                m_currentTower = null;
+        if (!m_currentTower)
+        {
+            if (m_isOpen)
+            {
                 m_isOpen = false;
-                m_animator.SetTrigger("slideIn");
+                exitButton();
             }
             return;
         }
+            
 
         if (m_currentTower.getHealth() == m_healthValue)
             return;
@@ -69,6 +71,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         if (m_isOpen)
             return;
         
+        m_animator.ResetTrigger("slideIn");
         m_animator.SetTrigger("slideOut");
         m_isOpen = true;
     }
@@ -216,9 +219,12 @@ public class UpgradeMenuHandler : MonoBehaviour
     {
         if (!hasAllReferences())
             return;
-
+        
+        Debug.Log("exitButton Called");
         m_currentTower = null;
         m_isOpen = false;
+        
+        m_animator.ResetTrigger("slideOut");
         m_animator.SetTrigger("slideIn");
     }
 
