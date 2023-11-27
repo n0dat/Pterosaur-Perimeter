@@ -177,13 +177,14 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	IEnumerator spawnSubRound(Round curRound) {
-		Debug.Log("Spawning sub round");
+		Debug.Log("Spawning sub round with start delay:" + curRound.startDelay);
 		if (curRound.startDelay != 0)
-			yield return new WaitForSeconds(curRound.startDelay);
+			yield return new WaitForSeconds(curRound.startDelay + 2f);
+		Debug.Log("Round ready to spawn");
 		
 		for (int i = 0; i < curRound.enemyCount; i++) {
 			spawnEnemy(curRound.enemy);
-			yield return new WaitForSeconds(1f / curRound.spawnRate);
+			yield return new WaitForSeconds(curRound.spawnRate + 0.2f);
 		}
 	}
 
