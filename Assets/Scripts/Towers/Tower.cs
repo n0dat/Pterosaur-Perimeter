@@ -120,14 +120,20 @@ public class Tower : MonoBehaviour {
     //
     //
     private void setTargetingMode(TargetingMode targetMode) {
+        Debug.Log("");
         if (targetMode == TargetingMode.First) { // target enemy within radius that is furthest along the track
             var distance = 0f;
             var initLength = enemiesInRange.Length;
             foreach (var enemy in enemiesInRange) {
-                if (enemiesInRange.Length != initLength)
+                Debug.Log("Checking on enemy");
+                if (enemiesInRange.Length != initLength) {
+                    Debug.Log("Enemies in range changed in length");
                     break;
+                }
+                
                 var tempDistance = enemy.gameObject.GetComponent<Enemy>().getTravelDistance();
                 if (tempDistance >= distance) {
+                    Debug.Log("tempDistance was greater than distance");
                     distance = tempDistance;
                     enemyToAttack = enemy.gameObject;
                 }

@@ -1,34 +1,26 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using IniParser;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class Settings : MonoBehaviour {
     
     // globals
-    [SerializeField]
-    private bool showFps;
+    [SerializeField] private bool showFps;
     
-    [SerializeField]
-    private int targetFps;
+    [SerializeField] private int targetFps;
     
-    [SerializeField]
-    private bool playAudio;
+    [SerializeField] private bool playAudio;
     
-    [SerializeField]
-    private float audioLevel;
+    [SerializeField] private float audioLevel;
     
-    [SerializeField]
-    private bool autoStartRounds;
+    [SerializeField] private bool autoStartRounds;
     
     private GameObject fpsCounter;
-    
     public SettingsHandler settingsHandler;
+    public Camera mainCamera;
+    public Canvas fpsCounterCanvas;
 
     void Awake() {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
         
         Application.targetFrameRate = 60;
         autoStartRounds = false;
@@ -99,5 +91,22 @@ public class Settings : MonoBehaviour {
         setPlayAudio(settings.Item2);
         setTargetFps(settings.Item3);
         setAudioLevel(settings.Item4);
+    }
+    
+    public void getNewCamera() {
+        StartCoroutine(GetCamera());
+    }
+
+    private IEnumerator GetCamera() {
+        while (!mainCamera) {
+            mainCamera = Camera.main;
+            fpsCounterCanvas.worldCamera = mainCamera;
+            fpsCounterCanvas.sortingLayerName = "UI_Top";
+            fpsCounterCanvas.sortingOrder = 10;
+            break;
+        }
+        
+        Debug.Log("Settings : Camera found");
+        yield return null;
     }
 }
