@@ -68,8 +68,9 @@ public class LevelManager : MonoBehaviour {
     
 	public void removeEnemy(int enemy) {
 		Debug.Log("Remove enemy called");
-		if (!rounds[currentRound].enemies.remove(enemy)) {
-			Debug.Log("Unable to remove enemy from current round list");
+		var ret = !rounds[currentRound].enemies.remove(enemy);
+		if (ret) {
+			Debug.Log("Unable to remove enemy from current round list: " + ret);
 		}
 	}
 
@@ -100,13 +101,16 @@ public class LevelManager : MonoBehaviour {
 			}
 		}
 		if (roundState == RoundState.InProgress) {
-			if (!hasEnemies())
+			if (hasEnemies())
 				endRound();
 		}
 	}
 
+	
+	public bool forceStart = true;
 	public void startRound() {
 		if (roundState == RoundState.Waiting) {
+			forceStart = false;
 			roundState = RoundState.Spawning;
 			StartCoroutine(spawnRound(rounds[currentRound]));
 			setRoundCounter();
@@ -147,7 +151,9 @@ public class LevelManager : MonoBehaviour {
 
 	bool hasEnemies() {
 		//Debug.Log("total enemies: " + rounds[currentRound].enemies.Count);
-		return !rounds[currentRound].enemies.IsEmpty;
+		//var enemyList = GameObject.FindGameObjectsWithTag("Enemy");
+		return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
+		//return !rounds[currentRound].enemies.IsEmpty;
 	}
 
 	IEnumerator spawnRound(Round curRound) {

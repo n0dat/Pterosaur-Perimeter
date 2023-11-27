@@ -3,17 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour {
 
-    // globals
-    [SerializeField]
-    private Scene currentScene;
+    [SerializeField] private Scene currentScene;
     
     private MainManager mainManager;
 
     void Awake() {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
         
         currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+        mainManager.getSettingsManager().getNewCamera();
     }
 
     public Scene getCurrentScene() {
@@ -23,6 +22,7 @@ public class SceneManager : MonoBehaviour {
     public void loadScene(string sceneToLoad) {
         currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         var asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneToLoad);
+        mainManager.getSettingsManager().getNewCamera();
         if (asyncLoad == null)
             Debug.Log("Failed to load scene : " + sceneToLoad);
     }
