@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealthUIHandler : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Slider m_slider;
+    private int m_maxHealth = 100;
 
     public void setHealth(int val)
     {
@@ -14,10 +15,10 @@ public class HealthUIHandler : MonoBehaviour
         if (val < 0)
             val = 0;
         
-        if (val > 100)
-            val = 100;
+        if (val > m_maxHealth)
+            val = m_maxHealth;
         
-        m_slider.value =  (float)val / (float)100;
+        m_slider.value =  (float)val / (float)m_maxHealth;
     } 
     
     private bool hasAllReferences()
@@ -29,5 +30,10 @@ public class HealthUIHandler : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void setMaxHealth(int max)
+    {
+        m_maxHealth = max;
     }
 }

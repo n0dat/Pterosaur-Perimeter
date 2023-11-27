@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour {
 		
 		m_playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 		spriteRenderer = sprite.GetComponent<SpriteRenderer>();
+		m_healthBarHandler.setMaxHealth((int)health);
 	}
 
 	void Update() {
