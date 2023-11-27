@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tower : MonoBehaviour {
@@ -457,7 +458,7 @@ public class Tower : MonoBehaviour {
         m_healthBar.setHealth(m_health);
         
         if (m_health == 0)
-            Destroy(this.gameObject);
+            Destroy(gameObject);
     }
 
     // damage to tower

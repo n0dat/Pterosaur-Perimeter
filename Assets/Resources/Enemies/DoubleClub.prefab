@@ -339,7 +339,7 @@ MonoBehaviour:
   m_enemy: {fileID: 9160740815599593331}
   attackDelay: 2
   readyToAttack: 1
-  damage: 5
+  damage: 2
   range: 25
   isAttackingEnemy: 1
 --- !u!1 &9194719120366156845

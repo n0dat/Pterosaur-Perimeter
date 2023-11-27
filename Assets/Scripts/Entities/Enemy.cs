@@ -65,6 +65,7 @@ public class Enemy : MonoBehaviour {
 	public void setWaypoints(List<Vector3> points) {
 		waypoints = points;
 		targetWaypoint = waypoints[0];
+		findTotalDistance();
 	}
 
 	private void getNextCheckpoint() {

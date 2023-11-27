@@ -79,6 +79,7 @@ public class Settings : MonoBehaviour {
 
     public void saveSettings() {
         initPrefs();
+        
         PlayerPrefs.SetInt("ShowFps", getShowFps() ? 1 : 0);
         PlayerPrefs.SetInt("PlayAudio", getPlayAudio() ? 1 : 0);
         PlayerPrefs.SetInt("TargetFps", getTargetFps());

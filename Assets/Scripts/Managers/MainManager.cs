@@ -18,15 +18,15 @@ public class MainManager : MonoBehaviour {
     }
 
     public Settings getSettingsManager() {
-	    return this.settingsManager;
+	    return settingsManager;
     }
 
     public SceneManager getSceneManager() {
-	    return this.sceneManager;
+	    return sceneManager;
     }
 
     public StateManager getStateManager() {
-	    return this.stateManager;
+	    return stateManager;
     }
 
     public int getNumLevelsCompleted()
