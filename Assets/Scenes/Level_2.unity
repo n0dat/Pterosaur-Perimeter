@@ -556,7 +556,7 @@ PrefabInstance:
     - target: {fileID: 7079448655759149755, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
       propertyPath: m_levelManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 692206120}
     - target: {fileID: 8569335042117032601, guid: 6971706f32d73b341aa4d88efc5791ce, type: 3}
       propertyPath: m_playerManager
       value: 
