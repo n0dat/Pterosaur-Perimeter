@@ -5,13 +5,9 @@ public class Settings : MonoBehaviour {
     
     // globals
     [SerializeField] private bool showFps;
-    
     [SerializeField] private int targetFps;
-    
     [SerializeField] private bool playAudio;
-    
     [SerializeField] private float audioLevel;
-    
     [SerializeField] private bool autoStartRounds;
     
     private GameObject fpsCounter;
@@ -27,7 +23,6 @@ public class Settings : MonoBehaviour {
         targetFps = 60;
         fpsCounter = gameObject.transform.GetChild(0).GetChild(0).gameObject;
         fpsCounter.SetActive(false);
-        settingsHandler = new SettingsHandler();
     }
 
     public void setShowFps(bool val) {
@@ -44,6 +39,7 @@ public class Settings : MonoBehaviour {
         targetFps = val;
         Debug.Log("Set Target FPS: " + targetFps);
         Application.targetFrameRate = val;
+        
     }
 
     public void setPlayAudio(bool val) {
@@ -82,17 +78,37 @@ public class Settings : MonoBehaviour {
     }
 
     public void saveSettings() {
-        settingsHandler.writeSettings(getShowFps(), getPlayAudio(), getTargetFps(), getAudioLevel());
+        initPrefs();
+        PlayerPrefs.SetInt("ShowFps", getShowFps() ? 1 : 0);
+        PlayerPrefs.SetInt("PlayAudio", getPlayAudio() ? 1 : 0);
+        PlayerPrefs.SetInt("TargetFps", getTargetFps());
+        PlayerPrefs.SetFloat("AudioLevel", getAudioLevel());
     }
 
     public void loadSettings() {
-        var settings = settingsHandler.readSettings();
-        setShowFps(settings.Item1);
-        setPlayAudio(settings.Item2);
-        setTargetFps(settings.Item3);
-        setAudioLevel(settings.Item4);
+        initPrefs();
+        
+        setShowFps(PlayerPrefs.GetInt("ShowFps") != 0);
+        setPlayAudio(PlayerPrefs.GetInt("PlayAudio") != 0);
+        
+        var fps = PlayerPrefs.GetInt("TargetFps");
+        setTargetFps(fps is >= 5 and <= 60 ? fps : 60);
+        
+        var level = PlayerPrefs.GetFloat("AudioLevel");
+        setAudioLevel(level is >= 0f and <= 100f ? level : 100);
     }
-    
+
+    private void initPrefs() {
+        if (!PlayerPrefs.HasKey("ShowFps"))
+            PlayerPrefs.SetInt("ShowFps", 0);
+        if (!PlayerPrefs.HasKey("PlayAudio"))
+            PlayerPrefs.SetInt("PlayAudio", 0);
+        if (!PlayerPrefs.HasKey("TargetFps"))
+            PlayerPrefs.SetInt("TargetFps", 60);
+        if (!PlayerPrefs.HasKey("AudioLevel"))
+            PlayerPrefs.SetFloat("AudioLevel", 100f);
+    }
+
     public void getNewCamera() {
         StartCoroutine(GetCamera());
     }

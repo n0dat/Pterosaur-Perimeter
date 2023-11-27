@@ -1,26 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Slider : MonoBehaviour {
     
-    // globals
-    [SerializeField]
-    private Settings settingsManager;
+    [SerializeField] private Settings settingsManager;
+    [SerializeField] private GameObject label;
+    [SerializeField] private UnityEngine.UI.Slider slider;
     
-    [SerializeField]
-    private GameObject label;
-    
-    [SerializeField]
-    private UnityEngine.UI.Slider slider;
+    public bool isAudio;
+    public bool isFPS;
 
     void Start() {
-        if (GameObject.Find("SettingsManager") != null)
+        if (GameObject.Find("SettingsManager"))
             settingsManager = GameObject.Find("SettingsManager").GetComponent<Settings>();
         else
             Debug.Log("Unable to find SettingsManager in current Scene");
+        
+        if (isAudio)
+            slider.value = settingsManager.getAudioLevel();
+        
+        if (isFPS)
+            slider.value = settingsManager.getTargetFps();
     }
 
     public void updateText() {
@@ -34,13 +34,11 @@ public class Slider : MonoBehaviour {
     }
 
     public void updateSetting() {
-        if (settingsManager != null) {
-            if (gameObject.name == "TargetFpsSlider") {
+        if (settingsManager) {
+            if (gameObject.name == "TargetFpsSlider")
                 settingsManager.setTargetFps(Mathf.RoundToInt(slider.value));
-            }
-            else if (gameObject.name == "AudioLevelSlider") {
+            if (gameObject.name == "AudioLevelSlider")
                 settingsManager.setAudioLevel(Mathf.RoundToInt(slider.value));
-            }
         }
     }
 }
