@@ -83,3 +83,5 @@ Assets/*/._*.cs
 Assets/*/*/._*.cs
 Assets/*/*/*/._*.cs
 settings.ini
+*.info
+LinuxBuild_Data/level0
