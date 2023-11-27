@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour {
 	void Awake() {
 		setChangeThreshold();
 		findTotalDistance();
-		//levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		
 		m_playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 		spriteRenderer = sprite.GetComponent<SpriteRenderer>();
 	}
@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour {
 		targetWaypoint = waypoints[0];
 	}
 
-	void getNextCheckpoint() {
+	private void getNextCheckpoint() {
 		//Reached the last checkpoint. Decrease player health.
 		if (waypointIndex >= waypoints.Count - 1) {
 			m_playerManager.hit();
@@ -89,10 +89,6 @@ public class Enemy : MonoBehaviour {
 		if (levelManager)
 			levelManager.removeEnemy(gameObject.GetInstanceID());
 		
-	}
-
-	public float getTotalDistance() {
-		return totalDistance;
 	}
 
 	public float getTravelDistance() {
@@ -121,14 +117,14 @@ public class Enemy : MonoBehaviour {
 		m_audioHandler.damage();
 		
 		m_healthBarHandler.setHealth((int)health);
+
+		if (health > 0) return;
 		
-		if (health <= 0) {
-			Debug.Log("Enemy killed");
-			attacker.enemyKilled();
-			m_playerManager.skullsCredit(killReward);
-			m_audioHandler.death();
-			Destroy(gameObject);
-		}
+		Debug.Log("Enemy killed");
+		attacker.enemyKilled();
+		m_playerManager.skullsCredit(killReward);
+		m_audioHandler.death();
+		Destroy(gameObject);
 	}
 
 	private IEnumerator indicateHit() {
@@ -141,7 +137,7 @@ public class Enemy : MonoBehaviour {
 		isDisplayingHit = false;
 	}
 
-	public FacingDirection getFacingDirection(Vector3 target) {
+	private FacingDirection getFacingDirection(Vector3 target) {
 		var angle = Vector3.Angle(transform.up, (target - transform.position));
 		if (Mathf.Abs(angle - 0f) < facingThreshold)
 			return FacingDirection.Up;
@@ -154,7 +150,7 @@ public class Enemy : MonoBehaviour {
 		return FacingDirection.Unknown;
 	}
 
-	public void updateRotation(Vector3 target) {
+	private void updateRotation(Vector3 target) {
 		Vector3 direction = target - sprite.transform.position;
 		var angle = Mathf.Atan2(direction.y, direction.x);
 		var angleDegrees = angle * Mathf.Rad2Deg + -90f;
@@ -171,21 +167,21 @@ public class Enemy : MonoBehaviour {
 		m_audioHandler.quip();
 	}
 
-	public void setChangeThreshold() {
+	private void setChangeThreshold() {
 		if (enemyType == EnemyType.Standard) {
-			changeThreshold = 0.15f;
+			changeThreshold = 0.18f;
 			movementSpeed = 24f;
 		}
 		if (enemyType == EnemyType.SingleClub) {
-			changeThreshold = 0.18f;
+			changeThreshold = 0.22f;
 			movementSpeed = 26f;
 		}
 		if (enemyType == EnemyType.DoubleClub) {
-			changeThreshold = 0.2f;
+			changeThreshold = 0.25f;
 			movementSpeed = 28f;
 		}
 		if (enemyType == EnemyType.Rock) {
-			changeThreshold = 0.25f;
+			changeThreshold = 0.3f;
 			movementSpeed = 30f;
 		}
 	}

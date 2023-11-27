@@ -187,15 +187,15 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
-	void spawnEnemy(Transform enemyToSpawn) {
+	private void spawnEnemy(Transform enemyToSpawn) {
 		var tempEnemy = Instantiate(enemyToSpawn, getCheckpoints()[0], Quaternion.identity);
 		rounds[currentRound].enemies.enqueue(tempEnemy.gameObject.GetInstanceID());
 		var enemyInstance = tempEnemy.gameObject.GetComponent<Enemy>();
 		enemyInstance.setWaypoints(getCheckpoints());
 		enemyInstance.levelManager = GetComponent<LevelManager>();
 	}
-	
-	public void showDisasterPrompt() {
+
+	private void showDisasterPrompt() {
 		disasterPrompt.SetActive(true);
 		mainManager.getStateManager().showDisasterPrompt();
 	}
@@ -206,16 +206,14 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	private List<Vector3> getCheckpoints() {
-		if (eventState == EventState.Event1)
-			return checkpointsEvent1;
-		
-		if (eventState == EventState.Event2)
-			return checkpointsEvent2;
-		
-		return checkpointsNoEvent;
+		return eventState switch {
+			EventState.Event1 => checkpointsEvent1,
+			EventState.Event2 => checkpointsEvent2,
+			_ => checkpointsNoEvent
+		};
 	}
 
-	public void loadCheckpoints() {
+	private void loadCheckpoints() {
 		checkpointsNoEvent.Clear();
 		checkpointsEvent1.Clear();
 		checkpointsEvent2.Clear();
@@ -236,7 +234,7 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
-	public void triggerEvent() {
+	private void triggerEvent() {
 		if (eventState == EventState.Event1) {
 			if (eventType == 1)
 				disasterEffectHandler.meteorDisaster(event1Location, 3f);
@@ -260,19 +258,21 @@ public class LevelManager : MonoBehaviour {
 
 		// here we need to switch the map and also do a raycast to remove all enemies and towers within that raycast
 		
-		if (eventNum == 1) {
-			destroyWithinRadius(event1Location, disasterDestructionRange);
+		switch (eventNum) {
+			case 1:
+				destroyWithinRadius(event1Location, disasterDestructionRange);
 			
-			mapNoEvent.SetActive(false);
-			mapEvent1.SetActive(true);
-			mapEvent2.SetActive(false);
-		}
-		if (eventNum == 2) {
-			destroyWithinRadius(event2Location, disasterDestructionRange);
+				mapNoEvent.SetActive(false);
+				mapEvent1.SetActive(true);
+				mapEvent2.SetActive(false);
+				break;
+			case 2:
+				destroyWithinRadius(event2Location, disasterDestructionRange);
 
-			mapNoEvent.SetActive(false);
-			mapEvent1.SetActive(false);
-			mapEvent2.SetActive(true);
+				mapNoEvent.SetActive(false);
+				mapEvent1.SetActive(false);
+				mapEvent2.SetActive(true);
+				break;
 		}
 	}
 
@@ -285,22 +285,23 @@ public class LevelManager : MonoBehaviour {
 				transforms.Add(colr.gameObject.transform);
 		}
 
-		if (transforms.Count > 0)
-			for (int i = transforms.Count - 1; i >= 0; i--)
-				Destroy(transforms[i].gameObject);
+		if (transforms.Count <= 0) return;
 		
+		for (var i = transforms.Count - 1; i >= 0; i--)
+			Destroy(transforms[i].gameObject);
+
 	}
 
-	public void loadMaps() {
+	private void loadMaps() {
 		mapNoEvent.SetActive(true);
 		mapEvent1.SetActive(false);
 		mapEvent2.SetActive(false);
 	}
 
-	public void resetLevel() {
+	private void resetLevel() {
 		var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-		for (int i = 0; i < enemies.Length; i++)
-			Destroy(enemies[i]);
+		foreach (var t in enemies)
+			Destroy(t);
 
 		disasterPrompt.SetActive(false);
         
@@ -316,7 +317,7 @@ public class LevelManager : MonoBehaviour {
 		foreach (var round in rounds)
 			round.init();
         
-		futureEvent = (Random.Range(1, 3) == 1) ? EventState.Event1 : EventState.Event2;
+		futureEvent = Random.Range(1, 3) == 1 ? EventState.Event1 : EventState.Event2;
 		
 		winUI.SetActive(false);
 		loseUI.SetActive(false);
@@ -340,7 +341,7 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
-	public void setRoundCounter() {
+	private void setRoundCounter() {
 		roundCounter.GetComponent<TextMeshProUGUI>().SetText("Round: " + currentRound);
 	}
 }

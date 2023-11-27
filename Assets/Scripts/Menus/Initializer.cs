@@ -7,22 +7,21 @@ public class Initializer : MonoBehaviour {
     
     // globals
     public bool playIntro = false;
-   
-    void Awake() {
+    public MainManager mainManager;
+
+    private void Awake() {
         DontDestroyOnLoad(this);
         if (playIntro)
             StartCoroutine(introStart());
         else {
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainMenuScene");
+            mainManager.getSceneManager().loadScene("MainMenuScene");
             Destroy(this);
         }
     }
 
-
-    IEnumerator introStart() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Test Intro Scene");
+    private IEnumerator introStart() {
+        mainManager.getSceneManager().loadScene("Test Intro Scene");
         yield return new WaitForSeconds(13f);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
-        
+        mainManager.getSceneManager().loadScene("MainMenuScene");
     }
 }

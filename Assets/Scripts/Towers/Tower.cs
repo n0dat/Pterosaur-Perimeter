@@ -120,20 +120,17 @@ public class Tower : MonoBehaviour {
     //
     //
     private void setTargetingMode(TargetingMode targetMode) {
-        Debug.Log("");
         if (targetMode == TargetingMode.First) { // target enemy within radius that is furthest along the track
             var distance = 0f;
             var initLength = enemiesInRange.Length;
             foreach (var enemy in enemiesInRange) {
-                Debug.Log("Checking on enemy");
                 if (enemiesInRange.Length != initLength) {
-                    Debug.Log("Enemies in range changed in length");
+                    Debug.Log("Enemies in range changed in length, breaking out");
                     break;
                 }
                 
                 var tempDistance = enemy.gameObject.GetComponent<Enemy>().getTravelDistance();
                 if (tempDistance >= distance) {
-                    Debug.Log("tempDistance was greater than distance");
                     distance = tempDistance;
                     enemyToAttack = enemy.gameObject;
                 }
@@ -465,13 +462,13 @@ public class Tower : MonoBehaviour {
 
     // damage to tower
     public void takeDamage(int val) {
-        Debug.Log("Taking damage");
+        //Debug.Log("Taking damage");
         StartCoroutine(hit());
         setHealth(getHealth() - val);
     }
 
     IEnumerator hit() {
-        Debug.Log("Tower called hit");
+        //Debug.Log("Tower called hit");
         spriteRotator.getRenderer().color = Color.red;
         yield return new WaitForSeconds(0.1f);
         spriteRotator.getRenderer().color = Color.white;
@@ -492,9 +489,9 @@ public class Tower : MonoBehaviour {
     
     // tower value calculation for sell button
     public void calculateValue() {
-        Debug.Log("Damage Upgrade Level: " + m_damageUpgradeLevel);
-        Debug.Log("Range Upgrade Level: " + m_rangeUpgradeLevel);
-        Debug.Log("Attack Speed Upgrade Level: " + m_attackSpeedUpgradeLevel);
+        //Debug.Log("Damage Upgrade Level: " + m_damageUpgradeLevel);
+        //Debug.Log("Range Upgrade Level: " + m_rangeUpgradeLevel);
+        //Debug.Log("Attack Speed Upgrade Level: " + m_attackSpeedUpgradeLevel);
         m_value = (int) (towerCost * 0.8f + m_damageUpgradeLevel * 40 + m_rangeUpgradeLevel * 40 + m_attackSpeedUpgradeLevel * 40);
     }
 

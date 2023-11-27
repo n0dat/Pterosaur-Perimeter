@@ -48,6 +48,7 @@ public class StateManager : MonoBehaviour {
 		resumeGame();
 		mainManager.getSceneManager().loadScene("MainMenuScene");
 		gameState = GameState.Menu;
+		mainManager.getSettingsManager().getNewCamera();
 	}
 
     public void setGameState(GameState state) {
