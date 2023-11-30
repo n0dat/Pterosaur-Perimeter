@@ -14,12 +14,9 @@ public class Tower : MonoBehaviour {
     [SerializeField] private Animator m_animator;
 
     // member vars
-    [SerializeField]
-    private int towerCost, repairCost, radiusLineSegments = 50, killCount;
-    [SerializeField]
-    private float attackSpeed, attackDamage, attackRange;
-    [SerializeField]
-    private bool isHeld, selected, validPosition, attackInProgress;
+    [SerializeField] private int towerCost, repairCost, radiusLineSegments = 50, killCount;
+    [SerializeField] private float attackSpeed, attackDamage, attackRange;
+    [SerializeField] private bool isHeld, selected, validPosition, attackInProgress;
     
     // references
     [SerializeField] private LineRenderer radiusLine;
@@ -51,6 +48,12 @@ public class Tower : MonoBehaviour {
 
     [SerializeField] private TowerAudioSpawner m_audioHandler;
     
+    // tower stats
+    public float attackCountdown = 0f;
+    public TowerStats towerStats;
+    public GameObject towerStatsObj;
+    public bool hasStats = false;
+    
     // initialize most global values
     void Awake() {
         repairCost = 0;
@@ -61,6 +64,10 @@ public class Tower : MonoBehaviour {
         validPosition = true;
         attackInProgress = false;
         radiusLine.enabled = true;
+        
+        towerStats = towerStatsObj.GetComponent<TowerStats>();
+        towerStats.tower = GetComponent<Tower>();
+        towerStatsObj.SetActive(false);
         
         setLineColorGrey();
         drawRadiusCircle();
@@ -170,7 +177,17 @@ public class Tower : MonoBehaviour {
             WaitForAttack waitForAttack = new WaitForAttack();
             StartCoroutine(finishAttack(waitForAttack));
             yield return waitForAttack;
-            yield return new WaitForSeconds(getAttackSpeed());
+            
+            var speed = getAttackSpeed();
+            var remain = speed % 0.1f;
+            attackCountdown = speed;
+            
+            for (int i = 0; i < speed / 0.1; i++) {
+                yield return new WaitForSeconds(0.1f);
+                attackCountdown -= 0.1f;
+            }
+            
+            yield return new WaitForSeconds(remain);
             attackInProgress = false;
         }
     }
@@ -498,5 +515,24 @@ public class Tower : MonoBehaviour {
 
     public int getValue() {
         return m_value;
+    }
+
+    
+    
+    // tower statistics
+    public void showStats() {
+        towerStatsObj.SetActive(true);
+        towerStats.start();
+        hasStats = true;
+    }
+
+    public void hideStats() {
+        towerStatsObj.SetActive(false);
+        towerStats.stop();
+        hasStats = false;
+    }
+
+    public bool showingStats() {
+        return hasStats;
     }
 }

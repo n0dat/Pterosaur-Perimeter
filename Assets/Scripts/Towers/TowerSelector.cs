@@ -112,5 +112,65 @@ public class TowerSelector : MonoBehaviour {
                 towerRef = null;
             }
         }
+        else if (Input.GetMouseButtonDown(1)) {
+            if (!mainCamera) {
+                getNewCamera();
+                return;
+            }
+            Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            var mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+            RaycastHit2D hit = new RaycastHit2D();
+            foreach (var hits in Physics2D.RaycastAll(mousePos2D, Vector2.zero)) {
+                if (hits.collider.gameObject.CompareTag("UI"))
+                    return;
+                if (hits.collider.gameObject.CompareTag("TowerCollider"))
+                    hit = hits;
+            }
+
+            if (!hit) {
+                if (towerObj) {
+                    towerRef.hideStats();
+                    towerObj = null;
+                    towerRef = null;
+                }
+                return;
+            }
+
+            if (hit.collider.gameObject.CompareTag("TowerCollider")) { // hit a Tower game object
+                Debug.Log("Clicked on tower collider");
+                
+                if (hit.collider.transform.parent.gameObject.GetComponent<Tower>().beingHeld())
+                    return;
+
+                if (towerObj) {
+                    towerRef = towerObj.gameObject.GetComponent<Tower>();
+                    if (hit.collider.transform.parent.gameObject.GetInstanceID() == towerObj.GetInstanceID()) {
+                        if (towerRef.showingStats())
+                            towerRef.hideStats();
+                        else
+                            towerRef.showStats();
+                        return;
+                    }
+                    
+                    if (towerRef.showingStats())
+                        towerRef.hideStats();
+                }
+                
+                
+                
+                towerObj = hit.collider.transform.parent.gameObject;
+                towerRef = towerObj.GetComponent<Tower>();
+                towerRef.showStats();
+
+                m_timeLastClick = Time.time;
+            }
+            else {
+                if (towerObj)
+                    towerRef.hideStats();
+                towerObj = null;
+                towerRef = null;
+            }
+        }
     }
 }
