@@ -535,4 +535,9 @@ public class Tower : MonoBehaviour {
     public bool showingStats() {
         return hasStats;
     }
+    
+    // disaster death
+    public void kill() {
+        Destroy(this);
+    }
 }

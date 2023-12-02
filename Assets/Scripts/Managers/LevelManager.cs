@@ -279,18 +279,30 @@ public class LevelManager : MonoBehaviour {
 
 	private void destroyWithinRadius(Vector3 target, float range) {
 		var transforms = new List<Transform>();
-		foreach (var colr in Physics2D.OverlapCircleAll(transform.position, range)) {
-			if (colr.gameObject.CompareTag("Tower"))
+		foreach (var colr in Physics2D.OverlapCircleAll(target, range)) {
+			Debug.Log("Collider hit for disaster:" + colr.name);
+			if (colr.gameObject.CompareTag("TowerCollider")) {
 				transforms.Add(colr.gameObject.transform);
+			}
 			else if (colr.gameObject.CompareTag("Enemy"))
 				transforms.Add(colr.gameObject.transform);
 		}
-
-		if (transforms.Count <= 0) return;
+		
+		if (transforms.Count <= 0) {
+			Debug.Log("Did not hit any towers for the disaster");
+			return;
+		}
+		
+		Debug.Log("Hit " + transforms.Count + " towers");
 		
 		for (var i = transforms.Count - 1; i >= 0; i--)
-			Destroy(transforms[i].gameObject);
+			Destroy(transforms[i].parent.gameObject);
+	}
 
+	private IEnumerator killTower(GameObject obj) {
+		obj.SetActive(false);
+		yield return new WaitForSeconds(1f);
+		Destroy(obj);
 	}
 
 	private void loadMaps() {

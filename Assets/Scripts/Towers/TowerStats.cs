@@ -5,24 +5,27 @@ using UnityEngine;
 
 public class TowerStats : MonoBehaviour {
 	
+	// globals
 	public Tower tower;
-	//public GameObject towerObj;
 	public GameObject textObj;
 	public TextMeshProUGUI text;
-
+    
+	// called before first update
 	void Awake() {
 		text = textObj.GetComponent<TextMeshProUGUI>();
-		//tower = towerObj.GetComponent<Tower>();
 	}
 
+	// start showing stats
 	public void start() {
 		StartCoroutine(update());
 	}
 
+	// stop showing stats
 	public void stop() {
 		StopCoroutine(update());;
 	}
 
+	// update stats ui every 100 milliseconds (1/10th second)
 	IEnumerator update() {
 		while (tower) {
 			var ret = "Health\t" + tower.getHealth() + "\n";
