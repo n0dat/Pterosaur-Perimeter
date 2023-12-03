@@ -228,9 +228,10 @@ public class Tower : MonoBehaviour {
             //Debug.Log("Colliding with: " + collision.gameObject.name);
             var col = collision.gameObject;
 
-            //if (col.CompareTag("TowerCollider") || col.CompareTag("Tower")) {
-            //    setValidPosition(false);
-            //}
+            if (col.CompareTag("TowerCollider") || col.CompareTag("Tower")) {
+                setValidPosition(false);
+                return;
+            }
             
             if (towerType == TowerType.Land) {
                 if (col.CompareTag("GroundCollider"))
@@ -248,9 +249,10 @@ public class Tower : MonoBehaviour {
             //Debug.Log("Stopped Colliding with: " + collision.gameObject.name);
             var col = collision.gameObject;
             
-            //if (col.CompareTag("TowerCollider") || col.CompareTag("Tower")) {
-            //    setValidPosition(true);
-            //}
+            if (col.CompareTag("TowerCollider") || col.CompareTag("Tower")) {
+                setValidPosition(true);
+                return;
+            }
 
             if (towerType == TowerType.Land) {
                 if (col.CompareTag("GroundCollider"))
