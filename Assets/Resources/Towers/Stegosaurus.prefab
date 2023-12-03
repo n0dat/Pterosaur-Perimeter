@@ -405,6 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteObject: {fileID: 6398726532095132751}
+  enabled: 0
 --- !u!114 &765229719627137857
 MonoBehaviour:
   m_ObjectHideFlags: 0
