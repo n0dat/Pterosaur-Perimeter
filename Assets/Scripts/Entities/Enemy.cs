@@ -87,10 +87,6 @@ public class Enemy : MonoBehaviour {
 			StopCoroutine(indicateHit());
 			isDisplayingHit = false;
 		}
-		
-		if (levelManager)
-			levelManager.removeEnemy(gameObject.GetInstanceID());
-		
 	}
 
 	public float getTravelDistance() {
@@ -122,7 +118,6 @@ public class Enemy : MonoBehaviour {
 
 		if (health > 0) return;
 		
-		Debug.Log("Enemy killed");
 		attacker.enemyKilled();
 		m_playerManager.skullsCredit(killReward);
 		m_audioHandler.death();

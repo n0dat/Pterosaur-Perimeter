@@ -54,6 +54,10 @@ public class Tower : MonoBehaviour {
     public GameObject towerStatsObj;
     public bool hasStats = false;
     
+    
+    // tower selection
+    public bool readyToBeSelected = false;
+    
     // initialize most global values
     void Awake() {
         repairCost = 0;
@@ -80,6 +84,8 @@ public class Tower : MonoBehaviour {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         m_upgradeMenuInterface = GameObject.Find("UpgradeMenu").GetComponent<UpgradeMenuHandler>(); //Must be called UpgradeMenu.
         deselect();
+        
+        StartCoroutine(spawnDelay());
     }
     
     // called every frame
@@ -230,6 +236,7 @@ public class Tower : MonoBehaviour {
 
             if (col.CompareTag("TowerCollider") || col.CompareTag("Tower")) {
                 setValidPosition(false);
+                return;
             }
             
             if (towerType == TowerType.Land) {
@@ -250,6 +257,7 @@ public class Tower : MonoBehaviour {
             
             if (col.CompareTag("TowerCollider") || col.CompareTag("Tower")) {
                 setValidPosition(true);
+                return;
             }
 
             if (towerType == TowerType.Land) {
@@ -325,20 +333,20 @@ public class Tower : MonoBehaviour {
     }
 
     public void deselect() {
-        Debug.Log("Deselect called on Tower");
+        //Debug.Log("Deselect called on Tower");
         selected = false;
         hideRadiusCircle();
     }
 
     public void hardDeselect() {
-        Debug.Log("Hard deselect called on Tower");
+        //Debug.Log("Hard deselect called on Tower");
         selected = false;
         hideRadiusCircle();
         m_upgradeMenuInterface.exitButton();
     }
 
     public void select() {
-        Debug.Log("Select called on Tower");
+        //Debug.Log("Select called on Tower");
         selected = true;
         showRadiusCircle();
         m_upgradeMenuInterface.upgrade(this);
@@ -423,7 +431,11 @@ public class Tower : MonoBehaviour {
         attackRange = val;
     }
 
-    
+    public bool getIsHeld() {
+        return isHeld;
+    }
+
+
     //Getters and setters for the upgrade system.
     public int getRangeUpgradeLevel() {
         return m_rangeUpgradeLevel;
@@ -480,13 +492,14 @@ public class Tower : MonoBehaviour {
 
     // damage to tower
     public void takeDamage(int val) {
-        //Debug.Log("Taking damage");
+        //if (isHeld)
+        //    return;
+        
         StartCoroutine(hit());
         setHealth(getHealth() - val);
     }
 
     IEnumerator hit() {
-        //Debug.Log("Tower called hit");
         spriteRotator.getRenderer().color = Color.red;
         yield return new WaitForSeconds(0.1f);
         spriteRotator.getRenderer().color = Color.white;
@@ -534,5 +547,16 @@ public class Tower : MonoBehaviour {
 
     public bool showingStats() {
         return hasStats;
+    }
+    
+    // disaster death
+    public void kill() {
+        Destroy(this);
+    }
+    
+    // tower timer before being able to run upgrade menu
+    private IEnumerator spawnDelay() {
+        yield return new WaitForSeconds(0.2f);
+        readyToBeSelected = true;
     }
 }

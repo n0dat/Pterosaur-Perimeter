@@ -25,7 +25,7 @@ public class TowerDropper : MonoBehaviour {
     }
 
     void Update() {
-        if (towerHeld) {
+        if (towerHeld && heldTower) {
             var loc = camera.ScreenToWorldPoint(Input.mousePosition);
             loc.z = 0;
             heldTower.transform.position = loc;

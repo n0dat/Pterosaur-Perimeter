@@ -15350,7 +15350,7 @@ MonoBehaviour:
   m_playerHealthUIHandler: {fileID: 1254618848577376783}
   m_playerHealth: 3
   currencyTextUIScript: {fileID: 7435203509379447334}
-  skulls: 1000
+  skulls: 50000
 --- !u!4 &692206121
 Transform:
   m_ObjectHideFlags: 0

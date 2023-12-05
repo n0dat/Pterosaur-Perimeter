@@ -65,25 +65,6 @@ public class LevelManager : MonoBehaviour {
         
         resetLevel();
     }
-    
-	public void removeEnemy(int enemy) {
-		Debug.Log("Remove enemy called");
-		var ret = !rounds[currentRound].enemies.remove(enemy);
-		if (ret) {
-			Debug.Log("Unable to remove enemy from current round list: " + ret);
-		}
-	}
-
-	public void switchButtons() {
-		if (pauseButton.activeSelf) {
-			pauseButton.SetActive(false);
-			startRoundButton.SetActive(true);
-		}
-		else {
-			pauseButton.SetActive(true);
-			startRoundButton.SetActive(false);
-		}
-	}
 
 	void Update() {
 		if (currentRound == disasterRound) {
@@ -112,9 +93,9 @@ public class LevelManager : MonoBehaviour {
 		if (roundState == RoundState.Waiting) {
 			forceStart = false;
 			roundState = RoundState.Spawning;
-			StartCoroutine(spawnRound(rounds[currentRound]));
-			setRoundCounter();
 			startRoundButton.GetComponent<Button>().enabled = false;
+			setRoundCounter();
+			StartCoroutine(spawnRound(rounds[currentRound]));
 			//switchButtons();
 			Debug.Log("End of startRound()");
 		}
@@ -123,25 +104,19 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	void endRound() {
-		Debug.Log("End Round called");
 		startRoundButton.GetComponent<Button>().enabled = true;
 		roundCountdown = roundDelay;
 		
-		rounds[currentRound].enemies.clear();
+		//rounds[currentRound].enemies.clear();
 
 		if (currentRound + 1 >= rounds.Length) {
-			currentRound = 0;
-			Debug.Log("All rounds completed. Looping to first round");
-			// TODO end the game here as a win
-			endLevel(true);
-			foreach (var round in rounds)
-				round.isComplete = false;
+			Debug.Log("All rounds completed.");
+			endLevel(true); // end the level as a win
 		}
 		else
 			rounds[currentRound++].isComplete = true;
 
 		roundState = RoundState.Waiting;
-		Debug.Log("Current Level new Round State: WAITING");
 		
 		//switchButtons();
 		
@@ -150,17 +125,12 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	bool hasEnemies() {
-		//Debug.Log("total enemies: " + rounds[currentRound].enemies.Count);
-		//var enemyList = GameObject.FindGameObjectsWithTag("Enemy");
 		return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
-		//return !rounds[currentRound].enemies.IsEmpty;
 	}
 
 	IEnumerator spawnRound(Round curRound) {
 		Debug.Log("Spawning Round: " + currentRound);
-		
-		Debug.Log("Current Level new Round State: SPAWNING");
-
+        
 		if (curRound.subRounds.Length == 0) {
 			Debug.Log("Rounds are empty, returning");
 			roundState = RoundState.Waiting;
@@ -171,16 +141,13 @@ public class LevelManager : MonoBehaviour {
 			StartCoroutine(spawnSubRound(round));
 		
 		roundState = RoundState.InProgress;
-		Debug.Log("Current Level new Round State: IN PROGRESS");
 
 		yield return null;
 	}
 
 	IEnumerator spawnSubRound(Round curRound) {
-		Debug.Log("Spawning sub round with start delay:" + curRound.startDelay);
 		if (curRound.startDelay != 0)
 			yield return new WaitForSeconds(curRound.startDelay + 2f);
-		Debug.Log("Round ready to spawn");
 		
 		for (int i = 0; i < curRound.enemyCount; i++) {
 			spawnEnemy(curRound.enemy);
@@ -279,18 +246,30 @@ public class LevelManager : MonoBehaviour {
 
 	private void destroyWithinRadius(Vector3 target, float range) {
 		var transforms = new List<Transform>();
-		foreach (var colr in Physics2D.OverlapCircleAll(transform.position, range)) {
-			if (colr.gameObject.CompareTag("Tower"))
+		foreach (var colr in Physics2D.OverlapCircleAll(target, range)) {
+			Debug.Log("Collider hit for disaster:" + colr.name);
+			if (colr.gameObject.CompareTag("TowerCollider")) {
 				transforms.Add(colr.gameObject.transform);
+			}
 			else if (colr.gameObject.CompareTag("Enemy"))
 				transforms.Add(colr.gameObject.transform);
 		}
-
-		if (transforms.Count <= 0) return;
+		
+		if (transforms.Count <= 0) {
+			Debug.Log("Did not hit any towers for the disaster");
+			return;
+		}
+		
+		Debug.Log("Hit " + transforms.Count + " towers");
 		
 		for (var i = transforms.Count - 1; i >= 0; i--)
-			Destroy(transforms[i].gameObject);
+			Destroy(transforms[i].parent.gameObject);
+	}
 
+	private IEnumerator killTower(GameObject obj) {
+		obj.SetActive(false);
+		yield return new WaitForSeconds(1f);
+		Destroy(obj);
 	}
 
 	private void loadMaps() {

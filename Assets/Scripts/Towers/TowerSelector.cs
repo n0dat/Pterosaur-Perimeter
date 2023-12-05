@@ -72,13 +72,13 @@ public class TowerSelector : MonoBehaviour {
             }
 
             if (hit.collider.gameObject.CompareTag("TowerCollider")) { // hit a Tower game object
-                Debug.Log("Clicked on tower collider");
+                //if (Time.time - m_timeLastClick > m_timeForDoubleClick) {
+                //    m_timeLastClick = Time.time;
+                //    return;
+                //}
                 
-                if (Time.time - m_timeLastClick > m_timeForDoubleClick)
-                {
-                    m_timeLastClick = Time.time;
+                if (!hit.collider.transform.parent.gameObject.GetComponent<Tower>().readyToBeSelected)
                     return;
-                }
                 
                 if (hit.collider.transform.parent.gameObject.GetComponent<Tower>().beingHeld())
                     return;
