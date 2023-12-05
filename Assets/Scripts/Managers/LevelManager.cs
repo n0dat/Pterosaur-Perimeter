@@ -65,25 +65,6 @@ public class LevelManager : MonoBehaviour {
         
         resetLevel();
     }
-    
-	public void removeEnemy(int enemy) {
-		Debug.Log("Remove enemy called");
-		var ret = !rounds[currentRound].enemies.remove(enemy);
-		if (ret) {
-			Debug.Log("Unable to remove enemy from current round list: " + ret);
-		}
-	}
-
-	public void switchButtons() {
-		if (pauseButton.activeSelf) {
-			pauseButton.SetActive(false);
-			startRoundButton.SetActive(true);
-		}
-		else {
-			pauseButton.SetActive(true);
-			startRoundButton.SetActive(false);
-		}
-	}
 
 	void Update() {
 		if (currentRound == disasterRound) {
@@ -126,7 +107,7 @@ public class LevelManager : MonoBehaviour {
 		startRoundButton.GetComponent<Button>().enabled = true;
 		roundCountdown = roundDelay;
 		
-		rounds[currentRound].enemies.clear();
+		//rounds[currentRound].enemies.clear();
 
 		if (currentRound + 1 >= rounds.Length) {
 			Debug.Log("All rounds completed.");
@@ -144,16 +125,12 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	bool hasEnemies() {
-		//Debug.Log("total enemies: " + rounds[currentRound].enemies.Count);
-		//var enemyList = GameObject.FindGameObjectsWithTag("Enemy");
 		return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
-		//return !rounds[currentRound].enemies.IsEmpty;
 	}
 
 	IEnumerator spawnRound(Round curRound) {
 		Debug.Log("Spawning Round: " + currentRound);
-		
-
+        
 		if (curRound.subRounds.Length == 0) {
 			Debug.Log("Rounds are empty, returning");
 			roundState = RoundState.Waiting;

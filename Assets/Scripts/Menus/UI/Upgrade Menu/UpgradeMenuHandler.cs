@@ -56,7 +56,7 @@ public class UpgradeMenuHandler : MonoBehaviour
     public void upgrade(Tower currentTower)
     {
         
-        Debug.Log("Upgrade called in upgrade menu handler");
+        //Debug.Log("Upgrade called in upgrade menu handler");
         m_currentTower = currentTower;
         if (!hasAllReferences())
             return;
