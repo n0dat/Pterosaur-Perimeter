@@ -54,6 +54,10 @@ public class Tower : MonoBehaviour {
     public GameObject towerStatsObj;
     public bool hasStats = false;
     
+    
+    // tower selection
+    public bool readyToBeSelected = false;
+    
     // initialize most global values
     void Awake() {
         repairCost = 0;
@@ -80,6 +84,8 @@ public class Tower : MonoBehaviour {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         m_upgradeMenuInterface = GameObject.Find("UpgradeMenu").GetComponent<UpgradeMenuHandler>(); //Must be called UpgradeMenu.
         deselect();
+        
+        StartCoroutine(spawnDelay());
     }
     
     // called every frame
@@ -546,5 +552,11 @@ public class Tower : MonoBehaviour {
     // disaster death
     public void kill() {
         Destroy(this);
+    }
+    
+    // tower timer before being able to run upgrade menu
+    private IEnumerator spawnDelay() {
+        yield return new WaitForSeconds(0.2f);
+        readyToBeSelected = true;
     }
 }

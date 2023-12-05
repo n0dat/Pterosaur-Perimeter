@@ -123,25 +123,19 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	void endRound() {
-		Debug.Log("End Round called");
 		startRoundButton.GetComponent<Button>().enabled = true;
 		roundCountdown = roundDelay;
 		
 		rounds[currentRound].enemies.clear();
 
 		if (currentRound + 1 >= rounds.Length) {
-			currentRound = 0;
-			Debug.Log("All rounds completed. Looping to first round");
-			// TODO end the game here as a win
-			endLevel(true);
-			foreach (var round in rounds)
-				round.isComplete = false;
+			Debug.Log("All rounds completed.");
+			endLevel(true); // end the level as a win
 		}
 		else
 			rounds[currentRound++].isComplete = true;
 
 		roundState = RoundState.Waiting;
-		Debug.Log("Current Level new Round State: WAITING");
 		
 		//switchButtons();
 		
@@ -159,7 +153,6 @@ public class LevelManager : MonoBehaviour {
 	IEnumerator spawnRound(Round curRound) {
 		Debug.Log("Spawning Round: " + currentRound);
 		
-		Debug.Log("Current Level new Round State: SPAWNING");
 
 		if (curRound.subRounds.Length == 0) {
 			Debug.Log("Rounds are empty, returning");
@@ -171,16 +164,13 @@ public class LevelManager : MonoBehaviour {
 			StartCoroutine(spawnSubRound(round));
 		
 		roundState = RoundState.InProgress;
-		Debug.Log("Current Level new Round State: IN PROGRESS");
 
 		yield return null;
 	}
 
 	IEnumerator spawnSubRound(Round curRound) {
-		Debug.Log("Spawning sub round with start delay:" + curRound.startDelay);
 		if (curRound.startDelay != 0)
 			yield return new WaitForSeconds(curRound.startDelay + 2f);
-		Debug.Log("Round ready to spawn");
 		
 		for (int i = 0; i < curRound.enemyCount; i++) {
 			spawnEnemy(curRound.enemy);
