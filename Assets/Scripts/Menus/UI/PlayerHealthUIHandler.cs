@@ -6,6 +6,7 @@ public class PlayerHealthUIHandler : MonoBehaviour
 {
     [SerializeField] private EggsIconHandler m_eggsHandler;
 
+    //Just sets the health level.
     public void setHealthLevel(int val)
     {
         if (!hasAllReferences() || val < 0 || val > 3)

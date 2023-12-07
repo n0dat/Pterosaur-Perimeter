@@ -24,6 +24,7 @@ public class DisasterEffectHandler : MonoBehaviour
     
     }
 
+    //Public interface function used for starting the earthquake disaster where you want.
     public void earthQuakeDisaster(Vector3 earthQuakeTo, float duration)
     {
         if (m_inProgress)
@@ -35,6 +36,7 @@ public class DisasterEffectHandler : MonoBehaviour
         StartCoroutine(moveEarthQuake(earthQuakeTo, duration));
     }
     
+    //Public interface function used for starting the meteor disaster where you want.
     public void meteorDisaster(Vector3 meteorTo, float duration)
     {
         if (m_inProgress)
@@ -46,11 +48,13 @@ public class DisasterEffectHandler : MonoBehaviour
         StartCoroutine(moveMeteor(meteorTo, duration));
     }
 
+    //Starting the rumble for disaster.
     private void startRumble()
     {
         StartCoroutine(fadeInRumble());
     }
 
+    //Stops the rumble of disaster. 
     private void stopRumble()
     {
         StartCoroutine(fadeOutRumble());
@@ -81,6 +85,7 @@ public class DisasterEffectHandler : MonoBehaviour
         m_audio.mute = true;
     }
     
+    //Handles the flashing and shaking effect.
     private IEnumerator shakeAndFlashCamera(float duration = 1f, float magnitudeFactor = 1f)
     {
         Vector3 originalCameraPosition = transform.position;
@@ -100,6 +105,7 @@ public class DisasterEffectHandler : MonoBehaviour
         StartCoroutine(fadeCover(1f));
     }
 
+    //Flashes the white cover to simulate disaster.
     private IEnumerator flashCover(float duration = 1f)
     {
         float timer = Time.time;
@@ -124,6 +130,7 @@ public class DisasterEffectHandler : MonoBehaviour
         setCoverTransparency(0f);
     }
 
+    //Helps handle end of disaster effect.
     private IEnumerator fadeCover(float duration = 1f)
     {
         float trans = 1f;
@@ -155,7 +162,8 @@ public class DisasterEffectHandler : MonoBehaviour
         m_whiteCover.color = new Color(m_whiteCover.color.r, m_whiteCover.color.g, m_whiteCover.color.b, trans);
     }
 
-    public IEnumerator moveMeteor(Vector3 finalMeteorPosition, float duration)
+    //Helper function to move the meteor. Slowly translates over the scene.
+    private IEnumerator moveMeteor(Vector3 finalMeteorPosition, float duration)
     {
         Vector3 translationVector = finalMeteorPosition - m_originalMeteorPosition;
         float startTime = Time.time;
@@ -177,7 +185,9 @@ public class DisasterEffectHandler : MonoBehaviour
         m_meteor.transform.position = m_originalMeteorPosition;
     }
 
-    public IEnumerator moveEarthQuake(Vector3 earthQuakePosition, float duration)
+
+    //Moves the earthquake to a particular position immediately.
+    private IEnumerator moveEarthQuake(Vector3 earthQuakePosition, float duration)
     {
         m_earthQuake.transform.position = earthQuakePosition;
         yield return new WaitForSeconds(duration);

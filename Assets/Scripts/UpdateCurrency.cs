@@ -8,12 +8,14 @@ public class UpdateCurrency : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currencyAmount;
     [SerializeField] private Animator m_animatior;
 
+    //Interface function for updating the currency.
     public void updateCurrencyAmount(int newAmount)
     {
         if (currencyAmount && newAmount >= 0)
             currencyAmount.SetText(newAmount.ToString());
     }
 
+    //Flashes red for spending money.
     public void flashCurrency()
     {
         if (!hasAllReferences())

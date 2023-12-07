@@ -4,6 +4,8 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+//Purpose of class is to handle a temporary game object that has an audio source attached. Will play a sound and 
+//destroy itself after the sound has completed playing.
 public class EnemyAudioHandler : MonoBehaviour
 {
     [SerializeField] private AudioSource m_audioSource;
@@ -15,6 +17,7 @@ public class EnemyAudioHandler : MonoBehaviour
     [SerializeField] private List<AudioClip> m_hitClips;
     [SerializeField] private List<AudioClip> m_damageBaseClips;
 
+    //Public interface function is used to play a hitting noise.
     public void hit()
     {
         AudioClip clip = m_hitClips[Random.Range(0, m_hitClips.Count)];
@@ -22,6 +25,7 @@ public class EnemyAudioHandler : MonoBehaviour
         Destroy(gameObject, clip.length + 0.1f);
     }
 
+    //Public interface function is played anytime the cavemen take damage.
     public void damage()
     {
         AudioClip clip = m_damageBaseClips[Random.Range(0, m_damageBaseClips.Count)];
@@ -39,6 +43,7 @@ public class EnemyAudioHandler : MonoBehaviour
         Destroy(gameObject, clip.length + 0.1f);
     }
 
+    //Public interface function is played anytime a caveman dies.
     public void death()
     {
         //Only play a damage sound 25 percent of the time.
@@ -59,6 +64,7 @@ public class EnemyAudioHandler : MonoBehaviour
         Destroy(gameObject, clip.length + 0.1f);
     }
 
+    //Called when an egg is stolen.
     public void eggSteal()
     {
         //Only play an egg steal 1/4 of the time.
@@ -73,6 +79,7 @@ public class EnemyAudioHandler : MonoBehaviour
         Destroy(gameObject, clip.length + 0.1f);
     }
 
+    //Played at random. Usually when a caveman hits a dinosaur.
     public void quip()
     {
         //Only play a damage sound 25 percent of the time.

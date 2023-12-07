@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UpgradeMenuHandler : MonoBehaviour
 {
+    //Keeps health updated.
     public void Update()
     {
         if (!m_currentTower)
@@ -151,6 +152,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         return true;
     }
 
+    //Called by the upgrade damage button. Will handle the logic for upgrading dino damage.
     public void upgradeDamageButton()
     {
         if (!hasAllReferences())
@@ -168,6 +170,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         m_towerSellButton.setValue(m_currentTower.getValue());
     }
 
+    //Called by the upgrade range button. Will handle the logic for upgrading dino range.
     public void upgradeRangeButton()
     {
         if (!hasAllReferences())
@@ -185,6 +188,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         m_towerSellButton.setValue(m_currentTower.getValue());
     }
 
+    //Called by the upgrade speed button. Will handle the logic for upgrading dino speed.
     public void upgradeSpeedButton()
     {
         if (!hasAllReferences())
@@ -202,6 +206,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         m_towerSellButton.setValue(m_currentTower.getValue());
     }
 
+    //Handles healing logic.
     public void healButton()
     {
         if (!hasAllReferences() || m_healthValue >= 100)
@@ -215,6 +220,7 @@ public class UpgradeMenuHandler : MonoBehaviour
         m_currentTower.setHealth(m_healthValue);
     }
 
+    //Will close the upgrade menu.
     public void exitButton()
     {
         if (!hasAllReferences())
