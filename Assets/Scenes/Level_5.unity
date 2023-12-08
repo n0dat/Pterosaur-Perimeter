@@ -15038,6 +15038,86 @@ PrefabInstance:
       propertyPath: checkpointObjectNoEvent
       value: 
       objectReference: {fileID: 712987740}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[1].subRounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[2].subRounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[3].subRounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[4].subRounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[5].subRounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[6].subRounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[2].subRounds.Array.data[0].enemy
+      value: 
+      objectReference: {fileID: 5110921954108796589, guid: 747dc1777eda14ea4a209a56845fc0b4, type: 3}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[5].subRounds.Array.data[0].enemy
+      value: 
+      objectReference: {fileID: 5110921954108796589, guid: 747dc1777eda14ea4a209a56845fc0b4, type: 3}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[2].subRounds.Array.data[0].spawnRate
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[3].subRounds.Array.data[0].spawnRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[4].subRounds.Array.data[0].spawnRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[5].subRounds.Array.data[0].spawnRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[6].subRounds.Array.data[0].spawnRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[0].subRounds.Array.data[0].enemyCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[1].subRounds.Array.data[0].enemyCount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[2].subRounds.Array.data[0].enemyCount
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[3].subRounds.Array.data[0].enemyCount
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[4].subRounds.Array.data[0].enemyCount
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[5].subRounds.Array.data[0].enemyCount
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396665392891099331, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
+      propertyPath: rounds.Array.data[6].subRounds.Array.data[0].enemyCount
+      value: 110
+      objectReference: {fileID: 0}
     - target: {fileID: 2967833508958221598, guid: 46d3ce2a9523f3f41a45fe9e0bd15c8e, type: 3}
       propertyPath: m_Camera
       value: 
