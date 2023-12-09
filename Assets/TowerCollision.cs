@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// class to disallow towers to be placed on top of one another
 public class TowerCollision : MonoBehaviour {
 	public Tower tower;
 

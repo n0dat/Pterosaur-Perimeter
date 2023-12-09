@@ -14,4 +14,10 @@ Unity Editor Version 2022.3.8f1
 
 <h2> Building </h2>
 
+To play within the editor, go to `Scenes` and open `InitializerScene`. Press the play button (next to pause) in the Unity Editor Window.
+
 Clone the entire project and open it with Unity Editor. From there you can select `Build Settings` then `Build and Run`.
+
+<h2> Code </h2>
+
+All code is visible within the `Assets/Scripts` folder, where it is then further divided into the respective components it is used on.
