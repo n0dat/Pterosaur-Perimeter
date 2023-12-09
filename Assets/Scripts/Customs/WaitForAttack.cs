@@ -8,7 +8,7 @@ public class WaitForAttack : CustomYieldInstruction {
     public override bool keepWaiting {
         get { return !isAttackFinished; }
     }
-
+    // Sets the value of isAttackFinsished to true
     public void setAttackFinished() {
         isAttackFinished = true;
     }

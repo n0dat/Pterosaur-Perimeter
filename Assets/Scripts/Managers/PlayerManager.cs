@@ -106,7 +106,7 @@ public class PlayerManager : MonoBehaviour {
         if (m_playerHealth <= 0)
             playerOutOfHealth();
     }
-    
+    // heals the players health 
     public void heal()
     {
         if ( !hasAllReferences() || m_playerHealth >= 3)

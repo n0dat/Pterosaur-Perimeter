@@ -17,15 +17,15 @@ public class MainManager : MonoBehaviour {
 	    sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 	    stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
     }
-
+    // returns a Setting from setting manager
     public Settings getSettingsManager() {
 	    return settingsManager;
     }
-
+    // Returns a SceneManager from SceneManager
     public SceneManager getSceneManager() {
 	    return sceneManager;
     }
-
+    // Return a Statemanager from StateManager
     public StateManager getStateManager() {
 	    return stateManager;
     }

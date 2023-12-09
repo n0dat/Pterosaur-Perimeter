@@ -84,7 +84,7 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
     
-	// 
+	// Starts the round
 	public void startRound() {
 		
 		// only start round if no round is currently in progress or spawning

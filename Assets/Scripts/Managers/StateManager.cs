@@ -54,29 +54,29 @@ public class StateManager : MonoBehaviour {
 		gameState = GameState.Menu;
 		mainManager.getSettingsManager().getNewCamera();
 	}
-
+	// sets the Game State 
     public void setGameState(GameState state) {
 	    gameState = state;
     }
-
+	// returns the gameState
     public GameState getGameState() {
 	    return gameState;
     }
-
+	// shows the disaster prompt
     public void showDisasterPrompt() {
 	    gameState = GameState.DisasterPrompt;
 	    Time.timeScale = 0f;
     }
-
+	// Hides the disaster promt
     public void hideDisasterPrompt() {
 	    gameState = GameState.Playing;
 	    Time.timeScale = 1f;
     }
-
+	// Sets teh gameState to an enum value of end
     public void endGame() {
 	    gameState = GameState.End;
     }
-
+	// Shows the endPromt
     public void showEndPrompt() {
 	    gameState = GameState.End;
 	    Time.timeScale = 0f;
