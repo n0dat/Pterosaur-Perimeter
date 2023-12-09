@@ -30,6 +30,7 @@ public class Toggle : MonoBehaviour {
             baseToggle.isOn = settingsManager.getPlayAudio();
     }
 
+    // checkbox has been toggled
     public void Toggled(bool toggled) {
         if (settingsManager != null) {
             if (gameObject.name == "ShowFpsToggle")

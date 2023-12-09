@@ -21,6 +21,7 @@ public class AutoStartRoundButton : MonoBehaviour {
     }
     
     public void onClick() {
+        // auto start rounds button clicked
         Debug.Log("AutoStartRoundButton: Clicked");
         if (!isEnabled) {
             mainManager.getSettingsManager().setAutoStartRounds(true);

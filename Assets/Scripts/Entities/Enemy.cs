@@ -52,22 +52,27 @@ public class Enemy : MonoBehaviour {
 		// used for targeting
 		distanceCovered += (movementSpeed * Time.deltaTime) / totalDistance;
 		
+		// move towards current checkpoint
 		Vector3 dir = targetWaypoint - transform.position;
 		transform.Translate(dir.normalized * (Time.deltaTime * movementSpeed), Space.World);
 		
+		// change rotation
 		sprite.transform.rotation = Quaternion.RotateTowards(sprite.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 		
+		// close enough to next checkpoint, get next
 		if (Vector3.Distance(transform.position, targetWaypoint) <= nextCheckpointThreshold) {
 			getNextCheckpoint();
 		}
 	}
 
+	// set the waypoints object and get total distance (new)
 	public void setWaypoints(List<Vector3> points) {
 		waypoints = points;
 		targetWaypoint = waypoints[0];
 		findTotalDistance();
 	}
 
+	// get the next checkpoint in list
 	private void getNextCheckpoint() {
 		//Reached the last checkpoint. Decrease player health.
 		if (waypointIndex >= waypoints.Count - 1) {
@@ -77,22 +82,17 @@ public class Enemy : MonoBehaviour {
 			return;
 		}
 		targetWaypoint = waypoints[++waypointIndex];
-		facingDirection = getFacingDirection(targetWaypoint);
+		//facingDirection = getFacingDirection(targetWaypoint);
 		updateRotation(targetWaypoint);
 	}
 
-	private void OnDestroy() {
-		// cancel hit indication
-		if (isDisplayingHit) {
-			StopCoroutine(indicateHit());
-			isDisplayingHit = false;
-		}
-	}
-
+	// get distance covered along the track
 	public float getTravelDistance() {
 		return distanceCovered;
 	}
 
+	// calculate total distance for the track based on the distances between
+	// all waypoints
 	private void findTotalDistance() {
 		totalDistance = 0f;
 		int count = waypoints.Count - 1;
@@ -100,6 +100,9 @@ public class Enemy : MonoBehaviour {
 			totalDistance += Vector3.Distance(waypoints[i], waypoints[i + 1]);
 	}
 
+	// take damage
+	// set health, if damage taken moves the health to less than zero
+	// then destroy self
 	public void takeDamage(float damage, Tower attacker) {
 		if (!gameObject)
 			return;
@@ -124,6 +127,7 @@ public class Enemy : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
+	// show that the enemy was hit by flashing red for a certain delay
 	private IEnumerator indicateHit() {
 		spriteRenderer.color = Color.red;
 		isDisplayingHit = true;
@@ -134,19 +138,22 @@ public class Enemy : MonoBehaviour {
 		isDisplayingHit = false;
 	}
 
-	private FacingDirection getFacingDirection(Vector3 target) {
-		var angle = Vector3.Angle(transform.up, (target - transform.position));
-		if (Mathf.Abs(angle - 0f) < facingThreshold)
-			return FacingDirection.Up;
-		if (Mathf.Abs(angle - 90f) < facingThreshold)
-			return FacingDirection.Left;
-		if (Mathf.Abs(angle - 180f) < facingThreshold)
-			return FacingDirection.Down;
-		if (Mathf.Abs(angle - 270f) < facingThreshold)
-			return FacingDirection.Right;
-		return FacingDirection.Unknown;
-	}
+	// get facing direction
+	// private FacingDirection getFacingDirection(Vector3 target) {
+	// 	var angle = Vector3.Angle(transform.up, (target - transform.position));
+	// 	if (Mathf.Abs(angle - 0f) < facingThreshold)
+	// 		return FacingDirection.Up;
+	// 	if (Mathf.Abs(angle - 90f) < facingThreshold)
+	// 		return FacingDirection.Left;
+	// 	if (Mathf.Abs(angle - 180f) < facingThreshold)
+	// 		return FacingDirection.Down;
+	// 	if (Mathf.Abs(angle - 270f) < facingThreshold)
+	// 		return FacingDirection.Right;
+	// 	return FacingDirection.Unknown;
+	// }
 
+	// update rotation of the enemy
+	// based on current target checkpoint
 	private void updateRotation(Vector3 target) {
 		Vector3 direction = target - sprite.transform.position;
 		var angle = Mathf.Atan2(direction.y, direction.x);
@@ -164,6 +171,10 @@ public class Enemy : MonoBehaviour {
 		m_audioHandler.quip();
 	}
 
+	// set turn thresholds and movement speed based on tower type
+	// changeThreshold is used due to floating point inaccuracies
+	// we can't move directly to a point, but we can get close
+	// so we detect at a certain distance to change to next
 	private void setChangeThreshold() {
 		if (enemyType == EnemyType.Standard) {
 			changeThreshold = 0.18f;

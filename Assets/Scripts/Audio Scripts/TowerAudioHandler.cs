@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +8,7 @@ public class TowerAudioHandler : MonoBehaviour
     [SerializeField] private List<AudioClip> m_lazerClips;
     [SerializeField] private List<AudioClip> m_damageBaseClips;
     
+    // play shoot sound effect
     public void shoot()
     {
         //Only play a damage sound 25 percent of the time.
@@ -23,6 +23,7 @@ public class TowerAudioHandler : MonoBehaviour
         Destroy(gameObject, clip.length + 0.1f);
     }
     
+    // play damage sound effect
     public void damage()
     {
         AudioClip clip = m_damageBaseClips[Random.Range(0, m_damageBaseClips.Count)];

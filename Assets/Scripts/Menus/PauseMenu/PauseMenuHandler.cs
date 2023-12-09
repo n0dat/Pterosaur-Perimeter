@@ -12,10 +12,12 @@ public class PauseMenuHandler : MonoBehaviour {
 			getNewCamera();
 	}
 
+	// get a new camera when loading into a new scene (game state changes)
 	public void getNewCamera() {
 		StartCoroutine(GetCamera());
 	}
 
+	// get new camera when loading into a level scene
 	private IEnumerator GetCamera() {
 		while (!mainCamera) {
 			mainCamera = Camera.main;

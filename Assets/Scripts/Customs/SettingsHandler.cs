@@ -3,6 +3,8 @@ using System.IO;
 using IniParser;
 using IniParser.Model;
 
+// UNUSED
+
 public class SettingsHandler {
     private const string Filename = "settings.ini";
     private readonly IniData data;

@@ -24,7 +24,6 @@ public class Tower : MonoBehaviour {
     [SerializeField] private GameObject enemyToAttack;
     [SerializeField] private AttackState attackState = AttackState.Initial;
     [SerializeField] private TargetingMode targetingMode = TargetingMode.First;
-    [SerializeField] private RoundManager roundManager;
     [SerializeField] private AttackType attackType;
     [SerializeField] private TowerType towerType;
     [SerializeField] private SpriteRotator spriteRotator;

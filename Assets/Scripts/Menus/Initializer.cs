@@ -19,6 +19,7 @@ public class Initializer : MonoBehaviour {
         }
     }
 
+    // start the intro
     private IEnumerator introStart() {
         mainManager.getSceneManager().loadScene("Test Intro Scene");
         yield return new WaitForSeconds(13f);

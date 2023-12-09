@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+// custom class to ensure a tower attack has finished its animation / spawning of laser
+// before next attack happens to next eneny
 public class WaitForAttack : CustomYieldInstruction {
     private bool isAttackFinished = false;
 

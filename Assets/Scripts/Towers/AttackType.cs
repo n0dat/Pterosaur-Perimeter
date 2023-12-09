@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using UnityEditor;
 using UnityEngine;
 
 public class AttackType : MonoBehaviour {
@@ -11,6 +8,9 @@ public class AttackType : MonoBehaviour {
     
     public Tower source;
 
+    // attack the enemy passed in
+    // sourceEnemy - enemy to attack
+    // sourceTower - tower that called attack
     public void attack(GameObject sourceEnemy, GameObject sourceTower) {
         var tower = sourceTower.GetComponent<Tower>();
         var enemy = sourceEnemy.GetComponent<Enemy>();
@@ -18,15 +18,15 @@ public class AttackType : MonoBehaviour {
         var direction = (enemy.transform.position - transform.position).normalized;
 
         switch (attackStyle) {
+            // single fire attack
             case AttackStyle.Single:
-                // TODO: PLAY ATTACK ANIMATION HERE
                 var laserSingle = Instantiate(projectile, transform.position, Quaternion.identity);
                 var laserSingleComp = laserSingle.GetComponent<Laser>();
                 laserSingleComp.parent = tower;
                 laserSingleComp.shoot(direction, enemy);
                 break;
             case AttackStyle.Triple:
-                // TODO: PLAY ATTACK ANIMATION HERE
+                // triple shot attack
                 for (int i = -15; i <= 15; i += 15) {
                     var targetDirection = enemy.transform.position - transform.position;
                     var baseAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
@@ -41,7 +41,7 @@ public class AttackType : MonoBehaviour {
                 }
                 break;
             case AttackStyle.Circle:
-                // TODO: PLAY ATTACK ANIMATION HERE
+                // circular attack
                 for (int i = 0; i < 8; i++) {
                     float angle = i * 360f / 8;
                     Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
@@ -56,6 +56,9 @@ public class AttackType : MonoBehaviour {
         }
     }
 
+    // heal function for heal tower
+    // raycast in circle to get all Tower colliders
+    // then heal all
     public void heal(float range) {
         foreach (var collider in Physics2D.OverlapCircleAll(transform.position, range)) {
             if (collider.gameObject.CompareTag("Tower")) {

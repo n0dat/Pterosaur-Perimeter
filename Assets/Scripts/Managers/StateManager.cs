@@ -22,6 +22,7 @@ public class StateManager : MonoBehaviour {
     }
 
     void Update() {
+	    // check for escape key presses in different game states
 	    if (Input.GetKeyDown("escape")) {
 		    if (gameState == GameState.Playing)
 			    pauseGame();
@@ -32,18 +33,21 @@ public class StateManager : MonoBehaviour {
 	    }
     }
 
+    // pause the game
     public void pauseGame() {
 	    gameState = GameState.Paused;
 	    pauseMenu.SetActive(true);
 	    Time.timeScale = 0f;
     }
 
+    // un-pause the game (resume)
     public void resumeGame() {
 	    gameState = GameState.Playing;
 	    pauseMenu.SetActive(false);
 	    Time.timeScale = 1f;
     }
 
+    // load main menu scene and resume the game (used from pause menu button)
 	public void loadMainMenu() {
 		resumeGame();
 		mainManager.getSceneManager().loadScene("MainMenuScene");
@@ -78,6 +82,7 @@ public class StateManager : MonoBehaviour {
 	    Time.timeScale = 0f;
     }
 
+    // prompt at end of level Defeat or Victory
     public void hideEndPrompt(bool val) {
 	    gameState = val ? GameState.Playing : GameState.Menu;
 	    Time.timeScale = 1f;

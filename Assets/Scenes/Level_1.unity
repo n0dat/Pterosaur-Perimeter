@@ -15350,7 +15350,7 @@ MonoBehaviour:
   m_playerHealthUIHandler: {fileID: 1254618848577376783}
   m_playerHealth: 3
   currencyTextUIScript: {fileID: 7435203509379447334}
-  skulls: 50000
+  skulls: 1000
 --- !u!4 &692206121
 Transform:
   m_ObjectHideFlags: 0
@@ -28062,6 +28062,10 @@ PrefabInstance:
     - target: {fileID: 3081819707119636475, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283507992654488142, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
+      propertyPath: m_Text
+      value: Victory
       objectReference: {fileID: 0}
     - target: {fileID: 4010352628551051060, guid: fa971eb9ff15e664499f96924caa5e57, type: 3}
       propertyPath: m_UiScaleMode

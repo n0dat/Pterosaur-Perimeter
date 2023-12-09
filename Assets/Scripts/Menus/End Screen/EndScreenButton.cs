@@ -11,12 +11,14 @@ public class EndScreenButton : MonoBehaviour {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
+    // restart the level from the ending scree 
     public void restartLevel() {
         mainManager.getStateManager().hideEndPrompt(true);
         mainManager.getSceneManager().reloadScene();
         //levelManager.resetLevel();
     }
 
+    // go to the level select scene after you win or lose a level
     public void exit(bool state) {
         mainManager.getStateManager().hideEndPrompt(false);
         mainManager.getStateManager().setGameState(StateManager.GameState.Menu);

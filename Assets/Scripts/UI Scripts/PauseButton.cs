@@ -9,6 +9,7 @@ public class PauseButton : MonoBehaviour {
 		mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
 	}
 
+	// pause the game
 	public void pauseGame() {
 		mainManager.getStateManager().pauseGame();
 	}

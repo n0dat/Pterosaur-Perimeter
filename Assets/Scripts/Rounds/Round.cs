@@ -1,6 +1,7 @@
 ﻿using Customs;
 using UnityEngine;
 
+// round class to hold round information per level
 [System.Serializable]
 public class Round {
     public int roundNumber;

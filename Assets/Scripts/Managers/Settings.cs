@@ -11,7 +11,6 @@ public class Settings : MonoBehaviour {
     [SerializeField] private bool autoStartRounds;
     
     private GameObject fpsCounter;
-    public SettingsHandler settingsHandler;
     public Camera mainCamera;
     public Canvas fpsCounterCanvas;
 

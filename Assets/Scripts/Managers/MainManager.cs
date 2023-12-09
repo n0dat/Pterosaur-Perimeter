@@ -7,6 +7,7 @@ public class MainManager : MonoBehaviour {
     private StateManager stateManager;
     private PlayerManager playerManager;
     
+    // array to store which levels have been completed
     private bool[] levelsCompleted = {false, false, false, false, false};
 
     void Awake() {
@@ -29,6 +30,7 @@ public class MainManager : MonoBehaviour {
 	    return stateManager;
     }
 
+    // get the number of levels that have been completed
     public int getNumLevelsCompleted()
     {
 	    int count = 0;
@@ -42,6 +44,7 @@ public class MainManager : MonoBehaviour {
 	    return count;
     }
     
+    // mark a level as completed
     public void completeLevel(int index) {
 	    levelsCompleted[index] = true;
     }

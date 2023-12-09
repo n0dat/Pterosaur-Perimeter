@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Timers;
 using UnityEngine;
 
+// This entire class is a hack
 public class TowerSelector : MonoBehaviour {
     
     [SerializeField]
@@ -29,10 +28,12 @@ public class TowerSelector : MonoBehaviour {
         getNewCamera();
     }
 
+    // get the new camera
     public void getNewCamera() {
         StartCoroutine(GetCamera());
     }
 
+    // get new camera from loading into a new scene
     private IEnumerator GetCamera() {
         while (!mainCamera) {
             mainCamera = Camera.main;
@@ -42,6 +43,7 @@ public class TowerSelector : MonoBehaviour {
         Debug.Log("Camera found");
     }
 
+    // don't look too close at this
     void Update() {
         
         if (Input.GetMouseButtonDown(0)) {
@@ -96,8 +98,6 @@ public class TowerSelector : MonoBehaviour {
                     if (towerRef.isSelected())
                         towerRef.deselect();
                 }
-                
-                
                 
                 towerObj = hit.collider.transform.parent.gameObject;
                 towerRef = towerObj.GetComponent<Tower>();
@@ -156,8 +156,6 @@ public class TowerSelector : MonoBehaviour {
                     if (towerRef.showingStats())
                         towerRef.hideStats();
                 }
-                
-                
                 
                 towerObj = hit.collider.transform.parent.gameObject;
                 towerRef = towerObj.GetComponent<Tower>();

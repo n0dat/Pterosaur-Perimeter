@@ -16,6 +16,7 @@ public class TowerDropUIHandler : MonoBehaviour, IPointerEnterHandler
         this.isExpanded = true;
     }
 
+    // close the tower drop ui
     public void closeMenu()
     {
         if (!isExpanded)
@@ -25,6 +26,7 @@ public class TowerDropUIHandler : MonoBehaviour, IPointerEnterHandler
         this.isExpanded = false;
         animator.SetTrigger("HoveredWhileOpened");
     }
+    // pointer entered the tower drop ui button
     public void OnPointerEnter(PointerEventData eventData)
     {
         Animator animator = towerContainer.GetComponent<Animator>();

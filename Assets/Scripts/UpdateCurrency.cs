@@ -24,6 +24,7 @@ public class UpdateCurrency : MonoBehaviour
         m_animatior.SetTrigger("FlashRed");
     }
 
+    // make sure we have all the references to avoid null exceptions
     private bool hasAllReferences()
     {
         if (!m_animatior || !currencyAmount)

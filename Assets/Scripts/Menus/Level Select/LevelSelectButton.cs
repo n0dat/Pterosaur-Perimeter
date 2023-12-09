@@ -16,14 +16,17 @@ public class LevelSelectButton : MonoBehaviour {
             Debug.Log("LevelSelectButton : Unable to get MainManager component.");
     }
 
+    // level select button has been pressed
     public void buttonPressed() {
 
+        // check if the level is locked
         if (m_isLocked)
         {
             m_audioHandler.playAudio("LevelLocked");
             return;
         }
         
+        // load the scene associated with the level
         var sceneLoader = mainManager.getSceneManager();
         if (sceneLoader) {
             mainManager.getSceneManager().loadScene(sceneToLoad);

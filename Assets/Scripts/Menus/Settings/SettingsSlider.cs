@@ -23,6 +23,7 @@ public class Slider : MonoBehaviour {
             slider.value = settingsManager.getTargetFps();
     }
 
+    // update label text
     public void updateText() {
         var textComponent = label.GetComponent<TextMeshProUGUI>();
         if (!textComponent) {
@@ -33,6 +34,7 @@ public class Slider : MonoBehaviour {
         label.GetComponent<TextMeshProUGUI>().SetText(Mathf.RoundToInt(slider.value).ToString());
     }
 
+    // update settings
     public void updateSetting() {
         if (settingsManager) {
             if (gameObject.name == "TargetFpsSlider")

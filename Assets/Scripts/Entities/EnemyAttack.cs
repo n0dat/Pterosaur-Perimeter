@@ -12,24 +12,33 @@ public class EnemyAttack : MonoBehaviour {
     [SerializeField] private bool isAttackingEnemy = false;
 
     void Update() {
+        
+        // ready to attack
         if (isAttackingEnemy && readyToAttack) {
             var towers = new List<Tower>();
+            
+            // find towers in attack radius
             foreach (var tower in Physics2D.OverlapCircleAll(transform.position, range))
                 if (tower.gameObject.CompareTag("TowerCollider"))
                     towers.Add(tower.transform.parent.gameObject.GetComponent<Tower>());
 
+            // detected some towers
             if (towers.Count > 0) {
                 var randTower = towers[Random.Range(0, towers.Count)];
                 if (randTower.getIsHeld())
                     return;
                 
+                // attack a random tower within the attack radius
                 StartCoroutine(attack(randTower));
             }
         }
     }
 
+    // attack tower
     IEnumerator attack(Tower towerToAttack) {
         if (towerToAttack) {
+            
+            // do not attack a tower that is held (being placed)
             if (towerToAttack.getIsHeld())
                 yield return null;
             

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 
 namespace Customs {
+    
+    // Generic Circular Buffer
     public class CircularBuffer<T> {
         public CircularBuffer(int capacity = 1) {
             if (capacity <= 0)

@@ -16,9 +16,7 @@ public class MainMenuButton : MonoBehaviour {
     }
 
     public void buttonPressed() {
-        
-        //mainManager.getLevelManager().displayDisasterNotification("METEOR");
-        
+        // load settings or level select scene
         var sceneLoader = mainManager.getSceneManager();
         if (sceneLoader != null) {
             mainManager.getSceneManager().loadScene(sceneToLoad);
@@ -34,6 +32,7 @@ public class MainMenuButton : MonoBehaviour {
             Debug.Log("Unable to get Scene Manager.");
     }
 
+    // exit the game from main menu
     public void exitGame() {
     #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

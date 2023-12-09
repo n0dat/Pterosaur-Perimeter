@@ -33,14 +33,17 @@ public class TowerDropper : MonoBehaviour {
             var towerRef = heldTower.GetComponent<Tower>();
             towerRef.holdTower();
             
+            // detected click to drop tower
             if (Input.GetMouseButtonDown(0) && towerRef.isValidPosition())
                 dropTower();
             
+            // kill tower
             if (Input.GetMouseButtonDown(1))
                 killTower();
         }
     }
 
+    // instantiate a new tower object at the specified location
     public GameObject instantiateTower(Vector3 loc) {
         loc.z = 0;
         var obj = Instantiate(towerToSpawn, loc, Quaternion.identity);
@@ -48,6 +51,7 @@ public class TowerDropper : MonoBehaviour {
         return obj.gameObject;
     }
 
+    // drop the tower where the players mouse pointer is
     public void dropTower() {   
         // instantiate tower at mouse coordinates if it can be placed
         if (canBePlaced && towerHeld) {
@@ -58,6 +62,8 @@ public class TowerDropper : MonoBehaviour {
         }
     }
 
+    // kill the tower
+    // called when the user right clicks while holding the tower
     private void killTower() {
         if (!hasAllReferences())
             return;
@@ -68,6 +74,7 @@ public class TowerDropper : MonoBehaviour {
         towerHeld = false;
     }
 
+    // purchase the tower from the tower dropper ui menu
     public void purchaseTower() {
         //Make sure references are actually set
         if (!hasAllReferences())

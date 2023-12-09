@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -10,7 +8,6 @@ using Random = UnityEngine.Random;
 public class LevelManager : MonoBehaviour {
     
     // globals
-    [SerializeField] private int startingCurrency;
     public int levelIndex = 0;
     
     // pathing
@@ -21,13 +18,9 @@ public class LevelManager : MonoBehaviour {
     // managers
     private MainManager mainManager;
     
-    // round stuff
-    public float roundDelay; // old
-    public float roundCountdown; // old
-    
     public RoundState roundState = RoundState.Waiting;
     public Round[] rounds;
-    public int currentRound = 0;
+    public int currentRound;
     public int disasterRound;
     
     // disaster stuff
@@ -58,6 +51,8 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private float disasterDestructionRange;
 
     void Awake() {
+	    
+	    // set managers
         mainManager = GameObject.Find("MainManager").gameObject.GetComponent<MainManager>();
         playerManager = GameObject.Find("PlayerManager").gameObject.GetComponent<PlayerManager>();
         
@@ -67,48 +62,48 @@ public class LevelManager : MonoBehaviour {
     }
 
 	void Update() {
-		if (currentRound == disasterRound) {
+		if (currentRound == disasterRound) { // disaster to play
 			Debug.Log("PLAYING DISASTER!!!");
 			eventState = futureEvent;
 			triggerEvent();
 			disasterRound = -2;
 		}
-		if (currentRound != 0 && (currentRound + 1) % 3 == 0 && disasterRound == -1) {
+		if (currentRound != 0 && (currentRound + 1) % 3 == 0 && disasterRound == -1) { // checking for a disaster
 			Debug.Log("Checking for disaster.");
-			if (Random.Range(1, 101) < eventTriggerThreshold) {
+			if (Random.Range(1, 101) < eventTriggerThreshold) { // determined we have a disaster
 				Debug.Log("We have a disaster incoming");
 				showDisasterPrompt();
 				disasterRound = currentRound + 3;
 			}
 		}
 		if (roundState == RoundState.InProgress) {
+			
+			// end the round if we have no more enemies
 			if (hasEnemies())
 				endRound();
 		}
 	}
-
-	
-	public bool forceStart = true;
+    
+	// 
 	public void startRound() {
+		
+		// only start round if no round is currently in progress or spawning
 		if (roundState == RoundState.Waiting) {
-			forceStart = false;
 			roundState = RoundState.Spawning;
 			startRoundButton.GetComponent<Button>().enabled = false;
 			setRoundCounter();
+			// start spawning the current / next round
 			StartCoroutine(spawnRound(rounds[currentRound]));
-			//switchButtons();
-			Debug.Log("End of startRound()");
 		}
 		else
 			Debug.Log("Round already started");
 	}
 
+	// end the round
 	void endRound() {
 		startRoundButton.GetComponent<Button>().enabled = true;
-		roundCountdown = roundDelay;
 		
-		//rounds[currentRound].enemies.clear();
-
+		// last round completed
 		if (currentRound + 1 >= rounds.Length) {
 			Debug.Log("All rounds completed.");
 			endLevel(true); // end the level as a win
@@ -116,27 +111,30 @@ public class LevelManager : MonoBehaviour {
 		else
 			rounds[currentRound++].isComplete = true;
 
+		// set state back to waiting to be able to start the next round
 		roundState = RoundState.Waiting;
-		
-		//switchButtons();
-		
+        
 		if (mainManager.getSettingsManager().getAutoStartRounds())
 			startRound();
 	}
 
+	// check for enemies in the scene
 	bool hasEnemies() {
 		return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
 	}
 
+	// spawn the round of enemies
 	IEnumerator spawnRound(Round curRound) {
 		Debug.Log("Spawning Round: " + currentRound);
         
+		// if for some reason we didn't add the rounds in the editor, can probably remove this
 		if (curRound.subRounds.Length == 0) {
 			Debug.Log("Rounds are empty, returning");
 			roundState = RoundState.Waiting;
 			yield return null;
 		}
 
+		// spawn sub rounds (different enemy types per round)
 		foreach (var round in curRound.subRounds)
 			StartCoroutine(spawnSubRound(round));
 		
@@ -145,6 +143,7 @@ public class LevelManager : MonoBehaviour {
 		yield return null;
 	}
 
+	// spawn a sub round after waiting on it's start delay
 	IEnumerator spawnSubRound(Round curRound) {
 		if (curRound.startDelay != 0)
 			yield return new WaitForSeconds(curRound.startDelay + 2f);
@@ -155,24 +154,30 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
+	// spawn the enemy into the scene
 	private void spawnEnemy(Transform enemyToSpawn) {
 		var tempEnemy = Instantiate(enemyToSpawn, getCheckpoints()[0], Quaternion.identity);
 		rounds[currentRound].enemies.enqueue(tempEnemy.gameObject.GetInstanceID());
 		var enemyInstance = tempEnemy.gameObject.GetComponent<Enemy>();
+		
+		// setting the waypoints / checkpoints so the enemy knows where to go
 		enemyInstance.setWaypoints(getCheckpoints());
 		enemyInstance.levelManager = GetComponent<LevelManager>();
 	}
 
+	// show the disaster prompt that the disaster is coming in 3 rounds
 	private void showDisasterPrompt() {
 		disasterPrompt.SetActive(true);
 		mainManager.getStateManager().showDisasterPrompt();
 	}
 
+	// accept the disaster prompt, effectively closing it
 	public void acceptDisasterPrompt() {
 		disasterPrompt.SetActive(false);
 		mainManager.getStateManager().hideDisasterPrompt();
 	}
 
+	// return the current checkpoints object based on which event is active
 	private List<Vector3> getCheckpoints() {
 		return eventState switch {
 			EventState.Event1 => checkpointsEvent1,
@@ -181,6 +186,8 @@ public class LevelManager : MonoBehaviour {
 		};
 	}
 
+	// read in all checkpoints for each disaster location / event
+	// this works by reading child objects and getting their locations within the scene
 	private void loadCheckpoints() {
 		checkpointsNoEvent.Clear();
 		checkpointsEvent1.Clear();
@@ -202,6 +209,8 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
+	// spawn in the event (disaster) based on the predetermined event location at the start of the level
+	// this will also switch the map to the new location
 	private void triggerEvent() {
 		if (eventState == EventState.Event1) {
 			if (eventType == 1)
@@ -221,10 +230,10 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
+	// change the map to the new one for post disaster
+	// we need to wait a little bit so it changes during the white flash of the disaster
 	private IEnumerator switchMap(float duration, int eventNum) {
 		yield return new WaitForSeconds(duration);
-
-		// here we need to switch the map and also do a raycast to remove all enemies and towers within that raycast
 		
 		switch (eventNum) {
 			case 1:
@@ -244,6 +253,8 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
+	// send a circular raycast based on a specific point at a set range
+	// detect all enemies and towers within the raycast and remove them
 	private void destroyWithinRadius(Vector3 target, float range) {
 		var transforms = new List<Transform>();
 		foreach (var colr in Physics2D.OverlapCircleAll(target, range)) {
@@ -266,27 +277,22 @@ public class LevelManager : MonoBehaviour {
 			Destroy(transforms[i].parent.gameObject);
 	}
 
-	private IEnumerator killTower(GameObject obj) {
-		obj.SetActive(false);
-		yield return new WaitForSeconds(1f);
-		Destroy(obj);
-	}
-
+	// load the maps and set the default map
 	private void loadMaps() {
 		mapNoEvent.SetActive(true);
 		mapEvent1.SetActive(false);
 		mapEvent2.SetActive(false);
 	}
 
+	// set the level variables
 	private void resetLevel() {
-		var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-		foreach (var t in enemies)
+		
+		// destroy all enemies on the screen, if present 
+        foreach (var t in GameObject.FindGameObjectsWithTag("Enemy"))
 			Destroy(t);
 
 		disasterPrompt.SetActive(false);
         
-		roundCountdown = roundDelay;
-		roundDelay = 5f;
 		eventState = EventState.NoEvent;
 		disasterRound = -1;
 		levelWon = false;
@@ -294,9 +300,11 @@ public class LevelManager : MonoBehaviour {
 		loadCheckpoints();
 		loadMaps();
         
+		// initialize all rounds for the level
 		foreach (var round in rounds)
 			round.init();
         
+		// calculate which event to play later on in the level
 		futureEvent = Random.Range(1, 3) == 1 ? EventState.Event1 : EventState.Event2;
 		
 		winUI.SetActive(false);
@@ -306,6 +314,9 @@ public class LevelManager : MonoBehaviour {
 		startRoundButton.SetActive(true);
 	}
 
+	// end the level
+	// true if level is won
+	// false if the level is marked as a lost
 	public void endLevel(bool condition) {
 		Time.timeScale = 0;
 		if (condition) {
@@ -321,7 +332,8 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
+	// set round counter
 	private void setRoundCounter() {
-		roundCounter.GetComponent<TextMeshProUGUI>().SetText("Round: " + currentRound);
+		roundCounter.GetComponent<TextMeshProUGUI>().SetText("Round: " + (currentRound + 1) + " / " + rounds.Length);
 	}
 }

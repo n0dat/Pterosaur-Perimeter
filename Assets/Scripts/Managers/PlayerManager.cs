@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour {
         skullsCredit(skullsTemp);
     }
 
+    // credit skulls to player
     public void skullsCredit(int amount)
     {
         if (!hasAllReferences())
@@ -62,6 +63,7 @@ public class PlayerManager : MonoBehaviour {
         return true;
     }
 
+    // check that we have all references to avoid null exceptions
     private bool hasAllReferences()
     {
         if (!currencyTextUIScript || !m_playerHealthUIHandler)
@@ -73,6 +75,7 @@ public class PlayerManager : MonoBehaviour {
         return true;
     }
 
+    // set player health to value (eggs)
     public void setPlayerHealth(int val)
     {
         if (val > 3 || !hasAllReferences())
@@ -88,6 +91,7 @@ public class PlayerManager : MonoBehaviour {
         m_playerHealthUIHandler.setHealthLevel(m_playerHealth);
     }
 
+    // indicate hit to player (egg health)
     public void hit()
     {
         if (!hasAllReferences())
@@ -111,7 +115,7 @@ public class PlayerManager : MonoBehaviour {
         m_playerHealthUIHandler.setHealthLevel(m_playerHealth);
     }
 
-    //TODO: Use this function for end of game logic/conditions.
+    // end the level
     private void playerOutOfHealth()
     {
         levelManager.endLevel(false);
