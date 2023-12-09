@@ -36,13 +36,13 @@ public class LevelSelectButton : MonoBehaviour {
             Debug.Log("Unable to get Scene Manager");
         }
     }
-    
+    // This method locks the level and sets m_islocaked to true
     public void lockLevel()
     {
         m_isLocked = true;
         m_lockedIcon.SetActive(true);
     }
-
+    // This method unlocks the level by setting m_isLocked to false
     public void unlockLevel()
     {
         m_isLocked = false;

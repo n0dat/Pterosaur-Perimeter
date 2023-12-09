@@ -206,7 +206,7 @@ public class Tower : MonoBehaviour {
         waitForAttack.setAttackFinished();
         yield return null;
     }
-
+    // Gets enemies in a radius of tower to attack
     private void getEnemiesInRadius() {
         var temp = new List<Collider2D>();
         foreach (var enemy in Physics2D.OverlapCircleAll(transform.position, getAttackRange()))
@@ -215,7 +215,7 @@ public class Tower : MonoBehaviour {
         
         enemiesInRange = temp.ToArray();
     }
-    
+    // The enemy was killed by the tower
     public void enemyKilled() {
         StopCoroutine(attackRoutine());
         attackState = AttackState.Waiting;
@@ -275,7 +275,7 @@ public class Tower : MonoBehaviour {
     // UI REPRESENT
     //
     //
-
+    // Sets the raidues color of grey to show that it is a valid loaction to place tower
     public void setLineColorGrey() {
         var gradient = new Gradient();
         var tempColorKeys = radiusLine.colorGradient.colorKeys;
@@ -285,7 +285,7 @@ public class Tower : MonoBehaviour {
         gradient.colorKeys = tempColorKeys;
         radiusLine.colorGradient = gradient;
     }
-
+    // Sets the color of the radius to red if invalid location of tower
     public void setLineColorRed() {
         var gradient = new Gradient();
         var tempColorKeys = radiusLine.colorGradient.colorKeys;
@@ -295,7 +295,7 @@ public class Tower : MonoBehaviour {
         gradient.colorKeys = tempColorKeys;
         radiusLine.colorGradient = gradient;
     }
-    
+    // This method draws the radius around the tower
     private void drawRadiusCircle() {
         if (radiusLine.enabled) {
             Vector3[] points = new Vector3[radiusLineSegments + 1];
@@ -323,14 +323,15 @@ public class Tower : MonoBehaviour {
     // UI INTERACTION
     //
     //
+    // return a bool if the tower is being held 
     public bool beingHeld() {
         return isHeld;
     }
-
+    // return a bool if the tower is selected
     public bool isSelected() {
         return selected;
     }
-
+    // Deselect the tower that was selected form dino tower UI
     public void deselect() {
         //Debug.Log("Deselect called on Tower");
         selected = false;
@@ -343,43 +344,43 @@ public class Tower : MonoBehaviour {
         hideRadiusCircle();
         m_upgradeMenuInterface.exitButton();
     }
-
+    // the tower has been selected
     public void select() {
         //Debug.Log("Select called on Tower");
         selected = true;
         showRadiusCircle();
         m_upgradeMenuInterface.upgrade(this);
     }
-
+    // the tower is held 
     public void holdTower() {
         isHeld = true;
         showRadiusCircle();
     }
-
+    // the tower has been droped on the map 
     public void dropTower() {
         isHeld = false;
         hideRadiusCircle();
     }
-    
+    // sets the radius color based on postion is valid for tower 
     private void setRadiusColor() {
         if (validPosition)
             setLineColorGrey();
         else
             setLineColorRed();
     }
-    
+    // return a boolean if tower position is valid 
     public bool isValidPosition() {
         return validPosition;
     }
-
+    // sets that valid position with a bool value
     public void setValidPosition(bool val) {
         validPosition = val;
     }
-
+    // show the radius of tower if the enaable is set to true
     public void showRadiusCircle() {
         radiusLine.enabled = true;
     }
-
+    // hides the radius if enabled is set to false
     public void hideRadiusCircle() {
         radiusLine.enabled = false;
     }
@@ -389,47 +390,47 @@ public class Tower : MonoBehaviour {
     // GETTERS AND SETTERS
     //
     //
-
+    // return a int of the tower cost
     public int getTowerCost() {
         return towerCost;
     }
-
+    // sets the tower cost
     public void setTowerCost(int val) {
         towerCost = val;
     }
-
+    // returns an in of the tower repair cost
     public int getRepairCost() {
         return repairCost;
     }
-
+    // sets the repair cost of a tower
     public void setRepairCost(int val) {
         repairCost = val;
     }
-    
+    // return the float attack speed of a tower
     public float getAttackSpeed() {
         return (float)(attackSpeed - (m_attackSpeedUpgradeLevel * 0.35));
     }
-
+    // sets the attack speed of tower
     public void setAttackSpeed(float val) {
         attackSpeed = val;
     }
-
+    // gets the attack damage of tower by returning a float
     public float getAttackDamage() {
         return attackDamage + (m_damageUpgradeLevel * 15);
     }
-
+    // sets the attack damage of a tower
     public void setAttackDamage(float val) {
         attackDamage = val;
     }
-
+    // return a float value of attack range
     public float getAttackRange() {
         return attackRange + (m_rangeUpgradeLevel * 8);
     }
-    
+    // sets the attack range
     public void setAttackRange(float val) {
         attackRange = val;
     }
-
+    // return a bool if the tower is held
     public bool getIsHeld() {
         return isHeld;
     }
@@ -439,7 +440,7 @@ public class Tower : MonoBehaviour {
     public int getRangeUpgradeLevel() {
         return m_rangeUpgradeLevel;
     }
-
+    // sets the upgrade range of tower
     public void setRangeUpgradeLevel(int val)
     {
         if (val < 0 || val > 3)
@@ -448,32 +449,32 @@ public class Tower : MonoBehaviour {
         drawRadiusCircle();
         showRadiusCircle();
     }
-
+    // gets the attack speed of upgrade tower
     public int getAttackSpeedUpgradeLevel() {
         return m_attackSpeedUpgradeLevel;
     }
-
+    // sets the attack speed of upgrade tower
     public void setAttackSpeedUpgradeLevel(int val) {
         if (val < 0 || val > 3)
             return;
         m_attackSpeedUpgradeLevel = val;
     }
-
+    // gets the damage level of tower upgrade
     public int getDamageUpgradeLevel() {
         return m_damageUpgradeLevel;
     }
-
+    // sets the damange level of upgrade tower
     public void setDamageUpgradeLevel(int val) {
         if (val < 0 || val > 3)
             return;
         m_damageUpgradeLevel = val;
     }
-
+    // get tower health
     public int getHealth()
     {
         return m_health;
     }
-
+    // sets the tower health
     public void setHealth(int val)
     {
         if (val < 0)
@@ -532,18 +533,19 @@ public class Tower : MonoBehaviour {
     
     
     // tower statistics
+    // Show the stats with the SetActive to true
     public void showStats() {
         towerStatsObj.SetActive(true);
         towerStats.start();
         hasStats = true;
     }
-
+    // Hides the states with setactive method set to false
     public void hideStats() {
         towerStatsObj.SetActive(false);
         towerStats.stop();
         hasStats = false;
     }
-
+    // return a bool to show stats 
     public bool showingStats() {
         return hasStats;
     }
