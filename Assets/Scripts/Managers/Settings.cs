@@ -24,6 +24,7 @@ public class Settings : MonoBehaviour {
         fpsCounter.SetActive(false);
     }
 
+    // Shows the values of the frams persecond by checking the bool value of val
     public void setShowFps(bool val) {
         showFps = val;
         Debug.Log("Show Fps: " + showFps);
@@ -33,7 +34,8 @@ public class Settings : MonoBehaviour {
         else
             fpsCounter.SetActive(false);
     }
-
+    
+    // Sets the target frams per seconds in the setting screen
     public void setTargetFps(int val) {
         targetFps = val;
         Debug.Log("Set Target FPS: " + targetFps);
@@ -41,41 +43,42 @@ public class Settings : MonoBehaviour {
         
     }
 
+    // Sets the play audio value by setting the playAudio val to a bool value 
     public void setPlayAudio(bool val) {
         playAudio = val;
         Debug.Log("Set Play Audio: " + playAudio);
     }
-
+    // This method set the audio level to a float value
     public void setAudioLevel(float val) {
         audioLevel = val;
         Debug.Log("Set Audio Level: " + audioLevel);
     }
-
+    // Sets the autoStartValue to a true or false value
     public void setAutoStartRounds(bool val) {
         autoStartRounds = val;
         Debug.Log("Auto Start Rounds: " + autoStartRounds);
     }
-
+    // This method return a bool value for showFps
     public bool getShowFps() {
         return showFps;
     }
-
+    // return an integer for the Fps 
     public int getTargetFps() {
         return targetFps;
     }
-
+    // return a bool value that was set for playAudio
     public bool getPlayAudio() {
         return playAudio;
     }
-
+    // return an int for the audio level
     public int getAudioLevel() {
         return (int)audioLevel;
     }
-    
+    // return a bool value for autoSTartRounds
     public bool getAutoStartRounds() {
         return autoStartRounds;
     }
-
+    // This method saves the setting after the user made changes
     public void saveSettings() {
         initPrefs();
         
@@ -84,7 +87,7 @@ public class Settings : MonoBehaviour {
         PlayerPrefs.SetInt("TargetFps", getTargetFps());
         PlayerPrefs.SetFloat("AudioLevel", getAudioLevel());
     }
-
+    // This method loads those new changes
     public void loadSettings() {
         initPrefs();
         
@@ -108,7 +111,7 @@ public class Settings : MonoBehaviour {
         if (!PlayerPrefs.HasKey("AudioLevel"))
             PlayerPrefs.SetFloat("AudioLevel", 100f);
     }
-
+    // Gets a new Camera
     public void getNewCamera() {
         StartCoroutine(GetCamera());
     }
